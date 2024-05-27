@@ -20,6 +20,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'recipe.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'recipe.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.tag'|trans, 'tag.title') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
                 <th>{{ 'label.create'|trans }}</th>
             </tr>
@@ -32,6 +33,12 @@
                     <td>{{ recipe.updatedAt|format_date('long') }}</td>
                     <td>{{ recipe.title }}</td>
                     <td>{{ recipe.category.title }}</td>
+                    <td>
+                        {% for tag in recipe.tags %}
+                            {{ tag.title }}
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="{{ url('recipe_show', {id: recipe.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}

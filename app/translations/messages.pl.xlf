@@ -138,6 +138,22 @@
         <source>message.edited_successfully</source>
         <target>Edytowano Pomyślnie</target>
       </trans-unit>
+      <trans-unit id="label.tag">
+        <source>label.tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="title.tag_list">
+        <source>title.tag_list</source>
+        <target>Lista Tagów</target>
+      </trans-unit>
+      <trans-unit id="title.tag_edit">
+        <source>title.tag_edit</source>
+        <target>Edytowanie  Tagu</target>
+      </trans-unit>
+      <trans-unit id="title.tag_delete">
+        <source>title.tag_delete</source>
+        <target>Usuwanie Tagu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

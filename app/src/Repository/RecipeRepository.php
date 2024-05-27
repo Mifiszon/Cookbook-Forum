@@ -7,6 +7,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -115,6 +116,28 @@ class RecipeRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('recipe');
+    }
+
+    /**
+     * Count recipes by category.
+     *
+     * @param Tag $tag Category
+     *
+     * @return int Number of recipes in category
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByTag(Tag $tag): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select($qb->expr()->countDistinct('recipe.id'))
+            ->leftJoin('recipe.tags', 'tag')
+            ->where('tag = :tag')
+            ->setParameter(':tag', $tag)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 }

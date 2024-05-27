@@ -17,7 +17,14 @@
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{ recipe.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
-            <dd>{{  recipe.category.title }}</dd>
+            <dd>{{ recipe.category.title }}</dd>
+            <dt>{{ 'label.tag'|trans }}</dt>
+            <dd>
+                {% for tag in recipe.tags %}
+                    {{ tag.title }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
         </dl>
         <p>
             <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}">
