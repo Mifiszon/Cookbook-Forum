@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.recipe_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.recipe_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'recipe.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'recipe.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'recipe.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'recipe.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
+                <th>{{ 'label.actions'|trans }}</th>
+                <th>{{ 'label.create'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for recipe in pagination.items %}
+                <tr>
+                    <td>{{ recipe.id }}</td>
+                    <td>{{ recipe.createdAt|format_date('long') }}</td>
+                    <td>{{ recipe.updatedAt|format_date('long') }}</td>
+                    <td>{{ recipe.title }}</td>
+                    <td>{{ recipe.category.title }}</td>
+                    <td>
+                        <a href="{{ url('recipe_show', {id: recipe.id}) }}" title="{{ 'action.show'|trans }}">
+                            {{ 'action.show'|trans }}
+                        </a>
+                        <br>
+                        <a href="{{ url('recipe_edit', {id: recipe.id}) }}" title="{{ 'action.edit'|trans }}">
+                            {{ 'action.edit'|trans }}
+                        </a>
+                        <br>
+                        <a href="{{ url('recipe_delete', {id: recipe.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'action.delete'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url('recipe_create', {id: recipe.id}) }}" title="{{ 'action.create'|trans }}">
+                            {{ 'action.create'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
