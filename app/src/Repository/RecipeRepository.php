@@ -8,6 +8,7 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Tag;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -140,4 +141,20 @@ class RecipeRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    /**
+     * Query recipes by author.
+     *
+     * @param User $user User entity
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('recipe.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
 }

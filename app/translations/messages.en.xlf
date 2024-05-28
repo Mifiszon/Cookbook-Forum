@@ -166,6 +166,10 @@
          <source>action.logout</source>
          <target>Logout</target>
       </trans-unit>
+      <trans-unit id="label.author">
+         <source>label.author</source>
+         <target>Author</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -25,6 +25,8 @@
                     {% if not loop.last %}, {% endif %}
                 {% endfor %}
             </dd>
+            <dt>{{ 'label.author'|trans }}</dt>
+            <dd>{{ recipe.author.email }}</dd>
         </dl>
         <p>
             <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}">

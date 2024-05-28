@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Recipe;
+use App\Entity\User;
 use App\Repository\RecipeRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -39,14 +40,23 @@ class RecipeService implements RecipeServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int  $page   Page number
+     * @param User $user User
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $user): PaginationInterface
     {
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            // Admin should see all recipes
+            $query = $this->recipeRepository->queryAll();
+        } else {
+            // Regular users see only their own recipes
+            $query = $this->recipeRepository->queryByAuthor($user);
+        }
+
         return $this->paginator->paginate(
-            $this->recipeRepository->queryAll(),
+            $query,
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );

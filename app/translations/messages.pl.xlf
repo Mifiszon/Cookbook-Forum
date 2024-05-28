@@ -164,6 +164,10 @@
      <trans-unit id="action.logout">
         <source>action.logout</source>
         <target>Wyloguj</target>
+    </trans-unit>
+    <trans-unit id="label.author">
+      <source>label.author</source>
+      <target>Autor</target>
    </trans-unit>
     </body>
   </file>

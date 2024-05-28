@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Entity\User;
 use App\Form\Type\RecipeType;
 use App\Service\RecipeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -42,7 +44,10 @@ class RecipeController extends AbstractController
     #[Route(name: 'recipe_index', methods: 'GET')]
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
-        $pagination = $this->recipeService->getPaginatedList($page);
+        $pagination = $this->recipeService->getPaginatedList(
+            $page,
+            $this->getUser()
+        );
 
         return $this->render('recipe/index.html.twig', ['pagination' => $pagination]);
     }
@@ -54,7 +59,8 @@ class RecipeController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET', )]
+    #[IsGranted('VIEW', subject: 'recipe')]
     public function show(Recipe $recipe): Response
     {
         return $this->render('recipe/show.html.twig', ['recipe' => $recipe]);
@@ -67,10 +73,13 @@ class RecipeController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'recipe_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'recipe_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         $recipe = new Recipe();
+        $recipe->setAuthor($user);
         $form = $this->createForm(
             RecipeType::class,
             $recipe,
@@ -89,7 +98,10 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('recipe_index');
         }
 
-        return $this->render('recipe/create.html.twig', ['form' => $form->createView()]);
+        return $this->render(
+            'recipe/create.html.twig',
+            ['form' => $form->createView()]
+        );
     }
 
     /**
@@ -101,6 +113,7 @@ class RecipeController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'recipe_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'recipe')]
     public function edit(Request $request, Recipe $recipe): Response
     {
         $form = $this->createForm(
@@ -142,6 +155,7 @@ class RecipeController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'recipe_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'recipe')]
     public function delete(Request $request, Recipe $recipe): Response
     {
         $form = $this->createForm(
