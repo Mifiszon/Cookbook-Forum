@@ -13,14 +13,26 @@
     {% endblock %}
 </head>
 <body>
+
 <main role="main">
+    <div class="user-info">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div>{{ app.user.email }}</div>
+            <div>
+                <a href="{{ path('app_logout') }}">{{ 'action.logout'|trans }}</a>
+            </div>
+        {% else %}
+            <div>
+                <a href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
+            </div>
+        {% endif %}
+    </div>
     <div class="container-fluid">
-        <div class="container-fluid">
-            {% include 'default/_flash_messages.html.twig' %}
-            {% block body %}{% endblock %}
-        </div>
+        {% include 'default/_flash_messages.html.twig' %}
+        {% block body %}{% endblock %}
     </div>
 </main>
+
 {% block javascripts %}
     {# {% block importmap %}{{ importmap('app') }}{% endblock %}#}
     <script

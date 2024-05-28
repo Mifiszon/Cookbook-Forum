@@ -153,7 +153,18 @@
       <trans-unit id="title.tag_delete">
         <source>title.tag_delete</source>
         <target>Usuwanie Tagu</target>
-      </trans-unit>
+      </trans-unit><trans-unit id="message.tag_contains_recipes">
+       <source>message.tag_contains_recipes</source>
+       <target>Tag Zawiera Przepisy</target>
+     </trans-unit>
+     <trans-unit id="action.login">
+       <source>action.login</source>
+       <target>Zaloguj</target>
+     </trans-unit>
+     <trans-unit id="action.logout">
+        <source>action.logout</source>
+        <target>Wyloguj</target>
+   </trans-unit>
     </body>
   </file>
 </xliff>

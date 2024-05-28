@@ -7,6 +7,7 @@ namespace App\Form\Type;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
+use App\Entity\Tag;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

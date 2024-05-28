@@ -154,6 +154,18 @@
         <source>title.tag_delete</source>
         <target>Tag Delete</target>
       </trans-unit>
+      <trans-unit id="message.tag_contains_recipes">
+        <source>message.tag_contains_recipes</source>
+        <target>Tag Contains Recipes</target>
+      </trans-unit>
+      <trans-unit id="action.login">
+        <source>action.login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="action.logout">
+         <source>action.logout</source>
+         <target>Logout</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

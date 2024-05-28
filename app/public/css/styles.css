@@ -6,3 +6,13 @@ label {
     content: "*";
     color: red;
 }
+
+.user-info {
+    display: flex;
+    justify-content: flex-end; /* Wyrównanie na prawo */
+    align-items: center; /* Wyrównanie w pionie */
+    padding: 10px; /* Dodatkowy odstęp dla lepszego wyglądu */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
