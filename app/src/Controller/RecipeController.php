@@ -80,6 +80,7 @@ class RecipeController extends AbstractController
         $user = $this->getUser();
         $recipe = new Recipe();
         $recipe->setAuthor($user);
+
         $form = $this->createForm(
             RecipeType::class,
             $recipe,
@@ -88,6 +89,8 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setComment($form->get('comment')->getData());
+
             $this->recipeService->save($recipe);
 
             $this->addFlash(
@@ -127,6 +130,8 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setComment($form->get('comment')->getData());
+
             $this->recipeService->save($recipe);
 
             $this->addFlash(

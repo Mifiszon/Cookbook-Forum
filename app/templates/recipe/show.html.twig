@@ -27,9 +27,11 @@
             </dd>
             <dt>{{ 'label.author'|trans }}</dt>
             <dd>{{ recipe.author.email }}</dd>
+            <dt>{{ 'label.comment'|trans }}</dt>
+            <dd>{{ recipe.comment|markdown_to_html }}</dd>
         </dl>
         <p>
-            <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

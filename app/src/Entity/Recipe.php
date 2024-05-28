@@ -9,6 +9,7 @@ use App\Repository\RecipeRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -92,6 +93,14 @@ class Recipe
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
     private ?User $author;
+
+    /**
+     * comment.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $comment = null;
 
     /**
      * Constructor.
@@ -231,6 +240,18 @@ class Recipe
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }

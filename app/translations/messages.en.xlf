@@ -170,6 +170,10 @@
          <source>label.author</source>
          <target>Author</target>
       </trans-unit>
+      <trans-unit id="label.comment">
+         <source>label.comment</source>
+         <target>Comment</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
