@@ -14,10 +14,6 @@
         <source>label.title</source>
         <target>Tytuł</target>
       </trans-unit>
-      <trans-unit id="label.content">
-        <source>label.content</source>
-        <target>Zawartość</target>
-      </trans-unit>
       <trans-unit id="label.tags">
         <source>label.tags</source>
         <target>Tagi</target>
@@ -32,7 +28,7 @@
       </trans-unit>
       <trans-unit id="title.recipe_details">
         <source>title.recipe_details</source>
-        <target>Szczegóły przepisu #%id%</target>
+        <target>Szczegóły przepisu - %title%</target>
       </trans-unit>
       <trans-unit id="title.recipe_list">
         <source>title.recipe_list</source>
@@ -169,9 +165,21 @@
       <source>label.author</source>
       <target>Autor</target>
    </trans-unit>
-   <trans-unit id="label.comment">
-      <source>label.comment</source>
-      <target>Komentarz</target>
+   <trans-unit id="label.content">
+      <source>label.content</source>
+      <target>Treść</target>
+   </trans-unit>
+   <trans-unit id="label.Password">
+      <source>label.Password</source>
+      <target>Hasło</target>
+   </trans-unit>
+   <trans-unit id="label.Email">
+      <source>label.Email</source>
+      <target>Email</target>
+   </trans-unit>
+   <trans-unit id="label.RepeatPassword">
+     <source>label.RepeatPassword</source>
+     <target>Powtórz Hasło</target>
    </trans-unit>
     </body>
   </file>

@@ -152,9 +152,6 @@ class RecipeRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->queryAll();
 
-        $queryBuilder->andWhere('recipe.author = :author')
-            ->setParameter('author', $user);
-
         return $queryBuilder;
     }
 }

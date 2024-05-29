@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.recipe_details'|trans({'%id%': recipe.id|default('')}) }}
+    {{ 'title.recipe_details'|trans({'%title%': recipe.title|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.recipe_details'|trans({'%id%': recipe.id|default('')}) }}</h1>
+    <h1>{{ 'title.recipe_details'|trans({'%title%': recipe.title|default('')}) }}</h1>
     {% if recipe is defined %}
         <dl class="dl-horizontal">
             <dt>{{ 'label.id'|trans }}</dt>
@@ -27,8 +27,8 @@
             </dd>
             <dt>{{ 'label.author'|trans }}</dt>
             <dd>{{ recipe.author.email }}</dd>
-            <dt>{{ 'label.comment'|trans }}</dt>
-            <dd>{{ recipe.comment|markdown_to_html }}</dd>
+            <dt>{{ 'label.content'|trans }}</dt>
+            <dd>{{ recipe.content|markdown_to_html }}</dd>
         </dl>
         <p>
             <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">

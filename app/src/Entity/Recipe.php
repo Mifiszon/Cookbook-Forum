@@ -95,12 +95,12 @@ class Recipe
     private ?User $author;
 
     /**
-     * comment.
+     * content.
      *
      * @var string|null
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $comment = null;
+    private ?string $content = null;
 
     /**
      * Constructor.
@@ -244,14 +244,14 @@ class Recipe
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getContent(): ?string
     {
-        return $this->comment;
+        return $this->content;
     }
 
-    public function setComment(?string $comment): static
+    public function setContent(?string $content): static
     {
-        $this->comment = $comment;
+        $this->content = $content;
 
         return $this;
     }

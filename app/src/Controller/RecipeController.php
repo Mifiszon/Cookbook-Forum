@@ -60,7 +60,6 @@ class RecipeController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET', )]
-    #[IsGranted('VIEW', subject: 'recipe')]
     public function show(Recipe $recipe): Response
     {
         return $this->render('recipe/show.html.twig', ['recipe' => $recipe]);
@@ -89,7 +88,7 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $recipe->setComment($form->get('comment')->getData());
+            $recipe->setContent($form->get('content')->getData());
 
             $this->recipeService->save($recipe);
 
@@ -130,7 +129,7 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $recipe->setComment($form->get('comment')->getData());
+            $recipe->setContent($form->get('content')->getData());
 
             $this->recipeService->save($recipe);
 
