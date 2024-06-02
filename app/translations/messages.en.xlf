@@ -179,16 +179,20 @@
          <target>Email</target>
       </trans-unit>
       <trans-unit id="label.RepeatPassword">
-       <source>label.RepeatPassword</source>
-       <target>Repeat Password</target>
+        <source>label.RepeatPassword</source>
+        <target>Repeat Password</target>
       </trans-unit>
       <trans-unit id="label.CurrentPassword">
-       <source>label.CurrentPassword</source>
-       <target>Current Password</target>
+        <source>label.CurrentPassword</source>
+        <target>Current Password</target>
       </trans-unit>
       <trans-unit id="label.NewPassword">
-       <source>label.NewPassword</source>
-       <target>New Password</target>
+        <source>label.NewPassword</source>
+        <target>New Password</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_recipes">
+        <source>action.back_to_recipes</source>
+        <target>Back To Recipes</target>
       </trans-unit>
     </body>
   </file>

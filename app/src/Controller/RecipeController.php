@@ -5,15 +5,18 @@
 
 namespace App\Controller;
 
+use App\Dto\RecipeListInputFiltersDto;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\Type\RecipeType;
+use App\Resolver\RecipeListInputFiltersDtoResolver;
 use App\Service\RecipeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -37,16 +40,23 @@ class RecipeController extends AbstractController
     /**
      * Index action.
      *
-     * @param int $page Page number
+     * @param RecipeListInputFiltersDto $filters Input filters
+     * @param int                     $page    Page number
      *
      * @return Response HTTP response
      */
-    #[Route(name: 'recipe_index', methods: 'GET')]
-    public function index(#[MapQueryParameter] int $page = 1): Response
+    #[Route(
+        name: 'recipe_index',
+        methods: 'GET'
+    )]
+    public function index(#[MapQueryString(resolver: RecipeListInputFiltersDtoResolver::class)] RecipeListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         $pagination = $this->recipeService->getPaginatedList(
             $page,
-            $this->getUser()
+            $user,
+            $filters
         );
 
         return $this->render('recipe/index.html.twig', ['pagination' => $pagination]);

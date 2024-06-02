@@ -5,10 +5,13 @@
 
 namespace App\Service;
 
+use App\Dto\RecipeListFiltersDto;
+use App\Dto\RecipeListInputFiltersDto;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Repository\RecipeRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -30,33 +33,30 @@ class RecipeService implements RecipeServiceInterface
     /**
      * Constructor.
      *
-     * @param RecipeRepository   $recipeRepository Recipe repository
-     * @param PaginatorInterface $paginator        Paginator
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param PaginatorInterface       $paginator       Paginator
+     * @param TagServiceInterface      $tagService      Tag service
+     * @param RecipeRepository         $recipeRepository  Recipe repository
      */
-    public function __construct(private readonly RecipeRepository $recipeRepository, private readonly PaginatorInterface $paginator)
+    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly PaginatorInterface $paginator, private readonly TagServiceInterface $tagService, private readonly RecipeRepository $recipeRepository)
     {
     }
 
     /**
      * Get paginated list.
      *
-     * @param int  $page   Page number
-     * @param User $user User
+     * @param int                     $page    Page number
+     * @param User                    $author  Recipes author
+     * @param RecipeListInputFiltersDto $filters Filters
      *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(int $page, User $user): PaginationInterface
+    public function getPaginatedList(int $page, User $author, RecipeListInputFiltersDto $filters): PaginationInterface
     {
-        if (in_array('ROLE_ADMIN', $user->getRoles())) {
-            // Admin should see all recipes
-            $query = $this->recipeRepository->queryAll();
-        } else {
-            // Regular users see only their own recipes
-            $query = $this->recipeRepository->queryByAuthor($user);
-        }
+        $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $query,
+            $this->recipeRepository->queryByAuthor($author, $filters),
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -80,6 +80,21 @@ class RecipeService implements RecipeServiceInterface
     public function delete(Recipe $recipe): void
     {
         $this->recipeRepository->delete($recipe);
+    }
+
+    /**
+     * Prepare filters for the recipes list.
+     *
+     * @param RecipeListInputFiltersDto $filters Raw filters from request
+     *
+     * @return RecipeListFiltersDto Result filters
+     */
+    private function prepareFilters(RecipeListInputFiltersDto $filters): RecipeListFiltersDto
+    {
+        return new RecipeListFiltersDto(
+            null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
+            null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
+        );
     }
 
 }

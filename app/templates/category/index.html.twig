@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+
     <h1>{{ 'title.category_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <br>
@@ -50,6 +51,8 @@
                             <a class="btn btn-outline-info" href="{{ url('category_create', {id: category.id}) }}" title="{{ 'action.create'|trans }}">
                                 {{ 'action.create'|trans }}
                             </a>
+                        {% else %}
+                            Brak
                         {% endif %}
                     </td>
                 </tr>
@@ -60,6 +63,10 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <a class="btn btn-outline-primary" href="{{ path('recipe_index') }}" title="{{ 'action.back_to_recipes'|trans }}">
+            {{ 'action.back_to_recipes'|trans }}
+        </a>
 
     {% else %}
         <p>

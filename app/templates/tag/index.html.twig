@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+
     <h1>{{ 'title.tag_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <br>
@@ -31,7 +32,7 @@
                     <td>{{ tag.updatedAt|format_date('long') }}</td>
                     <td>{{ tag.title }}</td>
                     <td>
-                    {% if is_granted('VIEW', tag) or is_granted('EDIT', tag) or is_granted('DELETE', tag) %}
+                        {% if is_granted('VIEW', tag) or is_granted('EDIT', tag) or is_granted('DELETE', tag) %}
                             {% if is_granted('VIEW', tag) %}
                                 <a class="btn btn-outline-primary" href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action.show'|trans }}">
                                     {{ 'action.show'|trans }}
@@ -50,7 +51,10 @@
                             <a class="btn btn-outline-info" href="{{ url('tag_create', {id: tag.id}) }}" title="{{ 'action.create'|trans }}">
                                 {{ 'action.create'|trans }}
                             </a>
+                        {%  else %}
+                            Brak
                         {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -59,6 +63,10 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <a class="btn btn-outline-primary" href="{{ path('recipe_index') }}" title="{{ 'action.back_to_recipes'|trans }}">
+            {{ 'action.back_to_recipes'|trans }}
+        </a>
 
     {% else %}
         <p>

@@ -12,7 +12,15 @@ label {
     justify-content: flex-end;
     align-items: center;
     padding: 10px;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
 }
+
+.change-password {
+    position: fixed;
+    top: 30px;
+    right: 0;
+    padding: 10px;
+}
+

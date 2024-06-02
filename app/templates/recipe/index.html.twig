@@ -6,8 +6,8 @@
 
 {% block body %}
 
-    <div class="user-info">
-        <a href="{{ path('app_change_password') }}">Change Password</a>
+    <div class="change-password">
+        <a href="{{ path('app_change_password') }}">Zmiana Hasła</a>
     </div>
 
     <h1>{{ 'title.recipe_list'|trans }}</h1>
@@ -36,12 +36,25 @@
                     <td>{{ recipe.createdAt|format_date('long') }}</td>
                     <td>{{ recipe.updatedAt|format_date('long') }}</td>
                     <td>{{ recipe.title }}</td>
-                    <td>{{ recipe.category.title }}</td>
                     <td>
-                        {% for tag in recipe.tags %}
-                            {{ tag.title }}
-                            {% if not loop.last %}, {% endif %}
-                        {% endfor %}
+                        <a class="btn btn-outline-primary"
+                           href="{{ url('recipe_index', {'categoryId' : recipe.category.id}) }}"
+                           title="{{ recipe.category.title }}">
+                            {{ recipe.category.title }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if recipe.tags is defined and recipe.tags|length %}
+                            {% for tag in recipe.tags %}
+                                <a class="btn btn-outline-primary"
+                                   href="{{ url('recipe_index', {'tagId' : tag.id}) }}"
+                                   title="{{ tag.title }}">
+                                    {{ tag.title }}
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
                     </td>
                     <td>{{ recipe.author.email }}</td>
                     <td>
@@ -66,9 +79,15 @@
             {% endfor %}
             </tbody>
         </table>
+
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <a class="btn btn-outline-primary" href="{{ path('recipe_index') }}" title="{{ 'action.back_to_recipes'|trans }}">
+            {{ 'action.back_to_recipes'|trans }}
+        </a>
+
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}
