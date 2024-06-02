@@ -5,14 +5,17 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="user-info">
+        <a href="{{ path('app_change_password') }}">Change Password</a>
+    </div>
+
     <h1>{{ 'title.recipe_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
         <br>
-
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-
         <table class="table table-striped">
             <thead>
             <tr>
@@ -63,11 +66,9 @@
             {% endfor %}
             </tbody>
         </table>
-
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
-
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}

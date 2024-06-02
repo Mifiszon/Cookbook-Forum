@@ -182,6 +182,14 @@
        <source>label.RepeatPassword</source>
        <target>Repeat Password</target>
       </trans-unit>
+      <trans-unit id="label.CurrentPassword">
+       <source>label.CurrentPassword</source>
+       <target>Current Password</target>
+      </trans-unit>
+      <trans-unit id="label.NewPassword">
+       <source>label.NewPassword</source>
+       <target>New Password</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
