@@ -194,6 +194,42 @@
         <source>action.back_to_recipes</source>
         <target>Back To Recipes</target>
       </trans-unit>
+      <trans-unit id="title.tag_details">
+        <source>title.tag_details</source>
+        <target>Tag Details</target>
+      </trans-unit>
+      <trans-unit id="title.user_delete">
+        <source>action.user_delete</source>
+        <target>User Delete</target>
+      </trans-unit>
+      <trans-unit id="title.user_edit">
+        <source>user_edit</source>
+        <target>User Edit</target>
+      </trans-unit>
+      <trans-unit id="title.user_list">
+        <source>title.user_list</source>
+        <target>User List</target>
+      </trans-unit>
+      <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="label.roles">
+        <source>label.roles</source>
+        <target>Roles</target>
+      </trans-unit>
+      <trans-unit id="title.user_details">
+        <source>title.user_details</source>
+        <target>User Details</target>
+    </trans-unit>
+    <trans-unit id="title.user_create">
+      <source>title.user_create</source>
+      <target>User Create</target>
+    </trans-unit>
+    <trans-unit id="action.show_users">
+      <source>action.show_users</source>
+      <target>Show Users</target>
+    </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.user_details'|trans({'%email%': user.email|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.user_details'|trans({'%email%': user.email|default('')}) }}</h1>
+    {% if user is defined %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ user.id }}</dd>
+            <dt>{{ 'label.email'|trans }}</dt>
+            <dd>{{ user.email }}</dd>
+            <dt>{{ 'label.roles'|trans }}</dt>
+            <dd>
+                {% for role in user.roles %}
+                    {{ role }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+        </dl>
+        <p>
+            <a href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

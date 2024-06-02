@@ -142,6 +142,10 @@
         <source>title.tag_list</source>
         <target>Lista Tagów</target>
       </trans-unit>
+      <trans-unit id="title.tag_details">
+        <source>title.tag_details</source>
+        <target>Szczegóły Tagu</target>
+      </trans-unit>
       <trans-unit id="title.tag_edit">
         <source>title.tag_edit</source>
         <target>Edytowanie  Tagu</target>
@@ -152,47 +156,79 @@
       </trans-unit><trans-unit id="message.tag_contains_recipes">
        <source>message.tag_contains_recipes</source>
        <target>Tag Zawiera Przepisy</target>
-     </trans-unit>
-     <trans-unit id="action.login">
-       <source>action.login</source>
-       <target>Zaloguj</target>
-     </trans-unit>
-     <trans-unit id="action.logout">
-        <source>action.logout</source>
-        <target>Wyloguj</target>
-    </trans-unit>
-    <trans-unit id="label.author">
-      <source>label.author</source>
-      <target>Autor</target>
-   </trans-unit>
-   <trans-unit id="label.content">
-      <source>label.content</source>
-      <target>Treść</target>
-   </trans-unit>
-   <trans-unit id="label.Password">
-      <source>label.Password</source>
-      <target>Hasło</target>
-   </trans-unit>
-   <trans-unit id="label.Email">
-      <source>label.Email</source>
-      <target>Email</target>
-   </trans-unit>
-   <trans-unit id="label.RepeatPassword">
-     <source>label.RepeatPassword</source>
-     <target>Powtórz Hasło</target>
-   </trans-unit>
-   <trans-unit id="label.CurrentPassword">
-     <source>label.CurrentPassword</source>
-     <target>Obecne Hasło</target>
-   </trans-unit>
-   <trans-unit id="label.NewPassword">
-     <source>label.NewPassword</source>
-     <target>Nowe Hasło</target>
-   </trans-unit>
-   <trans-unit id="action.back_to_recipes">
-     <source>action.back_to_recipes</source>
-     <target>Powrót do Przepisów</target>
-   </trans-unit>
+         </trans-unit>
+         <trans-unit id="action.login">
+           <source>action.login</source>
+           <target>Zaloguj</target>
+         </trans-unit>
+         <trans-unit id="action.logout">
+            <source>action.logout</source>
+            <target>Wyloguj</target>
+        </trans-unit>
+        <trans-unit id="label.author">
+          <source>label.author</source>
+          <target>Autor</target>
+       </trans-unit>
+       <trans-unit id="label.content">
+          <source>label.content</source>
+          <target>Treść</target>
+       </trans-unit>
+       <trans-unit id="label.Password">
+          <source>label.Password</source>
+          <target>Hasło</target>
+       </trans-unit>
+       <trans-unit id="label.Email">
+          <source>label.Email</source>
+          <target>Email</target>
+       </trans-unit>
+       <trans-unit id="label.RepeatPassword">
+         <source>label.RepeatPassword</source>
+         <target>Powtórz Hasło</target>
+       </trans-unit>
+       <trans-unit id="label.CurrentPassword">
+         <source>label.CurrentPassword</source>
+         <target>Obecne Hasło</target>
+       </trans-unit>
+       <trans-unit id="label.NewPassword">
+         <source>label.NewPassword</source>
+         <target>Nowe Hasło</target>
+       </trans-unit>
+       <trans-unit id="action.back_to_recipes">
+         <source>action.back_to_recipes</source>
+         <target>Powrót do Przepisów</target>
+       </trans-unit>
+       <trans-unit id="title.user_delete">
+         <source>action.user_delete</source>
+         <target>Usuwanie Użytkownika</target>
+       </trans-unit>
+       <trans-unit id="title.user_edit">
+         <source>user_edit</source>
+         <target>Edytowanie Użytkownika</target>
+       </trans-unit>
+       <trans-unit id="title.user_list">
+         <source>title.user_list</source>
+         <target>Lista Użytkowników</target>
+       </trans-unit>
+       <trans-unit id="label.email">
+         <source>label.email</source>
+         <target>Email</target>
+       </trans-unit>
+       <trans-unit id="label.roles">
+         <source>label.roles</source>
+         <target>Role</target>
+       </trans-unit>
+       <trans-unit id="title.user_details">
+         <source>title.user_details</source>
+         <target>Szczegóły Użytkownika</target>
+      </trans-unit>
+      <trans-unit id="title.user_create">
+        <source>title.user_create</source>
+        <target>Tworzenie Użytkownika</target>
+      </trans-unit>
+      <trans-unit id="action.show_users">
+         <source>action.show_users</source>
+         <target>Wszyscy Użytkownicy</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
