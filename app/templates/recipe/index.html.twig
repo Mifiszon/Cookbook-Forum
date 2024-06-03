@@ -88,12 +88,21 @@
             {{ 'action.back_to_recipes'|trans }}
         </a>
 
-        {# Dodaj link do listy użytkowników #}
+
         {% if is_granted('ROLE_ADMIN') %}
             <a class="btn btn-outline-primary" href="{{ path('user_index') }}" title="{{ 'action.show_users'|trans }}">
                 {{ 'action.show_users'|trans }}
             </a>
         {% endif %}
+
+        <a class="btn btn-outline-primary" href="{{ path('category_index') }}" title="{{ 'action.show_categories'|trans }}">
+            {{ 'action.show_categories'|trans }}
+        </a>
+
+        <a class="btn btn-outline-primary" href="{{ path('tag_index') }}" title="{{ 'action.show_tags'|trans }}">
+            {{ 'action.show_tags'|trans }}
+        </a>
+
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}

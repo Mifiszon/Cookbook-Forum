@@ -68,6 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 6, groups: ['registration'])]
     private ?string $plainPassword;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Avatar $avatar = null;
+
     /**
      * Getter for id.
      *
@@ -207,5 +210,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(Avatar $avatar): static
+    {
+        // set the owning side of the relation if necessary
+        if ($avatar->getUser() !== $this) {
+            $avatar->setUser($this);
+        }
+
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }
