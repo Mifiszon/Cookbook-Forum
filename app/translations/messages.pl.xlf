@@ -173,16 +173,16 @@
           <source>label.content</source>
           <target>Treść</target>
        </trans-unit>
-       <trans-unit id="label.Password">
-          <source>label.Password</source>
+       <trans-unit id="label.password">
+          <source>label.password</source>
           <target>Hasło</target>
        </trans-unit>
-       <trans-unit id="label.Email">
-          <source>label.Email</source>
+       <trans-unit id="Email">
+          <source>Email</source>
           <target>Email</target>
        </trans-unit>
-       <trans-unit id="label.RepeatPassword">
-         <source>label.RepeatPassword</source>
+       <trans-unit id="label.repeatPassword">
+         <source>label.repeatPassword</source>
          <target>Powtórz Hasło</target>
        </trans-unit>
        <trans-unit id="label.CurrentPassword">
@@ -198,11 +198,11 @@
          <target>Powrót do Przepisów</target>
        </trans-unit>
        <trans-unit id="title.user_delete">
-         <source>action.user_delete</source>
+         <source>title.user_delete</source>
          <target>Usuwanie Użytkownika</target>
        </trans-unit>
        <trans-unit id="title.user_edit">
-         <source>user_edit</source>
+         <source>title.user_edit</source>
          <target>Edytowanie Użytkownika</target>
        </trans-unit>
        <trans-unit id="title.user_list">
@@ -212,6 +212,10 @@
        <trans-unit id="label.email">
          <source>label.email</source>
          <target>Email</target>
+       </trans-unit>
+       <trans-unit id="title.tag_create">
+         <source>title.tag_create</source>
+         <target>Tworzenie Tagu</target>
        </trans-unit>
        <trans-unit id="label.roles">
          <source>label.roles</source>
@@ -248,6 +252,50 @@
       <trans-unit id="title.avatar_edit">
         <source>title.avatar_edit</source>
         <target>Edytowanie Avatara</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_users">
+        <source>action.back_to_users</source>
+        <target>Powrót do Listy</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_categories">
+        <source>action.back_to_categories</source>
+        <target>Powrót do Listy</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_tags">
+        <source>action.back_to_tags</source>
+        <target>Powrót do Listy</target>
+      </trans-unit>
+      <trans-unit id="0">
+        <source>0</source>
+        <target>Użytkownik</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>1</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="action.revoke">
+        <source>action.revoke</source>
+        <target>Odbierz Uprawnienia</target>
+      </trans-unit>
+      <trans-unit id="action.promote">
+        <source>action.promote</source>
+        <target>Nadaj Uprawnienia</target>
+      </trans-unit>
+      <trans-unit id="message.admin_privileges_revoked_from_user">
+        <source>message.admin_privileges_revoked_from_user</source>
+        <target>Uprawnienia Admina Odebrane</target>
+      </trans-unit>
+      <trans-unit id="message.user_promoted_to_admin">
+        <source>message.user_promoted_to_admin</source>
+        <target>Uprawnienia Admina Nadane</target>
+      </trans-unit>
+      <trans-unit id="Promote to Admin">
+        <source>Promote to Admin</source>
+        <target>Nadaj</target>
+      </trans-unit>
+      <trans-unit id="Revoke Admin Privileges">
+        <source>Revoke Admin Privileges</source>
+        <target>Odbierz</target>
       </trans-unit>
     </body>
   </file>

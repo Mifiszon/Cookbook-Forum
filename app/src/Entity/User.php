@@ -228,4 +228,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * Promote user to admin.
+     */
+    public function promoteToAdmin(): void
+    {
+        $roles = $this->getRoles();
+        $roles[] = UserRole::ROLE_ADMIN->value;
+        $this->setRoles($roles);
+    }
+
+    /**
+     * Revoke admin privileges from user.
+     */
+    public function revokeAdminPrivileges(): void
+    {
+        $roles = $this->getRoles();
+        $roles = array_diff($roles, [UserRole::ROLE_ADMIN->value]);
+        $this->setRoles($roles);
+    }
 }

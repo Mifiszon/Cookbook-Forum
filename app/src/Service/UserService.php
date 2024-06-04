@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\RecipeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -12,22 +14,14 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class UserService implements UserServiceInterface
 {
-    private UserRepository $userRepository;
-    private PaginatorInterface $paginator;
-
-    public function __construct(UserRepository $userRepository, PaginatorInterface $paginator)
-    {
-        $this->userRepository = $userRepository;
-        $this->paginator = $paginator;
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly RecipeRepository $recipeRepository,
+        private readonly PaginatorInterface $paginator,
+        private readonly EntityManagerInterface $entityManager
+    ) {
     }
 
-    /**
-     * Get paginated list.
-     *
-     * @param int $page Page number
-     *
-     * @return PaginationInterface<string, mixed> Paginated list
-     */
     public function getPaginatedList(int $page): PaginationInterface
     {
         return $this->paginator->paginate(
@@ -37,24 +31,32 @@ class UserService implements UserServiceInterface
         );
     }
 
-    /**
-     * Save entity.
-     *
-     * @param User $user User entity
-     */
     public function save(User $user): void
     {
         $this->userRepository->save($user);
     }
 
-    /**
-     * Delete entity.
-     *
-     * @param User $user User entity
-     */
     public function delete(User $user): void
     {
+        $recipes = $this->recipeRepository->findByUser($user);
+        foreach ($recipes as $recipe) {
+            $this->recipeRepository->delete($recipe);
+        }
+
+        $this->entityManager->flush();
         $this->userRepository->delete($user);
     }
-}
 
+    public function promoteUserToAdmin(User $user): void
+    {
+        $user->promoteToAdmin();
+        $this->entityManager->flush();
+    }
+
+    public function revokeAdminPrivilegesFromUser(User $user): void
+    {
+        $user->revokeAdminPrivileges();
+        $this->entityManager->flush();
+    }
+
+}

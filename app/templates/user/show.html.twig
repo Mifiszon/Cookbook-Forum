@@ -12,6 +12,8 @@
             <dd>{{ user.id }}</dd>
             <dt>{{ 'label.email'|trans }}</dt>
             <dd>{{ user.email }}</dd>
+            <dt>{{ 'label.password'|trans }}</dt>
+            <dd>{{ user.password }}</dd>
             <dt>{{ 'label.roles'|trans }}</dt>
             <dd>
                 {% for role in user.roles %}
@@ -21,7 +23,7 @@
             </dd>
         </dl>
         <p>
-            <a href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">
+            <a href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-primary">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

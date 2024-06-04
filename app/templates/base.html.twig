@@ -19,11 +19,11 @@
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div>{{ app.user.email }}&nbsp;&nbsp;</div>
             <div>
-                <a href="{{ path('app_logout') }}">{{ 'action.logout'|trans }}</a>
+                <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">{{ 'action.logout'|trans }}</a>
             </div>
         {% else %}
             <div>
-                <a href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
             </div>
         {% endif %}
     </div>

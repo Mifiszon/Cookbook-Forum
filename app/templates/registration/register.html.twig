@@ -9,17 +9,17 @@
 
     {{ form_start(registrationForm) }}
     <div class="form-group">
-        {{ form_row(registrationForm.email, {'label': 'label.Email'|trans, 'attr': {'class': 'form-control'}}) }}
+        {{ form_row(registrationForm.email, {'label': 'label.email'|trans, 'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="form-group">
         {{ form_row(registrationForm.plainPassword.first, {
-            'label': 'label.Password'|trans,
+            'label': 'label.password'|trans,
             'attr': {'class': 'form-control'}
         }) }}
     </div>
     <div class="form-group">
         {{ form_row(registrationForm.plainPassword.second, {
-            'label': 'label.RepeatPassword'|trans,
+            'label': 'label.repeatPassword'|trans,
             'attr': {'class': 'form-control'}
         }) }}
     </div>

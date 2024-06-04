@@ -32,4 +32,9 @@ interface UserServiceInterface
      * @param User $user User entity
      */
     public function delete(User $user): void;
+
+    public function promoteUserToAdmin(User $user): void;
+
+    public function revokeAdminPrivilegesFromUser(User $user): void;
+
 }

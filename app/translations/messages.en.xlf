@@ -150,6 +150,10 @@
         <source>title.tag_delete</source>
         <target>Tag Delete</target>
       </trans-unit>
+      <trans-unit id="title.tag_create">
+        <source>title.tag_create</source>
+        <target>Tag Create</target>
+      </trans-unit>
       <trans-unit id="message.tag_contains_recipes">
         <source>message.tag_contains_recipes</source>
         <target>Tag Contains Recipes</target>
@@ -170,16 +174,16 @@
          <source>label.content</source>
          <target>Content</target>
       </trans-unit>
-      <trans-unit id="label.Password">
-         <source>label.Password</source>
+      <trans-unit id="label.password">
+         <source>label.password</source>
          <target>Password</target>
       </trans-unit>
-      <trans-unit id="label.Email">
-         <source>label.Email</source>
+      <trans-unit id="label.email">
+         <source>label.email</source>
          <target>Email</target>
       </trans-unit>
-      <trans-unit id="label.RepeatPassword">
-        <source>label.RepeatPassword</source>
+      <trans-unit id="label.repeatPassword">
+        <source>label.repeatPassword</source>
         <target>Repeat Password</target>
       </trans-unit>
       <trans-unit id="label.CurrentPassword">
@@ -199,20 +203,16 @@
         <target>Tag Details</target>
       </trans-unit>
       <trans-unit id="title.user_delete">
-        <source>action.user_delete</source>
+        <source>title.user_delete</source>
         <target>User Delete</target>
       </trans-unit>
       <trans-unit id="title.user_edit">
-        <source>user_edit</source>
+        <source>title.user_edit</source>
         <target>User Edit</target>
       </trans-unit>
       <trans-unit id="title.user_list">
         <source>title.user_list</source>
         <target>User List</target>
-      </trans-unit>
-      <trans-unit id="label.email">
-        <source>label.email</source>
-        <target>Email</target>
       </trans-unit>
       <trans-unit id="label.roles">
         <source>label.roles</source>
@@ -249,6 +249,50 @@
       <trans-unit id="title.avatar_edit">
         <source>title.avatar_edit</source>
         <target>Avatar Edit</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_users">
+        <source>action.back_to_users</source>
+        <target>Back to List</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_categories">
+        <source>action.back_to_categories</source>
+        <target>Back to List</target>
+      </trans-unit>
+      <trans-unit id="action.back_to_tags">
+        <source>action.back_to_tags</source>
+        <target>Back to List</target>
+      </trans-unit>
+      <trans-unit id="0">
+          <source>0</source>
+          <target>User</target>
+      </trans-unit>
+      <trans-unit id="1">
+          <source>1</source>
+          <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="action.revoke">
+          <source>action.revoke</source>
+          <target>Revoke Admin Privileges</target>
+      </trans-unit>
+      <trans-unit id="action.promote">
+          <source>action.promote</source>
+          <target>Promote to Admin</target>
+      </trans-unit>
+      <trans-unit id="message.admin_privileges_revoked_from_user">
+          <source>message.admin_privileges_revoked_from_user</source>
+          <target>Admin privileges revoked from user.</target>
+      </trans-unit>
+      <trans-unit id="message.user_promoted_to_admin">
+          <source>message.user_promoted_to_admin</source>
+          <target>User promoted to Admin.</target>
+      </trans-unit>
+      <trans-unit id="Promote to Admin">
+          <source>Promote to Admin</source>
+          <target>Promote to Admin</target>
+      </trans-unit>
+      <trans-unit id="Revoke Admin Privileges">
+          <source>Revoke Admin Privileges</source>
+          <target>Revoke Admin Privileges</target>
       </trans-unit>
     </body>
   </file>

@@ -190,4 +190,12 @@ class RecipeRepository extends ServiceEntityRepository
 
         return $queryBuilder;
     }
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('recipe')
+            ->andWhere('recipe.author = :author')
+            ->setParameter('author', $user)
+            ->getQuery()
+            ->getResult();
+    }
 }

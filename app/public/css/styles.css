@@ -19,8 +19,13 @@ label {
 
 .change-password {
     position: fixed;
-    top: 30px;
+    top: 50px;
     right: 0;
     padding: 10px;
 }
+
+.bold-label {
+    font-weight: bold;
+}
+
 

@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="change-password">
-        <a href="{{ path('app_change_password') }}">Zmiana Hasła</a>
+        <a class="btn btn-outline-primary" href="{{ path('app_change_password') }}">Zmiana Hasła</a>
     </div>
 
     <h1>{{ 'title.user_list'|trans }}</h1>
@@ -49,6 +49,12 @@
                             </a>
                             <a class="btn btn-outline-info" href="{{ url('user_create', {id: user.id}) }}" title="{{ 'action.create'|trans }}">
                                 {{ 'action.create'|trans }}
+                            </a>
+                            <a class="btn btn-outline-dark" href="{{ path('user_promote', {id: user.id}) }}" title="{{ 'action.promote'|trans }}">
+                                {{ 'action.promote'|trans }}
+                            </a>
+                            <a class="btn btn-outline-secondary" href="{{ path('user_revoke', {id: user.id}) }}" title="{{ 'action.revoke'|trans }}">
+                                {{ 'action.revoke'|trans }}
                             </a>
                         {% else %}
                             Brak

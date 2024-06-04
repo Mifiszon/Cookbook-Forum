@@ -73,7 +73,6 @@ class RecipeType extends AbstractType
                 'attr' => ['max_length' => 128],
             ]
         );
-        // Dodanie pola content
         $builder->add(
             'content',
             TextareaType::class,
