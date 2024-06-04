@@ -14,10 +14,10 @@ class ChangePasswordFormType extends AbstractType
     {
         $builder
             ->add('currentPassword', PasswordType::class, [
-                'label' => 'Current Password',
+                'label' => 'CurrentPassword',
             ])
             ->add('newPassword', PasswordType::class, [
-                'label' => 'New Password',
+                'label' => 'NewPassword',
             ]);
     }
 

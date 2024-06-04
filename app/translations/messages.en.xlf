@@ -221,15 +221,35 @@
       <trans-unit id="title.user_details">
         <source>title.user_details</source>
         <target>User Details</target>
-    </trans-unit>
-    <trans-unit id="title.user_create">
-      <source>title.user_create</source>
-      <target>User Create</target>
-    </trans-unit>
-    <trans-unit id="action.show_users">
-      <source>action.show_users</source>
-      <target>Show Users</target>
-    </trans-unit>
+      </trans-unit>
+      <trans-unit id="title.user_create">
+        <source>title.user_create</source>
+        <target>User Create</target>
+      </trans-unit>
+      <trans-unit id="action.show_users">
+        <source>action.show_users</source>
+        <target>Show Users</target>
+      </trans-unit>
+      <trans-unit id="action.show_tags">
+        <source>action.show_tags</source>
+        <target>Show Tags</target>
+      </trans-unit>
+      <trans-unit id="action.show_categories">
+        <source>action.show_categories</source>
+        <target>Show Categories</target>
+      </trans-unit>
+      <trans-unit id="label.avatar">
+        <source>label.avatar</source>
+        <target>Avatar</target>
+      </trans-unit>
+      <trans-unit id="title.avatar_create">
+        <source>title.avatar_create</source>
+        <target>Avatar Create</target>
+      </trans-unit>
+      <trans-unit id="title.avatar_edit">
+        <source>title.avatar_edit</source>
+        <target>Avatar Edit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

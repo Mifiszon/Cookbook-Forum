@@ -227,7 +227,27 @@
       </trans-unit>
       <trans-unit id="action.show_users">
          <source>action.show_users</source>
-         <target>Wszyscy Użytkownicy</target>
+         <target>Lista Użytkowników</target>
+      </trans-unit>
+      <trans-unit id="action.show_tags">
+        <source>action.show_tags</source>
+        <target>Lista Tagów</target>
+      </trans-unit>
+      <trans-unit id="action.show_categories">
+        <source>action.show_categories</source>
+        <target>Lista Kategorii</target>
+      </trans-unit>
+      <trans-unit id="label.avatar">
+        <source>label.avatar</source>
+        <target>Avatar</target>
+      </trans-unit>
+      <trans-unit id="title.avatar_create">
+        <source>title.avatar_create</source>
+        <target>Tworzenie Avatara</target>
+      </trans-unit>
+      <trans-unit id="title.avatar_edit">
+        <source>title.avatar_edit</source>
+        <target>Edytowanie Avatara</target>
       </trans-unit>
     </body>
   </file>
