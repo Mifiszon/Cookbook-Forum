@@ -1,7 +1,3 @@
-label {
-    font-weight: bold;
-}
-
 .required-field::after {
     content: "*";
     color: red;
@@ -33,6 +29,11 @@ label {
 
 .bold-label {
     font-weight: bold;
+}
+
+.alert {
+    max-width: 15%;
+    text-align: center;
 }
 
 

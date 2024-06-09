@@ -35,6 +35,7 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
     /**
      * Delete entity.
      *
@@ -49,4 +50,13 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    public function countAdmins(): int
+    {
+        return (int) $this->createQueryBuilder('user')
+            ->select('COUNT(user.id)')
+            ->where('user.roles LIKE :role')
+            ->setParameter('role', '%"ROLE_ADMIN"%')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

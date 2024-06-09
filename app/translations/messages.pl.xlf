@@ -283,11 +283,11 @@
       </trans-unit>
       <trans-unit id="message.admin_privileges_revoked_from_user">
         <source>message.admin_privileges_revoked_from_user</source>
-        <target>Uprawnienia Admina Odebrane</target>
+        <target>Uprawnienia Administratora Odebrane</target>
       </trans-unit>
       <trans-unit id="message.user_promoted_to_admin">
         <source>message.user_promoted_to_admin</source>
-        <target>Uprawnienia Admina Nadane</target>
+        <target>Uprawnienia Administratora Nadane</target>
       </trans-unit>
       <trans-unit id="Promote to Admin">
         <source>Promote to Admin</source>
@@ -320,6 +320,14 @@
       <trans-unit id="Nick">
          <source>Nick</source>
          <target>Nick</target>
+      </trans-unit>
+      <trans-unit id="message.no_access">
+         <source>message.no_access</source>
+         <target>Brak Uprawnień</target>
+      </trans-unit>
+      <trans-unit id="New Nickname">
+         <source>New Nickname</source>
+         <target>Nowy Nick</target>
       </trans-unit>
     </body>
   </file>

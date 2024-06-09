@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Type\ChangeNicknameType;
 use App\Form\Type\Privileges\PromoteType;
 use App\Form\Type\Privileges\RevokeType;
 use App\Form\Type\RegistrationFormType;
@@ -181,6 +182,11 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function revokeAdminPrivilegesFromUser(Request $request, User $user): Response
     {
+        if ($this->userService->isLastAdmin($user)) {
+            $this->addFlash('error', $this->translator->trans('message.no_access'));
+            return $this->redirectToRoute('user_index');
+        }
+
         $form = $this->createForm(RevokeType::class);
         $form->handleRequest($request);
 
@@ -199,4 +205,27 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/change_nickname', name: 'change_data')]
+    public function changeNickname(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ChangeNicknameType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success',  $this->translator->trans('message.updated_successfully'));
+
+            return $this->redirectToRoute('recipe_index');
+        }
+
+        return $this->render('user/change_nickname.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
+        ]);
+    }
+
+
 }

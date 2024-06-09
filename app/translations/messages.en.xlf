@@ -306,6 +306,14 @@
          <source>label.nickname</source>
          <target>Nickname</target>
       </trans-unit>
+      <trans-unit id="message.no_access">
+         <source>message.no_access</source>
+         <target>No access</target>
+      </trans-unit>
+      <trans-unit id="New Nickname">
+         <source>New Nickname</source>
+         <target>New Nickname</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

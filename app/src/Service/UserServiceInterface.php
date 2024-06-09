@@ -37,4 +37,8 @@ interface UserServiceInterface
 
     public function revokeAdminPrivilegesFromUser(User $user): void;
 
+    public function isLastAdmin(User $user): bool;
+
+    public function changeNickname(User $user, string $newNickname): void;
+
 }

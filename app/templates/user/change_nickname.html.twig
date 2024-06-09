@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zmiana Danych{% endblock %}
+
+{% block body %}
+    <h1>Zmiana Danych</h1>
+
+    {{ form_start(form, {'attr': {'class': 'my-form'}}) }}
+    {{ form_row(form.nickname, {'attr': {'class': 'form-control'}}) }}
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    {{ form_end(form) }}
+
+    <div style="padding-top: 15px">
+        <a class="btn btn-primary" href="{{ path('avatar_create') }}">Dodaj Avatar</a>
+        <a class="btn btn-primary" href="{{ path('avatar_edit', {id: user.avatar.id}) }}">Zmień Avatar</a>
+    </div>
+
+{% endblock %}

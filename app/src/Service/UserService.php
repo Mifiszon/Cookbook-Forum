@@ -59,4 +59,14 @@ class UserService implements UserServiceInterface
         $this->entityManager->flush();
     }
 
+    public function isLastAdmin(User $user): bool
+    {
+        return $this->userRepository->countAdmins() === 1 && $user->isAdmin();
+    }
+
+    public function changeNickname(User $user, string $newNickname): void
+    {
+        $user->setNickname($newNickname);
+        $this->entityManager->flush();
+    }
 }
