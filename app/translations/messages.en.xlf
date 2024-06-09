@@ -263,36 +263,48 @@
         <target>Back to List</target>
       </trans-unit>
       <trans-unit id="0">
-          <source>0</source>
-          <target>User</target>
+         <source>0</source>
+         <target>User</target>
       </trans-unit>
       <trans-unit id="1">
-          <source>1</source>
-          <target>Admin</target>
+         <source>1</source>
+         <target>Admin</target>
       </trans-unit>
       <trans-unit id="action.revoke">
-          <source>action.revoke</source>
-          <target>Revoke Admin Privileges</target>
+         <source>action.revoke</source>
+         <target>Revoke Admin Privileges</target>
       </trans-unit>
       <trans-unit id="action.promote">
-          <source>action.promote</source>
-          <target>Promote to Admin</target>
+         <source>action.promote</source>
+         <target>Promote to Admin</target>
       </trans-unit>
       <trans-unit id="message.admin_privileges_revoked_from_user">
-          <source>message.admin_privileges_revoked_from_user</source>
-          <target>Admin privileges revoked from user.</target>
+         <source>message.admin_privileges_revoked_from_user</source>
+         <target>Admin privileges revoked from user.</target>
       </trans-unit>
       <trans-unit id="message.user_promoted_to_admin">
-          <source>message.user_promoted_to_admin</source>
-          <target>User promoted to Admin.</target>
+         <source>message.user_promoted_to_admin</source>
+         <target>User promoted to Admin.</target>
       </trans-unit>
       <trans-unit id="Promote to Admin">
-          <source>Promote to Admin</source>
-          <target>Promote to Admin</target>
+         <source>Promote to Admin</source>
+         <target>Promote to Admin</target>
       </trans-unit>
       <trans-unit id="Revoke Admin Privileges">
-          <source>Revoke Admin Privileges</source>
-          <target>Revoke Admin Privileges</target>
+         <source>Revoke Admin Privileges</source>
+         <target>Revoke Admin Privileges</target>
+      </trans-unit>
+      <trans-unit id="Obecne Hasło">
+         <source>Obecne Hasło</source>
+         <target>Current Password</target>
+      </trans-unit>
+      <trans-unit id="Nowe Hasło">
+         <source>Nowe Hasło</source>
+         <target>New Password</target>
+      </trans-unit>
+      <trans-unit id="label.nickname">
+         <source>label.nickname</source>
+         <target>Nickname</target>
       </trans-unit>
     </body>
   </file>

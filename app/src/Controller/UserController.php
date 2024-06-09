@@ -70,7 +70,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encode the plain password
             $user->setPassword(
                 $passwordHasher->hashPassword(
                     $user,
@@ -81,7 +80,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'message.created_successfully.');
+            $this->addFlash('success', 'message.created_successfully');
 
             return $this->redirectToRoute('user_index');
         }

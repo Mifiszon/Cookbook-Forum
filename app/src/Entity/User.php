@@ -72,6 +72,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Avatar $avatar = null;
 
     /**
+     * Nickname.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    private ?string $nickname = null;
+
+    /**
      * Getter for id.
      *
      * @return int|null Id
@@ -247,5 +256,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->getRoles();
         $roles = array_diff($roles, [UserRole::ROLE_ADMIN->value]);
         $this->setRoles($roles);
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): static
+    {
+        $this->nickname = $nickname;
+
+        return $this;
     }
 }

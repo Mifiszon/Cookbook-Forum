@@ -9,6 +9,9 @@
     <div class="change-password">
         <a class="btn btn-outline-primary" href="{{ path('app_change_password') }}">Zmiana Hasła</a>
     </div>
+    <div class="change-data">
+        <a class="btn btn-outline-primary" href="{{ path('app_change_password') }}">Zmiana Danych</a>
+    </div>
 
     <h1>{{ 'title.recipe_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
@@ -56,7 +59,7 @@
                             &nbsp;
                         {% endif %}
                     </td>
-                    <td>{{ recipe.author.email }}</td>
+                    <td>{{ recipe.author.nickname }}</td>
                     <td>
                         <a class="btn btn-outline-primary" href="{{ url('recipe_show', {id: recipe.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
@@ -87,8 +90,6 @@
         <a class="btn btn-outline-primary" href="{{ path('recipe_index') }}" title="{{ 'action.back_to_recipes'|trans }}">
             {{ 'action.back_to_recipes'|trans }}
         </a>
-
-
         <a class="btn btn-outline-primary" href="{{ path('user_index') }}" title="{{ 'action.show_users'|trans }}">
             {{ 'action.show_users'|trans }}
         </a>
@@ -98,7 +99,6 @@
         <a class="btn btn-outline-primary" href="{{ path('tag_index') }}" title="{{ 'action.show_tags'|trans }}">
             {{ 'action.show_tags'|trans }}
         </a>
-
     {% else %}
         <p>
             {{ 'message.empty_list'|trans }}

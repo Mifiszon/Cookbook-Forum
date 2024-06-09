@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.user_edit'|trans({'%id%': user.id|default('')}) }}
+    {{ 'title.recipe_details'|trans({'%title%': recipe.title|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.user_edit'|trans({'%id%': user.id|default('')}) }}</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary"/>
-    </div>
-    <div class="form-group row float-sm-left">
-        <a href="{{ url('user_index') }}" class="btn btn-link">
-            {{ 'action.back_to_list'|trans }}
-        </a>
-    </div>
-    {{ form_end(form) }}
+    <h1>{{ 'title.recipe_details'|trans({'%title%': recipe.title|default('')}) }}</h1>
+    {% if recipe is defined %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ recipe.id }}</dd>
+            <dt>{{ 'label.created_at'|trans }}</dt>
+            <dd>{{ recipe.createdAt|format_date('long') }}</dd>
+            <dt>{{ 'label.updated_at'|trans }}</dt>
+            <dd>{{ recipe.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'label.title'|trans }}</dt>
+            <dd>{{ recipe.title }}</dd>
+            <dt>{{ 'label.category'|trans }}</dt>
+            <dd>{{ recipe.category.title }}</dd>
+            <dt>{{ 'label.tag'|trans }}</dt>
+            <dd>
+                {% for tag in recipe.tags %}
+                    {{ tag.title }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
+            <dt>{{ 'label.author'|trans }}</dt>
+            <dd>{{ recipe.author.nickname }}</dd>
+            <dt>{{ 'label.content'|trans }}</dt>
+            <dd>{{ recipe.content|markdown_to_html }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
 {% endblock %}

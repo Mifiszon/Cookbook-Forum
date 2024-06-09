@@ -24,6 +24,13 @@ label {
     padding: 10px;
 }
 
+.change-data {
+    position: fixed;
+    top: 50px;
+    right: 130px;
+    padding: 10px;
+}
+
 .bold-label {
     font-weight: bold;
 }

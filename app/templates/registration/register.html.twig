@@ -3,13 +3,16 @@
 {% block title %}Rejestracja{% endblock %}
 
 {% block body %}
-    <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się !</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Zarejestruj się!</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
     <div class="form-group">
         {{ form_row(registrationForm.email, {'label': 'label.email'|trans, 'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(registrationForm.nickname, {'label': 'label.nickname'|trans, 'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="form-group">
         {{ form_row(registrationForm.plainPassword.first, {

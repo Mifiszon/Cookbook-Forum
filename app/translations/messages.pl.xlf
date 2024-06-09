@@ -297,6 +297,30 @@
         <source>Revoke Admin Privileges</source>
         <target>Odbierz</target>
       </trans-unit>
+      <trans-unit id="Obecne Hasło">
+         <source>Obecne Hasło</source>
+         <target>Obecne Hasło</target>
+      </trans-unit>
+      <trans-unit id="Nowe Hasło">
+         <source>Nowe Hasło</source>
+         <target>Nowe Hasło</target>
+      </trans-unit>
+      <trans-unit id="label.nickname">
+         <source>label.nickname</source>
+         <target>Nick</target>
+      </trans-unit>
+      <trans-unit id="Hasło">
+         <source>Hasło</source>
+         <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="Powtórz Hasło">
+         <source>Powtórz Hasło</source>
+         <target>Powtórz Hasło</target>
+      </trans-unit>
+      <trans-unit id="Nick">
+         <source>Nick</source>
+         <target>Nick</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

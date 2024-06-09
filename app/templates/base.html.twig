@@ -16,14 +16,15 @@
 
 <main role="main">
     <div class="user-info">
+        <div class ="profile-pic" style="padding-right: 8px">
+            {% if app.user.avatar.filename is defined and app.user.avatar.filename|length %}
+                <img style="width: 40px; height: 40px; border-radius: 50%" alt="Avatar" class="nav-profile-img" src="{{ asset(avatars_directory~app.user.avatar.filename) }}">
+            {% endif %}
+        </div>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div>{{ app.user.email }}&nbsp;&nbsp;</div>
             <div>
                 <a class="btn btn-outline-danger" href="{{ path('app_logout') }}">{{ 'action.logout'|trans }}</a>
-            </div>
-        {% else %}
-            <div>
-                <a class="btn btn-outline-primary" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
             </div>
         {% endif %}
     </div>
