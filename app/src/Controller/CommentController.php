@@ -5,16 +5,18 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Recipe;
 use App\Form\Type\CommentType;
+use App\Repository\RecipeRepository;
 use App\Service\CommentServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/comment')]
 class CommentController extends AbstractController
 {
-    public function __construct(private CommentServiceInterface $commentService)
+    public function __construct(private readonly CommentServiceInterface $commentService,private readonly TranslatorInterface $translator, private readonly RecipeRepository $recipeRepository)
     {
     }
 
@@ -27,14 +29,14 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
-            $recipe = $this->getDoctrine()->getRepository(Recipe::class)->find($recipeId);
+            $recipe = $this->recipeRepository->find($recipeId);
             $comment->setAuthor($user);
             $comment->setRecipe($recipe);
-            $this->commentService->save($comment);
+            $this->commentService->add($comment);
 
-            $this->addFlash('success', 'message.comment_added_successfully.');
+            $this->addFlash('success', $this->translator->trans('message.comment_added_successfully'));
 
-            return $this->redirectToRoute('recipe_details', ['id' => $recipeId]);
+            return $this->redirectToRoute('recipe_show', ['id' => $recipeId]);
         }
 
         return $this->render('comment/add.html.twig', [

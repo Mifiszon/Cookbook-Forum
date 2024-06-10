@@ -30,8 +30,28 @@
             <dt>{{ 'label.content'|trans }}</dt>
             <dd>{{ recipe.content|markdown_to_html }}</dd>
         </dl>
+
+        <h3>Komentarze:</h3>
+        {% for comment in commentsPagination|reverse %}
+            <div class="comment-table">
+                <div class="comment-row">
+                    <strong>{{ comment.author.nickname }}</strong> - {{ comment.createdAt|format_date('long') }}
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        {{ knp_pagination_render(commentsPagination) }}
+
+        <br>
+
+        <a href="{{ path('comment_add', {'recipeId': recipe.id}) }}" class="btn btn-primary">Dodaj komentarz</a>
+
+        <br><br>
+
         <p>
-            <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-outline-info">
+            <a href="{{ url('recipe_index') }}" title="{{ 'action.back_to_list'|trans }}" class="btn btn-primary">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

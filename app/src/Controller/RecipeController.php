@@ -10,6 +10,8 @@ use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\Type\RecipeType;
 use App\Resolver\RecipeListInputFiltersDtoResolver;
+use App\Service\CommentService;
+use App\Service\CommentServiceInterface;
 use App\Service\RecipeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -33,7 +35,7 @@ class RecipeController extends AbstractController
      * @param RecipeServiceInterface $recipeService Recipe service
      * @param TranslatorInterface    $translator    Translator
      */
-    public function __construct(private readonly RecipeServiceInterface $recipeService, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly RecipeServiceInterface $recipeService, private readonly TranslatorInterface $translator, private  readonly CommentServiceInterface $commentService)
     {
     }
 
@@ -69,10 +71,14 @@ class RecipeController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET', )]
+    #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Recipe $recipe): Response
     {
-        return $this->render('recipe/show.html.twig', ['recipe' => $recipe]);
+        $commentsPagination = $this->commentService->getPaginatedCommentsForRecipe($recipe->getId(), 1);
+        return $this->render('recipe/show.html.twig', [
+            'recipe' => $recipe,
+            'commentsPagination' => $commentsPagination,
+        ]);
     }
 
     /**

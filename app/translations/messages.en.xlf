@@ -314,6 +314,10 @@
          <source>New Nickname</source>
          <target>New Nickname</target>
       </trans-unit>
+      <trans-unit id="message.comment_added_successfully">
+         <source>message.comment_added_successfully</source>
+         <target>Comment Added</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

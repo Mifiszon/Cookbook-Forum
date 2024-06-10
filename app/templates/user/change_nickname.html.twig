@@ -11,8 +11,11 @@
     {{ form_end(form) }}
 
     <div style="padding-top: 15px">
-        <a class="btn btn-primary" href="{{ path('avatar_create') }}">Dodaj Avatar</a>
+        {% if app.user.avatar.filename is defined and app.user.avatar.filename|length %}
         <a class="btn btn-primary" href="{{ path('avatar_edit', {id: user.avatar.id}) }}">Zmień Avatar</a>
+        {% else  %}
+        <a class="btn btn-primary" href="{{ path('avatar_create') }}">Dodaj Avatar</a>
+        {% endif %}
     </div>
 
 {% endblock %}

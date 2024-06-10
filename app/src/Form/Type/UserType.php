@@ -49,7 +49,6 @@ class UserType extends AbstractType
             ])
             ->add('roles', CollectionType::class, [
                 'label' => 'label.roles',
-                'label_attr' => ['class' => 'bold-label'],
             ]);
 
         if (!$options['is_edit']) {

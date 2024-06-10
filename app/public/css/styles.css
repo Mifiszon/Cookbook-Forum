@@ -27,13 +27,20 @@
     padding: 10px;
 }
 
-.bold-label {
-    font-weight: bold;
-}
-
 .alert {
     max-width: 15%;
     text-align: center;
+}
+
+.comment-table {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-row {
+    margin-bottom: 5px;
 }
 
 
