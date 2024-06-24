@@ -10,6 +10,8 @@ use App\Entity\Recipe;
 use App\Form\Type\CommentType;
 use App\Repository\RecipeRepository;
 use App\Service\CommentServiceInterface;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,7 @@ class CommentController extends AbstractController
     public function __construct(
         private readonly CommentServiceInterface $commentService,
         private readonly TranslatorInterface $translator,
-        private readonly RecipeRepository $recipeRepository)
+        private readonly RecipeRepository $recipeRepository,)
     {}
 
     #[Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
@@ -51,5 +53,17 @@ class CommentController extends AbstractController
         return $this->render('comment/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($comment);
+        $entityManager->flush();
+
+        $this->addFlash('success', $this->translator->trans('message.comment_deleted_successfully'));
+
+        return $this->redirectToRoute('recipe_show', ['id' => $comment->getRecipe()->getId()]);
     }
 }

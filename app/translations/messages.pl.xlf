@@ -341,6 +341,10 @@
          <source>title.registration</source>
          <target>Zarejestruj się !</target>
       </trans-unit>
+      <trans-unit id="message.comment_deleted_successfully">
+         <source>message.comment_deleted_successfully</source>
+         <target>Komentarz Usunięty</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

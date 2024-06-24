@@ -37,9 +37,15 @@
                 <div class="comment-row">
                     <strong>{{ comment.author.nickname }}</strong> - {{ comment.createdAt|format_date('long') }}
                     <p>{{ comment.content }}</p>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <form method="post" action="{{ path('comment_delete', {'id': comment.id}) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                            <button type="submit" class="btn btn-danger">Usuń</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
-
         {% endfor %}
 
         {{ knp_pagination_render(commentsPagination) }}
