@@ -365,6 +365,22 @@
          <source>message.account_blocked</source>
          <target>Twoje konto jest zablokowane</target>
       </trans-unit>
+      <trans-unit id="message.added_successfully">
+         <source>message.added_successfully</source>
+         <target>Dodano pomyślnie !</target>
+      </trans-unit>
+      <trans-unit id="title.picture_create">
+         <source>title.picture_create</source>
+         <target>Dodaj Obrazek</target>
+      </trans-unit>
+      <trans-unit id="title.picture_edit">
+         <source>title.picture_edit</source>
+         <target>Edytuj Obrazek</target>
+      </trans-unit>
+      <trans-unit id="label.picture">
+         <source>label.picture</source>
+         <target>Obrazek</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

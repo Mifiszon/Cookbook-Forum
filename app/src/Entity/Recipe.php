@@ -102,6 +102,9 @@ class Recipe
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $content = null;
 
+    #[ORM\OneToOne(mappedBy: 'recipe', cascade: ['persist', 'remove'])]
+    private ?Picture $picture = null;
+
     /**
      * Constructor.
      */
@@ -252,6 +255,23 @@ class Recipe
     public function setContent(?string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(Picture $picture): static
+    {
+        // set the owning side of the relation if necessary
+        if ($picture->getRecipe() !== $this) {
+            $picture->setRecipe($this);
+        }
+
+        $this->picture = $picture;
 
         return $this;
     }

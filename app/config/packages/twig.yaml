@@ -3,6 +3,7 @@ twig:
     form_themes: [ 'bootstrap_5_horizontal_layout.html.twig' ]
     globals:
         avatars_directory: 'uploads/avatars/'
+        pictures_directory: 'uploads/pictures/'
 
 when@test:
     twig:

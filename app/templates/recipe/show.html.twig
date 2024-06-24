@@ -31,6 +31,22 @@
             <dd>{{ recipe.content|markdown_to_html }}</dd>
         </dl>
 
+        {% if recipe.picture is not null %}
+            <div class="recipe-picture">
+                <img src="{{ asset(avatars_directory ~ recipe.picture.filename) }}" alt="Recipe Picture" class="img-fluid rounded">
+            </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER') and (app.user.id == recipe.author.id or is_granted('ROLE_ADMIN')) %}
+            {% if recipe.picture is not null %}
+                <a href="{{ path('picture_edit', {'id': recipe.picture.id}) }}" class="btn btn-outline-primary mt-3">Edytuj obrazek</a>
+            {% else %}
+                <a href="{{ path('picture_create', {'id': recipe.id}) }}" class="btn btn-primary mt-3">Dodaj obrazek</a>
+            {% endif %}
+        {% endif %}
+
+        <br><br>
+
         <h3>Komentarze:</h3>
         {% for comment in commentsPagination|reverse %}
             <div class="comment-table">
@@ -52,7 +68,7 @@
 
         <br>
 
-        <a href="{{ path('comment_add', {'recipeId': recipe.id}) }}" class="btn btn-primary">Dodaj komentarz</a>
+        <a href="{{ path('comment_add', {'recipeId': recipe.id}) }}" class="btn btn-outline-primary">Dodaj komentarz</a>
 
         <br><br>
 
