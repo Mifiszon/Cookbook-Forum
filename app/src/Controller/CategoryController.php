@@ -39,6 +39,7 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(name: 'category_index', methods: 'GET')]
+    #[IsGranted('ROLE_USER')]
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->categoryService->getPaginatedList($page);
@@ -78,6 +79,7 @@ class CategoryController extends AbstractController
         name: 'category_create',
         methods: 'GET|POST',
     )]
+    #[IsGranted('ROLE_USER')]
     public function create(Request $request): Response
     {
         $category = new Category();

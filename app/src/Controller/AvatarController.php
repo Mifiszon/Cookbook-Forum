@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -44,6 +45,7 @@ class AvatarController extends AbstractController
         name: 'avatar_create',
         methods: 'GET|POST'
     )]
+    #[IsGranted('ROLE_USER')]
     public function create(Request $request): Response
     {
         /** @var User $user */
@@ -100,6 +102,7 @@ class AvatarController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET|PUT'
     )]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Avatar $avatar): Response
     {
         /** @var User $user */

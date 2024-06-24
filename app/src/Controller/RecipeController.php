@@ -72,6 +72,7 @@ class RecipeController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Recipe $recipe): Response
     {
         $commentsPagination = $this->commentService->getPaginatedCommentsForRecipe($recipe->getId(), 1);
@@ -89,6 +90,7 @@ class RecipeController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/create', name: 'recipe_create', methods: 'GET|POST')]
+    #[IsGranted('ROLE_USER')]
     public function create(Request $request): Response
     {
         /** @var User $user */

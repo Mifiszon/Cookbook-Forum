@@ -51,12 +51,18 @@ class RecipeService implements RecipeServiceInterface
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(int $page, User $author, RecipeListInputFiltersDto $filters): PaginationInterface
+    public function getPaginatedList(int $page, ?User $author, RecipeListInputFiltersDto $filters): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
 
+        if ($author) {
+            $query = $this->recipeRepository->queryByAuthor($author, $filters);
+        } else {
+            $query = $this->recipeRepository->queryAll($filters);
+        }
+
         return $this->paginator->paginate(
-            $this->recipeRepository->queryByAuthor($author, $filters),
+            $query,
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );

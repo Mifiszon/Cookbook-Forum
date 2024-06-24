@@ -1,4 +1,7 @@
 <?php
+/**
+* Comment Controller.
+ */
 
 namespace App\Controller;
 
@@ -11,16 +14,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
+/**
+* Class CommentController.
+ */
 #[Route('/comment')]
 class CommentController extends AbstractController
 {
-    public function __construct(private readonly CommentServiceInterface $commentService,private readonly TranslatorInterface $translator, private readonly RecipeRepository $recipeRepository)
-    {
-    }
+    public function __construct(
+        private readonly CommentServiceInterface $commentService,
+        private readonly TranslatorInterface $translator,
+        private readonly RecipeRepository $recipeRepository)
+    {}
 
     #[Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function add(Request $request, int $recipeId): Response
     {
         $comment = new Comment();

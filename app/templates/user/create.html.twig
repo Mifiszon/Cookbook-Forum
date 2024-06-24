@@ -1,38 +1,6 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Tworzenie Użytkownika{% endblock %}
-
-{% block body %}
-    <h1 class="h3 mb-3 font-weight-normal">Tworzenie Użytkownika</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-    <div class="form-group">
-        {{ form_row(registrationForm.email, {'label': 'label.email'|trans, 'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(registrationForm.nickname, {'label': 'label.nickname'|trans, 'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(registrationForm.plainPassword.first, {
-            'label': 'label.password'|trans,
-            'attr': {'class': 'form-control'}
-        }) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(registrationForm.plainPassword.second, {
-            'label': 'label.repeatPassword'|trans,
-            'attr': {'class': 'form-control'}
-        }) }}
-    </div>
-
-    <button type="submit" class="btn btn-lg btn-primary">Wyślij</button>
-    {{ form_end(registrationForm) }}
-
-    <br>
-
-    <a href="{{ path('user_index') }}" title="{{ 'action.back_to_users'|trans }}">
-        {{ 'action.back_to_users'|trans }}
-    </a>
-{% endblock %}
+{% include 'default/_form.html.twig' with {
+    page_title: 'title.user_create'|trans,
+    form: registrationForm,
+    submit_label: 'action.save'|trans,
+    back_to_list_path: 'user_index',
+} %}

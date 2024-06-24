@@ -173,16 +173,16 @@
           <source>label.content</source>
           <target>Treść</target>
        </trans-unit>
-       <trans-unit id="label.password">
-          <source>label.password</source>
+       <trans-unit id="Password">
+          <source>Password</source>
           <target>Hasło</target>
        </trans-unit>
        <trans-unit id="Email">
           <source>Email</source>
           <target>Email</target>
        </trans-unit>
-       <trans-unit id="label.repeatPassword">
-         <source>label.repeatPassword</source>
+       <trans-unit id="Repeat Password">
+         <source>Repeat Password</source>
          <target>Powtórz Hasło</target>
        </trans-unit>
        <trans-unit id="label.CurrentPassword">
@@ -332,6 +332,14 @@
       <trans-unit id="message.comment_added_successfully">
          <source>message.comment_added_successfully</source>
          <target>Komentarz Dodany</target>
+      </trans-unit>
+      <trans-unit id="title.change_password">
+         <source>title.change_password</source>
+         <target>Zmiana Hasła</target>
+      </trans-unit>
+      <trans-unit id="title.registration">
+         <source>title.registration</source>
+         <target>Zarejestruj się !</target>
       </trans-unit>
     </body>
   </file>

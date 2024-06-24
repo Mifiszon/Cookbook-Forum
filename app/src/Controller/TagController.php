@@ -39,6 +39,7 @@ class TagController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(name: 'tag_index', methods: 'GET')]
+    #[IsGranted('ROLE_USER')]
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->tagService->getPaginatedList($page);
@@ -77,6 +78,7 @@ class TagController extends AbstractController
         name: 'tag_create',
         methods: 'GET|POST',
     )]
+    #[IsGranted('ROLE_USER')]
     public function create(Request $request): Response
     {
         $tag = new Tag();
