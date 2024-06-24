@@ -69,4 +69,24 @@ class UserService implements UserServiceInterface
         $user->setNickname($newNickname);
         $this->entityManager->flush();
     }
+
+    public function blockUser(User $user): void
+    {
+        $user->setIsBlocked(true);
+        $this->entityManager->flush();
+    }
+
+    public function unblockUser(User $user): void
+    {
+        $user->setIsBlocked(false);
+        $this->entityManager->flush();
+    }
+
+    public function isUserBlocked(string $email): bool
+    {
+        $userRepository = $this->entityManager->getRepository(User::class);
+        $user = $userRepository->findOneBy(['email' => $email]);
+
+        return $user->isBlocked;
+    }
 }

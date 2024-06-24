@@ -41,4 +41,11 @@ interface UserServiceInterface
 
     public function changeNickname(User $user, string $newNickname): void;
 
+    public function blockUser(User $user): void;
+
+    public function unblockUser(User $user): void;
+
+    public function isUserBlocked(string $email): bool;
+
+
 }

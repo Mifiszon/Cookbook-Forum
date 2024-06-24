@@ -345,6 +345,26 @@
          <source>message.comment_deleted_successfully</source>
          <target>Komentarz Usunięty</target>
       </trans-unit>
+      <trans-unit id="action.block">
+         <source>action.block</source>
+         <target>Zablokuj</target>
+      </trans-unit>
+      <trans-unit id="action.unblock">
+         <source>action.unblock</source>
+         <target>Odblokuj</target>
+      </trans-unit>
+      <trans-unit id="message.user_blocked">
+         <source>message.user_blocked</source>
+         <target>Konto Zablokowane</target>
+      </trans-unit>
+      <trans-unit id="message.user_unblocked">
+         <source>message.user_unblocked</source>
+         <target>Konto Odblokowane</target>
+      </trans-unit>
+      <trans-unit id="message.account_blocked">
+         <source>message.account_blocked</source>
+         <target>Twoje konto jest zablokowane</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

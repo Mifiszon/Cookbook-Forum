@@ -228,5 +228,23 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/block', name: 'user_block', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function blockUser(User $user): Response
+    {
+        $this->userService->blockUser($user);
+        $this->addFlash('success',  $this->translator->trans('message.user_blocked'));
 
+        return $this->redirectToRoute('user_index');
+    }
+
+    #[Route('/{id}/unblock', name: 'user_unblock', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function unblockUser(User $user): Response
+    {
+        $this->userService->unblockUser($user);
+        $this->addFlash('success',  $this->translator->trans('message.user_unblocked'));
+
+        return $this->redirectToRoute('user_index');
+    }
 }

@@ -61,6 +61,23 @@
                             <a class="btn btn-outline-secondary" href="{{ path('user_revoke', {id: user.id}) }}" title="{{ 'action.revoke'|trans }}">
                                 {{ 'action.revoke'|trans }}
                             </a>
+                            {% if not user.isBlocked %}
+                                <form method="post" action="{{ path('user_block', {id: user.id}) }}" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-warning">
+                                        {{ 'action.block'|trans }}
+                                    </button>
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('block_user_' ~ user.id) }}">
+                                </form>
+                            {% else %}
+                                <form method="post" action="{{ path('user_unblock', {id: user.id}) }}" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-warning">
+                                        {{ 'action.unblock'|trans }}
+                                    </button>
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('unblock_user_' ~ user.id) }}">
+                                </form>
+                            {% endif %}
                         {% else %}
                             Brak
                         {% endif %}
