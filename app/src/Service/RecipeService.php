@@ -10,6 +10,7 @@ use App\Dto\RecipeListInputFiltersDto;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\Exception\ORMException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
@@ -33,20 +34,24 @@ class RecipeService implements RecipeServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService Category service
-     * @param PaginatorInterface       $paginator       Paginator
-     * @param TagServiceInterface      $tagService      Tag service
+     * @param CategoryServiceInterface  $categoryService Category service
+     * @param PaginatorInterface        $paginator       Paginator
+     * @param TagServiceInterface       $tagService      Tag service
      * @param RecipeRepository         $recipeRepository  Recipe repository
      */
-    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly PaginatorInterface $paginator, private readonly TagServiceInterface $tagService, private readonly RecipeRepository $recipeRepository)
-    {
+    public function __construct(
+        private readonly CategoryServiceInterface $categoryService,
+        private readonly PaginatorInterface $paginator,
+        private readonly TagServiceInterface $tagService,
+        private readonly RecipeRepository $recipeRepository
+    ) {
     }
 
     /**
      * Get paginated list.
      *
-     * @param int                     $page    Page number
-     * @param User                    $author  Recipes author
+     * @param int $page Page number
+     * @param User|null $author Recipes author
      * @param RecipeListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
@@ -72,6 +77,7 @@ class RecipeService implements RecipeServiceInterface
      * Save entity.
      *
      * @param Recipe $recipe Recipe entity
+     * @throws ORMException
      */
     public function save(Recipe $recipe): void
     {
@@ -82,6 +88,7 @@ class RecipeService implements RecipeServiceInterface
      * Delete entity.
      *
      * @param Recipe $recipe Recipe entity
+     * @throws ORMException
      */
     public function delete(Recipe $recipe): void
     {

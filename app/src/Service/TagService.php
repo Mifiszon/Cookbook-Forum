@@ -11,7 +11,6 @@ use App\Repository\RecipeRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -38,8 +37,11 @@ class TagService implements TagServiceInterface
      * @param PaginatorInterface $paginator          Paginator
      * @param RecipeRepository   $recipeRepository   Recipe repository
      */
-    public function __construct(private readonly TagRepository $tagRepository, private readonly PaginatorInterface $paginator, private readonly RecipeRepository $recipeRepository)
-    {
+    public function __construct(
+        private readonly TagRepository $tagRepository,
+        private readonly PaginatorInterface $paginator,
+        private readonly RecipeRepository $recipeRepository
+    ) {
     }
 
     /**
@@ -62,6 +64,7 @@ class TagService implements TagServiceInterface
      * Save entity.
      *
      * @param Tag $tag Tag entity
+     * @throws ORMException
      */
     public function save(Tag $tag): void
     {
@@ -72,6 +75,7 @@ class TagService implements TagServiceInterface
      * Delete entity.
      *
      * @param Tag $tag Tag entity
+     * @throws ORMException
      */
     public function delete(Tag $tag): void
     {

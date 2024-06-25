@@ -2,10 +2,10 @@
 /**
  * Login form authenticator.
  */
-
 namespace App\Security;
 
 use App\Service\UserServiceInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -22,54 +22,37 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class LoginFormAuthenticator.
+ *
  */
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    /**
-     * Login route.
-     *
-     * @const string
-     */
     private const LOGIN_ROUTE = 'app_login';
-
-    /**
-     * Default route.
-     *
-     * @const string
-     */
     private const DEFAULT_ROUTE = 'recipe_index';
 
     /**
-     * Constructor.
-     *
-     * @param UrlGeneratorInterface $urlGenerator Url generator
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param UserServiceInterface $userService
+     * @param TranslatorInterface $translator
      */
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly UserServiceInterface $userService,
-        private readonly TranslatorInterface $translator,)
-    {
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**
-     * Does the authenticator support the given Request?
+     * Override to change the request conditions that have to be
+     * matched in order to handle the login form submit.
      *
-     * If this returns false, the authenticator will be skipped.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return bool Result
+     * This default implementation handles all POST requests to the
+     * login path (@see getLoginUrl()).
      */
     public function supports(Request $request): bool
     {
-        if (self::LOGIN_ROUTE !== $request->attributes->get('_route') || !$request->isMethod('POST')) {
-            return false;
-        }
-
-        return true;
+        return self::LOGIN_ROUTE === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     /**
@@ -83,17 +66,19 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * You may throw any AuthenticationException in this method in case of error (e.g.
      * a UserNotFoundException when the user cannot be found).
      *
-     * @param Request $request HTTP request
-     *
-     * @return Passport Passport
-     *
      * @throws AuthenticationException
      */
     public function authenticate(Request $request): Passport
     {
         $email = (string) $request->request->get('email', '');
+        $user = $this->userService->findUserByEmail($email);
 
-        if ($this->userService->isUserBlocked($email)) {
+        if (!$user) {
+            $message = $this->translator->trans('message.user_not_found');
+            throw new CustomUserMessageAuthenticationException($message);
+        }
+
+        if ($user->isBlocked) {
             $message = $this->translator->trans('message.account_blocked');
             throw new CustomUserMessageAuthenticationException($message);
         }
@@ -117,20 +102,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      *
      * If you return null, the current request will continue, and the user
      * will be authenticated. This makes sense, for example, with an API.
-     *
-     * @param Request        $request      HTTP request
-     * @param TokenInterface $token        Token
-     * @param string         $firewallName Firewall name
-     *
-     * @return RedirectResponse|null HTTP response
-     *
-     * @throws \Exception
      */
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
-        string $firewallName): ?RedirectResponse
-    {
+        string $firewallName
+    ): ?RedirectResponse {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
@@ -139,11 +116,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     /**
-     * Get login URL.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return string Login URL
+     * Return the URL to the login page.
      */
     protected function getLoginUrl(Request $request): string
     {

@@ -29,8 +29,10 @@ class CategoryController extends AbstractController
      * @param CategoryServiceInterface $categoryService Category service
      *  @param TranslatorInterface      $translator      Translator
      */
-    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly CategoryServiceInterface $categoryService,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**
@@ -157,7 +159,7 @@ class CategoryController extends AbstractController
     #[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
-        if(!$this->categoryService->canBeDeleted($category)) {
+        if (!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.category_contains_recipes')

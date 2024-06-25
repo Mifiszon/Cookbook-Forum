@@ -20,6 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ *
+ */
 #[Route('/user')]
 class UserController extends AbstractController
 {
@@ -34,9 +37,8 @@ class UserController extends AbstractController
     public function __construct(
         private readonly UserServiceInterface $userService,
         private readonly TranslatorInterface $translator,
-        private readonly UserPasswordHasherInterface $userPasswordHasher,
-        private readonly EntityManagerInterface $entityManager)
-    {
+        private readonly UserPasswordHasherInterface $userPasswordHasher
+    ) {
     }
 
     /**
@@ -54,6 +56,10 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', ['pagination' => $pagination]);
     }
 
+    /**
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
     #[IsGranted('ROLE_ADMIN')]
     public function show(User $user): Response
@@ -63,6 +69,12 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @return Response
+     */
     #[Route('/create', name: 'user_create', methods: ['GET|POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
@@ -93,6 +105,11 @@ class UserController extends AbstractController
     }
 
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'POST', 'PUT'])]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
@@ -125,6 +142,11 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, User $user): Response
@@ -156,6 +178,11 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/promote', name: 'user_promote', methods: ['GET','POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function promoteUserToAdmin(Request $request, User $user): Response
@@ -179,6 +206,11 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/revoke', name: 'user_revoke', methods: ['GET','POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function revokeAdminPrivilegesFromUser(Request $request, User $user): Response
@@ -207,6 +239,11 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/change_nickname', name: 'change_data')]
     public function changeNickname(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -228,6 +265,10 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/block', name: 'user_block', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function blockUser(User $user): Response
@@ -238,6 +279,10 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index');
     }
 
+    /**
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}/unblock', name: 'user_unblock', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function unblockUser(User $user): Response

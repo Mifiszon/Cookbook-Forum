@@ -54,6 +54,9 @@ interface TagServiceInterface
      */
     public function findOneByTitle(string $title): ?Tag;
 
+    /**
+     * @param int $id
+     * @return Tag|null
+     */
     public function findOneById(int $id): ?Tag;
-
 }

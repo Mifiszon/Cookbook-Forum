@@ -11,7 +11,6 @@ use App\Repository\RecipeRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -62,6 +61,7 @@ class CategoryService implements CategoryServiceInterface
      * Save entity.
      *
      * @param Category $category Category entity
+     * @throws ORMException
      */
     public function save(Category $category): void
     {
@@ -72,6 +72,7 @@ class CategoryService implements CategoryServiceInterface
      * Delete entity.
      *
      * @param Category $category
+     * @throws ORMException
      */
     public function delete(Category $category): void
     {

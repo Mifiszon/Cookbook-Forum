@@ -381,6 +381,10 @@
          <source>label.picture</source>
          <target>Obrazek</target>
       </trans-unit>
+      <trans-unit id="message.user_not_found">
+         <source>message.user_not_found</source>
+         <target>Twoje konto nie istnieje</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

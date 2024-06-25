@@ -9,7 +9,6 @@ use App\Repository\RecipeRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,22 +33,22 @@ class Recipe
     /**
      * Created at.
      *
-     * @var \DateTimeImmutable|null
+     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?\DateTimeImmutable $createdAt;
+    private ?DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
      *
-     * @var \DateTimeImmutable|null
+     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?\DateTimeImmutable $updatedAt;
+    private ?DateTimeImmutable $updatedAt;
 
     /**
      * Title.
@@ -126,9 +125,9 @@ class Recipe
     /**
      * Getter for created at.
      *
-     * @return \DateTimeImmutable|null Created at
+     * @return DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -136,9 +135,9 @@ class Recipe
     /**
      * Setter for created at.
      *
-     * @param \DateTimeImmutable $createdAt Created at
+     * @param DateTimeImmutable $createdAt Created at
      */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -146,9 +145,9 @@ class Recipe
     /**
      * Getter for updated at.
      *
-     * @return \DateTimeImmutable|null Updated at
+     * @return DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -156,9 +155,9 @@ class Recipe
     /**
      * Setter for updated at.
      *
-     * @param \DateTimeImmutable $updatedAt Updated at
+     * @param DateTimeImmutable $updatedAt Updated at
      */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -235,11 +234,18 @@ class Recipe
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * @param User|null $author
+     * @return $this
+     */
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
@@ -247,11 +253,18 @@ class Recipe
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string|null $content
+     * @return $this
+     */
     public function setContent(?string $content): static
     {
         $this->content = $content;
@@ -259,11 +272,18 @@ class Recipe
         return $this;
     }
 
+    /**
+     * @return Picture|null
+     */
     public function getPicture(): ?Picture
     {
         return $this->picture;
     }
 
+    /**
+     * @param Picture $picture
+     * @return $this
+     */
     public function setPicture(Picture $picture): static
     {
         // set the owning side of the relation if necessary

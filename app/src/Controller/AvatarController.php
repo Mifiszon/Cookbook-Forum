@@ -29,8 +29,10 @@ class AvatarController extends AbstractController
      * @param AvatarServiceInterface $avatarService Avatar service
      * @param TranslatorInterface    $translator    Translator
      */
-    public function __construct(private readonly AvatarServiceInterface $avatarService, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly AvatarServiceInterface $avatarService,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**

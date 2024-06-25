@@ -10,7 +10,6 @@ use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\Type\RecipeType;
 use App\Resolver\RecipeListInputFiltersDtoResolver;
-use App\Service\CommentService;
 use App\Service\CommentServiceInterface;
 use App\Service\RecipeServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,8 +34,11 @@ class RecipeController extends AbstractController
      * @param RecipeServiceInterface $recipeService Recipe service
      * @param TranslatorInterface    $translator    Translator
      */
-    public function __construct(private readonly RecipeServiceInterface $recipeService, private readonly TranslatorInterface $translator, private  readonly CommentServiceInterface $commentService)
-    {
+    public function __construct(
+        private readonly RecipeServiceInterface $recipeService,
+        private readonly TranslatorInterface $translator,
+        private readonly CommentServiceInterface $commentService
+    ) {
     }
 
     /**
@@ -51,8 +53,10 @@ class RecipeController extends AbstractController
         name: 'recipe_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryString(resolver: RecipeListInputFiltersDtoResolver::class)] RecipeListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
-    {
+    public function index(
+        #[MapQueryString(resolver: RecipeListInputFiltersDtoResolver::class)] RecipeListInputFiltersDto $filters,
+        #[MapQueryParameter] int $page = 1
+    ): Response {
         /** @var User $user */
         $user = $this->getUser();
         $pagination = $this->recipeService->getPaginatedList(

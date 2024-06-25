@@ -15,8 +15,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
+/**
+ *
+ */
 class RegistrationController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @param LoginFormAuthenticator $authenticator
+     * @param TokenStorageInterface $tokenStorage
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(
         Request $request,
@@ -55,4 +66,3 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
-

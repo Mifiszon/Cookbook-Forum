@@ -29,8 +29,10 @@ class TagController extends AbstractController
      * @param TagServiceInterface     $tagService Tag service
      * @param TranslatorInterface     $translator Translator
      */
-    public function __construct(private readonly TagServiceInterface $tagService, private readonly TranslatorInterface $translator)
-    {
+    public function __construct(
+        private readonly TagServiceInterface $tagService,
+        private readonly TranslatorInterface $translator
+    ) {
     }
 
     /**
@@ -156,7 +158,7 @@ class TagController extends AbstractController
     #[IsGranted('DELETE', subject: 'tag')]
     public function delete(Request $request, Tag $tag): Response
     {
-        if(!$this->tagService->canBeDeleted($tag)) {
+        if (!$this->tagService->canBeDeleted($tag)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.tag_contains_recipes')

@@ -93,11 +93,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    /**
+     * @return bool
+     */
     public function getIsBlocked(): bool
     {
         return $this->isBlocked;
     }
 
+    /**
+     * @param bool $isBlocked
+     * @return $this
+     */
     public function setIsBlocked(bool $isBlocked): self
     {
         $this->isBlocked = $isBlocked;
@@ -236,11 +243,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = null;
     }
 
+    /**
+     * @return Avatar|null
+     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
+    /**
+     * @param Avatar $avatar
+     * @return $this
+     */
     public function setAvatar(Avatar $avatar): static
     {
         // set the owning side of the relation if necessary
@@ -273,11 +287,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->setRoles($roles);
     }
 
+    /**
+     * @return string|null
+     */
     public function getNickname(): ?string
     {
         return $this->nickname;
     }
 
+    /**
+     * @param string $nickname
+     * @return $this
+     */
     public function setNickname(string $nickname): static
     {
         $this->nickname = $nickname;

@@ -7,6 +7,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
+/**
+ *
+ */
 class CommentService implements CommentServiceInterface
 {
     /**
@@ -20,21 +23,41 @@ class CommentService implements CommentServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 5;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly PaginatorInterface $paginator)
-    {
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param PaginatorInterface $paginator
+     */
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly PaginatorInterface $paginator
+    ) {
     }
 
+    /**
+     * @param Comment $comment
+     * @return void
+     */
     public function add(Comment $comment): void
     {
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
     }
 
+    /**
+     * @param Comment $comment
+     * @return void
+     */
     public function delete(Comment $comment): void
     {
         $this->entityManager->remove($comment);
         $this->entityManager->flush();
     }
+
+    /**
+     * @param int $recipeId
+     * @param int $page
+     * @return PaginationInterface
+     */
     public function getPaginatedCommentsForRecipe(int $recipeId, int $page): PaginationInterface
     {
         $query = $this->entityManager

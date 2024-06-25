@@ -1,8 +1,10 @@
 <?php
+/**
+* Change Password Controller
+ */
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\Type\ChangePasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +14,24 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+/**
+ * Class ChangePasswordController
+ */
 class ChangePasswordController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/change-password', name: 'app_change_password')]
     #[IsGranted('ROLE_USER')]
-    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
-    {
+    public function changePassword(
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $entityManager
+    ): Response {
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 

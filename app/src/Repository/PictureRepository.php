@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Picture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,6 +13,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PictureRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Picture::class);
@@ -21,6 +25,7 @@ class PictureRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param Picture $picture Picture entity
+     * @throws ORMException
      */
     public function save(Picture $picture): void
     {

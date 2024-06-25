@@ -6,8 +6,8 @@
 namespace App\Service;
 
 use App\Entity\Avatar;
-use App\Entity\User;
 use App\Repository\AvatarRepository;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +35,7 @@ class AvatarService implements AvatarServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Avatar       $avatar       Avatar entity
      * @param UserInterface         $user         User entity
+     * @throws ORMException
      */
     public function update(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void
     {
@@ -55,6 +56,7 @@ class AvatarService implements AvatarServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Avatar       $avatar       Avatar entity
      * @param UserInterface         $user         User entity
+     * @throws ORMException
      */
     public function create(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void
     {

@@ -6,11 +6,9 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Recipe;
 use App\Form\Type\CommentType;
 use App\Repository\RecipeRepository;
 use App\Service\CommentServiceInterface;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,18 +16,30 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
+
 /**
 * Class CommentController.
  */
 #[Route('/comment')]
 class CommentController extends AbstractController
 {
+    /**
+     * @param CommentServiceInterface $commentService
+     * @param TranslatorInterface $translator
+     * @param RecipeRepository $recipeRepository
+     */
     public function __construct(
         private readonly CommentServiceInterface $commentService,
         private readonly TranslatorInterface $translator,
-        private readonly RecipeRepository $recipeRepository,)
-    {}
+        private readonly RecipeRepository $recipeRepository,
+    ) {
+    }
 
+    /**
+     * @param Request $request
+     * @param int $recipeId
+     * @return Response
+     */
     #[Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function add(Request $request, int $recipeId): Response
@@ -55,9 +65,14 @@ class CommentController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Comment $comment
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Comment $comment, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($comment);
         $entityManager->flush();

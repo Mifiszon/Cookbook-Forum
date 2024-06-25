@@ -55,12 +55,16 @@
                             <a class="btn btn-outline-info" href="{{ url('user_create', {id: user.id}) }}" title="{{ 'action.create'|trans }}">
                                 {{ 'action.create'|trans }}
                             </a>
-                            <a class="btn btn-outline-dark" href="{{ path('user_promote', {id: user.id}) }}" title="{{ 'action.promote'|trans }}">
-                                {{ 'action.promote'|trans }}
-                            </a>
-                            <a class="btn btn-outline-secondary" href="{{ path('user_revoke', {id: user.id}) }}" title="{{ 'action.revoke'|trans }}">
-                                {{ 'action.revoke'|trans }}
-                            </a>
+                            {% if 'ROLE_ADMIN' not in user.roles %}
+                                <a class="btn btn-outline-dark" href="{{ path('user_promote', {id: user.id}) }}" title="{{ 'action.promote'|trans }}">
+                                    {{ 'action.promote'|trans }}
+                                </a>
+                            {% endif %}
+                            {% if 'ROLE_ADMIN' in user.roles %}
+                                <a class="btn btn-outline-dark" href="{{ path('user_revoke', {id: user.id}) }}" title="{{ 'action.revoke'|trans }}">
+                                    {{ 'action.revoke'|trans }}
+                                </a>
+                            {% endif %}
                             {% if not user.isBlocked %}
                                 <form method="post" action="{{ path('user_block', {id: user.id}) }}" class="d-inline">
                                     <button type="submit" class="btn btn-outline-warning">

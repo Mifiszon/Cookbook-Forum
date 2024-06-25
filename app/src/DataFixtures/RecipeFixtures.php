@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -33,12 +34,12 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             $recipe = new Recipe();
             $recipe->setTitle($this->faker->sentence);
             $recipe->setCreatedAt(
-                \DateTimeImmutable::createFromMutable(
+                DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $recipe->setUpdatedAt(
-                \DateTimeImmutable::createFromMutable(
+                DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );

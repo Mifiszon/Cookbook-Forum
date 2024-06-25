@@ -36,7 +36,13 @@ class Avatar
      *
      * @var User|null
      */
-    #[ORM\OneToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
+    #[ORM\OneToOne(
+        inversedBy: 'avatar',
+        targetEntity: User::class,
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY'
+    )
+    ]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Type(User::class)]
     private ?User $user;

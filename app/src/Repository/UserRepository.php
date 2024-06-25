@@ -4,18 +4,27 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ *
+ */
 class UserRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
+    /**
+     * @return QueryBuilder
+     */
     public function queryAll(): QueryBuilder
     {
         return $this->createQueryBuilder('user')
@@ -27,8 +36,6 @@ class UserRepository extends ServiceEntityRepository
      *
      * @param User $user User entity
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function save(User $user): void
     {
@@ -41,8 +48,6 @@ class UserRepository extends ServiceEntityRepository
      *
      * @param User $user User entity
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function delete(User $user): void
     {
@@ -50,6 +55,11 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    /**
+     * @return int
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function countAdmins(): int
     {
         return (int) $this->createQueryBuilder('user')

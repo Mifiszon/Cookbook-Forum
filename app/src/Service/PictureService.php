@@ -8,6 +8,7 @@ namespace App\Service;
 use App\Entity\Picture;
 use App\Entity\Recipe;
 use App\Repository\PictureRepository;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -19,13 +20,17 @@ class PictureService implements PictureServiceInterface
     /**
      * Constructor.
      *
-     * @param string                     $targetDirectory   Target directory
-     * @param PictureRepository          $pictureRepository Picture repository
-     * @param FileUploadServiceInterface $fileUploadService File upload service
-     * @param Filesystem                 $filesystem        Filesystem component
+     * @param string $targetDirectory Target directory
+     * @param PictureRepository $pictureRepository Picture repository
+     * @param PictureUploadServiceInterface $pictureUploadService Picture upload service
+     * @param Filesystem $filesystem Filesystem component
      */
-    public function __construct(private readonly string $targetDirectory, private readonly PictureRepository $pictureRepository, private readonly FileUploadServiceInterface $fileUploadService, private readonly Filesystem $filesystem)
-    {
+    public function __construct(
+        readonly string $targetDirectory,
+        private readonly PictureRepository $pictureRepository,
+        private readonly PictureUploadServiceInterface $pictureUploadService,
+        private readonly Filesystem $filesystem
+    ) {
     }
 
     /**
@@ -34,6 +39,7 @@ class PictureService implements PictureServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Picture      $picture      Picture entity
      * @param Recipe       $recipe      Recipe entity
+     * @throws ORMException
      */
     public function update(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
     {
@@ -54,10 +60,11 @@ class PictureService implements PictureServiceInterface
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Picture      $picture      Picture entity
      * @param Recipe       $recipe      Recipe entity
+     * @throws ORMException
      */
     public function create(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
     {
-        $pictureFilename = $this->fileUploadService->upload($uploadedFile);
+        $pictureFilename = $this->pictureUploadService->upload($uploadedFile);
 
         $picture->setRecipe($recipe);
         $picture->setFilename($pictureFilename);

@@ -36,7 +36,8 @@ class Picture
      *
      * @var Recipe|null
      */
-    #[ORM\OneToOne(inversedBy: 'picture', targetEntity: Recipe::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
+    #[ORM\OneToOne(
+        inversedBy: 'picture', targetEntity: Recipe::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Type(Recipe::class)]
     private ?Recipe $recipe;
