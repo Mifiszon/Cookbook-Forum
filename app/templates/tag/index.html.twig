@@ -32,27 +32,22 @@
                     <td>{{ tag.updatedAt|format_date('long') }}</td>
                     <td>{{ tag.title }}</td>
                     <td>
-                        {% if is_granted('VIEW', tag) or is_granted('EDIT', tag) or is_granted('DELETE', tag) %}
-                            {% if is_granted('VIEW', tag) %}
-                                <a class="btn btn-outline-primary" href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action.show'|trans }}">
-                                    {{ 'action.show'|trans }}
-                                </a>
-                            {% endif %}
-                            {% if is_granted('EDIT', tag) %}
-                                <a class="btn btn-outline-success" href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'action.edit'|trans }}">
-                                    {{ 'action.edit'|trans }}
-                                </a>
-                            {% endif %}
-                            {% if is_granted('DELETE', tag) %}
-                                <a class="btn btn-outline-danger" href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action.delete'|trans }}">
-                                    {{ 'action.delete'|trans }}
-                                </a>
-                            {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-outline-primary" href="{{ url('tag_show', {id: tag.id}) }}" title="{{ 'action.show'|trans }}">
+                                {{ 'action.show'|trans }}
+                            </a>
+                            <a class="btn btn-outline-success" href="{{ url('tag_edit', {id: tag.id}) }}" title="{{ 'action.edit'|trans }}">
+                                {{ 'action.edit'|trans }}
+                            </a>
+                            <a class="btn btn-outline-danger" href="{{ url('tag_delete', {id: tag.id}) }}" title="{{ 'action.delete'|trans }}">
+                            </a>
                             <a class="btn btn-outline-info" href="{{ url('tag_create', {id: tag.id}) }}" title="{{ 'action.create'|trans }}">
                                 {{ 'action.create'|trans }}
                             </a>
                         {%  else %}
-                            Brak
+                            <a class="btn btn-outline-info" href="{{ url('tag_create', {id: tag.id}) }}" title="{{ 'action.create'|trans }}">
+                                {{ 'action.create'|trans }}
+                            </a>
                         {% endif %}
                     </td>
                 </tr>

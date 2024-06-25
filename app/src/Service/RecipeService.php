@@ -109,5 +109,4 @@ class RecipeService implements RecipeServiceInterface
             null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
         );
     }
-
 }

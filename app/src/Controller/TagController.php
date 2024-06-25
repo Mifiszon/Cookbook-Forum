@@ -62,7 +62,7 @@ class TagController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    #[IsGranted('VIEW', subject: 'tag')]
+    #[IsGranted('ROLE_ADMIN')]
     public function show(Tag $tag): Response
     {
         return $this->render('tag/show.html.twig', ['tag' => $tag]);
@@ -80,7 +80,6 @@ class TagController extends AbstractController
         name: 'tag_create',
         methods: 'GET|POST',
     )]
-    #[IsGranted('ROLE_USER')]
     public function create(Request $request): Response
     {
         $tag = new Tag();
@@ -113,7 +112,7 @@ class TagController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'tag_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    #[IsGranted('EDIT', subject: 'tag')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Tag $tag): Response
     {
         $form = $this->createForm(
@@ -155,7 +154,7 @@ class TagController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'tag_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'tag')]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Tag $tag): Response
     {
         if (!$this->tagService->canBeDeleted($tag)) {
