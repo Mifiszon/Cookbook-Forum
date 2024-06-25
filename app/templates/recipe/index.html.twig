@@ -30,11 +30,11 @@
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'recipe.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'recipe.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'recipe.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'recipe.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.tag'|trans }}</th>
                 <th>{{ 'label.author'|trans }}</th>
+                <th>{{ 'label.average_rating'|trans }}</th> {# Dodano nową kolumnę dla średniej oceny #}
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -43,7 +43,6 @@
                 <tr>
                     <td>{{ recipe.id }}</td>
                     <td>{{ recipe.createdAt|format_date('long') }}</td>
-                    <td>{{ recipe.updatedAt|format_date('long') }}</td>
                     <td>{{ recipe.title }}</td>
                     <td>
                         <a class="btn btn-outline-primary"
@@ -66,6 +65,13 @@
                         {% endif %}
                     </td>
                     <td>{{ recipe.author.nickname }}</td>
+                    <td>
+                        {% if averageRatings[recipe.id] is defined %}
+                            {{ averageRatings[recipe.id]|number_format(1, ',', '.') }}
+                        {% else %}
+                            - {# Wyświetl brak oceny, jeśli nie ma średniej #}
+                        {% endif %}
+                    </td>
                     <td>
                         {% if is_granted('ROLE_USER') %}
                             <a class="btn btn-outline-primary" href="{{ url('recipe_show', {id: recipe.id}) }}" title="{{ 'action.show'|trans }}">

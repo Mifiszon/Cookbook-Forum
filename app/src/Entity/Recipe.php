@@ -105,11 +105,18 @@ class Recipe
     private ?Picture $picture = null;
 
     /**
+     * @var Collection<int, Rating>
+     */
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Rating::class)]
+    private Collection $ratings;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     /**
@@ -294,5 +301,61 @@ class Recipe
         $this->picture = $picture;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Rating>
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    /**
+     * @param Rating $rating
+     * @return $this
+     */
+    public function addRating(Rating $rating): static
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings->add($rating);
+            $rating->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Rating $rating
+     * @return $this
+     */
+    public function removeRating(Rating $rating): static
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getRecipe() === $this) {
+                $rating->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getAverageRating(): ?float
+    {
+        $ratings = $this->getRatings();
+        if ($ratings->count() === 0) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($ratings as $rating) {
+            $total += $rating->getRating();
+        }
+
+        return $total / $ratings->count();
     }
 }

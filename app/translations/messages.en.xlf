@@ -262,14 +262,6 @@
         <source>action.back_to_tags</source>
         <target>Back to List</target>
       </trans-unit>
-      <trans-unit id="0">
-         <source>0</source>
-         <target>User</target>
-      </trans-unit>
-      <trans-unit id="1">
-         <source>1</source>
-         <target>Admin</target>
-      </trans-unit>
       <trans-unit id="action.revoke">
          <source>action.revoke</source>
          <target>Revoke Admin Privileges</target>

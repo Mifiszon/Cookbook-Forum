@@ -8,7 +8,7 @@
       </trans-unit>
       <trans-unit id="label.id">
         <source>label.id</source>
-        <target>Identyfikator</target>
+        <target>ID</target>
       </trans-unit>
       <trans-unit id="label.title">
         <source>label.title</source>
@@ -36,7 +36,7 @@
       </trans-unit>
       <trans-unit id="label.created_at">
         <source>label.created_at</source>
-        <target>Stworzone</target>
+        <target>Dodane</target>
       </trans-unit>
       <trans-unit id="label.updated_at">
         <source>label.updated_at</source>
@@ -265,14 +265,6 @@
         <source>action.back_to_tags</source>
         <target>Powrót do Listy</target>
       </trans-unit>
-      <trans-unit id="0">
-        <source>0</source>
-        <target>Użytkownik</target>
-      </trans-unit>
-      <trans-unit id="1">
-        <source>1</source>
-        <target>Admin</target>
-      </trans-unit>
       <trans-unit id="action.revoke">
         <source>action.revoke</source>
         <target>Odbierz Uprawnienia</target>
@@ -384,6 +376,46 @@
       <trans-unit id="message.user_not_found">
          <source>message.user_not_found</source>
          <target>Twoje konto nie istnieje</target>
+      </trans-unit>
+      <trans-unit id="label.average_rating">
+         <source>label.average_rating</source>
+         <target>Ocena</target>
+      </trans-unit>
+      <trans-unit id="label.rate">
+         <source>label.rate</source>
+         <target>Wybór Oceny :</target>
+      </trans-unit>
+      <trans-unit id="1">
+          <source>1</source>
+          <target>1</target>
+      </trans-unit>
+      <trans-unit id="2">
+          <source>2</source>
+          <target>2</target>
+      </trans-unit>
+      <trans-unit id="3">
+          <source>3</source>
+          <target>3</target>
+      </trans-unit>
+      <trans-unit id="4">
+          <source>4</source>
+          <target>4</target>
+      </trans-unit>
+      <trans-unit id="5">
+          <source>5</source>
+          <target>5</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+          <source>message.form_error</source>
+          <target>Błąd formularza. Sprawdź wprowadzone dane.</target>
+      </trans-unit>
+      <trans-unit id="label.password">
+          <source>label.password</source>
+          <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="label.repeatPassword">
+          <source>label.repeatPassword</source>
+          <target>Powtórz hasło</target>
       </trans-unit>
     </body>
   </file>

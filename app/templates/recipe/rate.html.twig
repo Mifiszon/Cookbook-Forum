@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="rate">
+        <h3>Oceń Przepis - {{ recipe.title }}</h3>
+        <br>
+        <form method="post" action="{{ path('recipe_rate', {'id': recipe.id}) }}">
+            {{ form_start(form) }}
+            {{ form_row(form.rating) }}
+            <button type="submit" class="btn btn-primary">Oceń</button>
+            {{ form_end(form) }}
+        </form>
+    </div>
+{% endblock %}

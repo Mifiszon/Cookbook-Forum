@@ -4,7 +4,6 @@ namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -39,8 +38,10 @@ class UserType extends AbstractType
                     new NotBlank(),
                     new Length(['max' => 255]),
                 ],
-            ])
-            ->add('plainPassword', RepeatedType::class, [
+            ]);
+
+        if (!$options['is_edit'] || $options['change_password']) {
+            $builder->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
@@ -54,10 +55,8 @@ class UserType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-            ->add('roles', CollectionType::class, [
-                'label' => 'label.roles',
             ]);
+        }
 
         if (!$options['is_edit']) {
             $builder->add('password', HiddenType::class, [
@@ -75,6 +74,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'is_edit' => false,
+            'change_password' => false,
         ]);
     }
 }

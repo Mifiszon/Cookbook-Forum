@@ -6,6 +6,7 @@
 
 {% block body %}
     <h1>{{ 'title.recipe_details'|trans({'%title%': recipe.title|default('')}) }}</h1>
+
     {% if recipe is defined %}
         <dl class="dl-horizontal">
             <dt>{{ 'label.id'|trans }}</dt>
@@ -69,6 +70,10 @@
         <br>
 
         <a href="{{ path('comment_add', {'recipeId': recipe.id}) }}" class="btn btn-outline-primary">Dodaj komentarz</a>
+
+        <br><br>
+
+        {% include 'recipe/rate.html.twig' with {'form': ratingForm} %}
 
         <br><br>
 
