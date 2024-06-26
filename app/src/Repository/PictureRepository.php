@@ -25,6 +25,7 @@ class PictureRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param Picture $picture Picture entity
+     *
      * @throws ORMException
      */
     public function save(Picture $picture): void

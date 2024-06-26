@@ -11,6 +11,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+
 /**
  * Class UserService.
  */
@@ -29,6 +30,7 @@ class UserService implements UserServiceInterface
         private readonly EntityManagerInterface $entityManager
     ) {
     }
+
     /**
      * Get paginated list.
      *
@@ -44,6 +46,7 @@ class UserService implements UserServiceInterface
             10
         );
     }
+
     /**
      * Save entity.
      *
@@ -53,10 +56,12 @@ class UserService implements UserServiceInterface
     {
         $this->userRepository->save($user);
     }
+
     /**
      * Delete entity.
      *
      * @param User $user User entity
+     *
      * @throws ORMException
      */
     public function delete(User $user): void
@@ -69,8 +74,10 @@ class UserService implements UserServiceInterface
         $this->entityManager->flush();
         $this->userRepository->delete($user);
     }
+
     /**
      * @param User $user
+     *
      * @return void
      */
     public function promoteUserToAdmin(User $user): void
@@ -78,8 +85,10 @@ class UserService implements UserServiceInterface
         $user->promoteToAdmin();
         $this->entityManager->flush();
     }
+
     /**
      * @param User $user
+     *
      * @return void
      */
     public function revokeAdminPrivilegesFromUser(User $user): void
@@ -87,19 +96,20 @@ class UserService implements UserServiceInterface
         $user->revokeAdminPrivileges();
         $this->entityManager->flush();
     }
+
     /**
-     * @param User $user
-     * @return bool
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function isLastAdmin(User $user): bool
     {
-        return $this->userRepository->countAdmins() === 1 && $user->isAdmin();
+        return 1 === $this->userRepository->countAdmins() && $user->isAdmin();
     }
+
     /**
      * @param User $user
      * @param string $newNickname
+     *
      * @return void
      */
     public function changeNickname(User $user, string $newNickname): void
@@ -107,8 +117,10 @@ class UserService implements UserServiceInterface
         $user->setNickname($newNickname);
         $this->entityManager->flush();
     }
+
     /**
      * @param User $user
+     *
      * @return void
      */
     public function blockUser(User $user): void
@@ -116,8 +128,10 @@ class UserService implements UserServiceInterface
         $user->setIsBlocked(true);
         $this->entityManager->flush();
     }
+
     /**
      * @param User $user
+     *
      * @return void
      */
     public function unblockUser(User $user): void
@@ -125,8 +139,10 @@ class UserService implements UserServiceInterface
         $user->setIsBlocked(false);
         $this->entityManager->flush();
     }
+
     /**
      * @param string $email
+     *
      * @return bool
      */
     public function isUserBlocked(string $email): bool
@@ -136,8 +152,10 @@ class UserService implements UserServiceInterface
 
         return $user->isBlocked;
     }
+
     /**
      * @param string $email
+     *
      * @return User|null
      */
     public function findUserByEmail(string $email): ?User

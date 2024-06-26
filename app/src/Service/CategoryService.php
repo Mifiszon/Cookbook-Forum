@@ -33,9 +33,9 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryRepository  $categoryRepository Category repository
-     * @param PaginatorInterface $paginator        Paginator
-     * @param RecipeRepository $recipeRepository Recipe repository
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param PaginatorInterface $paginator          Paginator
+     * @param RecipeRepository   $recipeRepository   Recipe repository
      */
     public function __construct(private readonly CategoryRepository $categoryRepository, private readonly PaginatorInterface $paginator, private readonly RecipeRepository $recipeRepository)
     {
@@ -61,6 +61,7 @@ class CategoryService implements CategoryServiceInterface
      * Save entity.
      *
      * @param Category $category Category entity
+     *
      * @throws ORMException
      */
     public function save(Category $category): void
@@ -71,7 +72,6 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Delete entity.
      *
-     * @param Category $category
      * @throws ORMException
      */
     public function delete(Category $category): void

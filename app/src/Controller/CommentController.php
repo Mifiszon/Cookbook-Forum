@@ -1,6 +1,6 @@
 <?php
 /**
-* Comment Controller.
+ * Comment Controller.
  */
 
 namespace App\Controller;
@@ -18,7 +18,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
-* Class CommentController.
+ * Class CommentController.
  */
 #[Route('/comment')]
 class CommentController extends AbstractController

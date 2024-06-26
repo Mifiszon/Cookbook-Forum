@@ -1,6 +1,6 @@
 <?php
 /**
- * SecurityController
+ * SecurityController.
  */
 
 namespace App\Controller;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * Class SecurityController
+ * Class SecurityController.
  */
 class SecurityController extends AbstractController
 {

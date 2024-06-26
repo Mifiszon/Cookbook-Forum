@@ -33,9 +33,9 @@ class TagService implements TagServiceInterface
     /**
      * Constructor.
      *
-     * @param TagRepository      $tagRepository      Tag repository
-     * @param PaginatorInterface $paginator          Paginator
-     * @param RecipeRepository   $recipeRepository   Recipe repository
+     * @param TagRepository      $tagRepository    Tag repository
+     * @param PaginatorInterface $paginator        Paginator
+     * @param RecipeRepository   $recipeRepository Recipe repository
      */
     public function __construct(
         private readonly TagRepository $tagRepository,
@@ -64,6 +64,7 @@ class TagService implements TagServiceInterface
      * Save entity.
      *
      * @param Tag $tag Tag entity
+     *
      * @throws ORMException
      */
     public function save(Tag $tag): void
@@ -75,6 +76,7 @@ class TagService implements TagServiceInterface
      * Delete entity.
      *
      * @param Tag $tag Tag entity
+     *
      * @throws ORMException
      */
     public function delete(Tag $tag): void
@@ -111,6 +113,7 @@ class TagService implements TagServiceInterface
     {
         return $this->tagRepository->findOneByTitle($title);
     }
+
     /**
      * Find by id.
      *

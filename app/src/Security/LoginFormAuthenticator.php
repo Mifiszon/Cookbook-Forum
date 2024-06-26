@@ -2,10 +2,10 @@
 /**
  * Login form authenticator.
  */
+
 namespace App\Security;
 
 use App\Service\UserServiceInterface;
-use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- *
+ * Class Login form authenticator.
  */
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -33,8 +33,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
-     * @param UserServiceInterface $userService
-     * @param TranslatorInterface $translator
+     * @param UserServiceInterface  $userService
+     * @param TranslatorInterface   $translator
      */
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,

@@ -9,7 +9,6 @@ use App\Repository\CommentRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,8 +20,6 @@ class Comment
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,8 +28,6 @@ class Comment
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(DateTimeImmutable::class)]
@@ -41,16 +36,12 @@ class Comment
 
     /**
      * Created at.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'text')]
     private ?string $content = null;
 
     /**
      * Author (User).
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -58,13 +49,10 @@ class Comment
 
     /**
      * Recipe.
-     *
-     * @var Recipe|null
      */
     #[ORM\ManyToOne(targetEntity: Recipe::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
-
 
     /**
      * Getter for Id.
@@ -105,7 +93,6 @@ class Comment
     }
 
     /**
-     * @param string $content
      * @return $this
      */
     public function setContent(string $content): static
@@ -114,6 +101,7 @@ class Comment
 
         return $this;
     }
+
     /**
      * Getter for author.
      *

@@ -35,7 +35,6 @@ class UserRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param User $user User entity
-     *
      */
     public function save(User $user): void
     {
@@ -47,7 +46,6 @@ class UserRepository extends ServiceEntityRepository
      * Delete entity.
      *
      * @param User $user User entity
-     *
      */
     public function delete(User $user): void
     {
@@ -56,7 +54,6 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

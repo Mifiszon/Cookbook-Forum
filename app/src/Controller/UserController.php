@@ -26,13 +26,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-
     /**
      * Constructor.
      *
      * @param UserServiceInterface $userService User service
-     * @param TranslatorInterface      $translator      Translator
-     *
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(
         private readonly UserServiceInterface $userService,
@@ -103,7 +101,6 @@ class UserController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-
 
     /**
      * @param Request $request
@@ -183,7 +180,7 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      */
-    #[Route('/{id}/promote', name: 'user_promote', methods: ['GET','POST'])]
+    #[Route('/{id}/promote', name: 'user_promote', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function promoteUserToAdmin(Request $request, User $user): Response
     {
@@ -211,12 +208,13 @@ class UserController extends AbstractController
      * @param User $user
      * @return Response
      */
-    #[Route('/{id}/revoke', name: 'user_revoke', methods: ['GET','POST'])]
+    #[Route('/{id}/revoke', name: 'user_revoke', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function revokeAdminPrivilegesFromUser(Request $request, User $user): Response
     {
         if ($this->userService->isLastAdmin($user)) {
             $this->addFlash('error', $this->translator->trans('message.no_access'));
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -254,7 +252,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success',  $this->translator->trans('message.updated_successfully'));
+            $this->addFlash('success', $this->translator->trans('message.updated_successfully'));
 
             return $this->redirectToRoute('recipe_index');
         }
@@ -274,7 +272,7 @@ class UserController extends AbstractController
     public function blockUser(User $user): Response
     {
         $this->userService->blockUser($user);
-        $this->addFlash('success',  $this->translator->trans('message.user_blocked'));
+        $this->addFlash('success', $this->translator->trans('message.user_blocked'));
 
         return $this->redirectToRoute('user_index');
     }
@@ -288,7 +286,7 @@ class UserController extends AbstractController
     public function unblockUser(User $user): Response
     {
         $this->userService->unblockUser($user);
-        $this->addFlash('success',  $this->translator->trans('message.user_unblocked'));
+        $this->addFlash('success', $this->translator->trans('message.user_unblocked'));
 
         return $this->redirectToRoute('user_index');
     }

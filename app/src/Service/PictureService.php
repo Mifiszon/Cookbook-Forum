@@ -20,10 +20,10 @@ class PictureService implements PictureServiceInterface
     /**
      * Constructor.
      *
-     * @param string $targetDirectory Target directory
-     * @param PictureRepository $pictureRepository Picture repository
+     * @param string                        $targetDirectory      Target directory
+     * @param PictureRepository             $pictureRepository    Picture repository
      * @param PictureUploadServiceInterface $pictureUploadService Picture upload service
-     * @param Filesystem $filesystem Filesystem component
+     * @param Filesystem                    $filesystem           Filesystem component
      */
     public function __construct(
         readonly string $targetDirectory,
@@ -38,7 +38,8 @@ class PictureService implements PictureServiceInterface
      *
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Picture      $picture      Picture entity
-     * @param Recipe       $recipe      Recipe entity
+     * @param Recipe       $recipe       Recipe entity
+     *
      * @throws ORMException
      */
     public function update(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
@@ -59,7 +60,8 @@ class PictureService implements PictureServiceInterface
      *
      * @param UploadedFile $uploadedFile Uploaded file
      * @param Picture      $picture      Picture entity
-     * @param Recipe       $recipe      Recipe entity
+     * @param Recipe       $recipe       Recipe entity
+     *
      * @throws ORMException
      */
     public function create(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void

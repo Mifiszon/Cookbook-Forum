@@ -1,6 +1,6 @@
 <?php
 /**
-* Change Password Controller
+ * Change Password Controller.
  */
 
 namespace App\Controller;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * Class ChangePasswordController
+ * Class ChangePasswordController.
  */
 class ChangePasswordController extends AbstractController
 {
@@ -39,21 +39,20 @@ class ChangePasswordController extends AbstractController
             $user = $this->getUser();
             $currentPassword = $form->get('currentPassword')->getData();
 
-
             if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
                 $this->addFlash('error', 'Nieprawidłowe stare hasło.');
+
                 return $this->redirectToRoute('app_change_password');
             }
 
-
             $newPassword = $form->get('newPassword')->getData();
             $user->setPassword($passwordHasher->hashPassword($user, $newPassword));
-
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             $this->addFlash('success', 'Hasło zmienione pomyślnie.');
+
             return $this->redirectToRoute('recipe_index');
         }
 

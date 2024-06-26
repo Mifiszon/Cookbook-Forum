@@ -25,16 +25,21 @@ class AvatarService implements AvatarServiceInterface
      * @param FileUploadServiceInterface $fileUploadService File upload service
      * @param Filesystem                 $filesystem        Filesystem component
      */
-    public function __construct(private readonly string $targetDirectory, private readonly AvatarRepository $avatarRepository, private readonly FileUploadServiceInterface $fileUploadService, private readonly Filesystem $filesystem)
-    {
+    public function __construct(
+        private readonly string $targetDirectory,
+        private readonly AvatarRepository $avatarRepository,
+        private readonly FileUploadServiceInterface $fileUploadService,
+        private readonly Filesystem $filesystem
+    ) {
     }
 
     /**
      * Update avatar.
      *
-     * @param UploadedFile $uploadedFile Uploaded file
-     * @param Avatar       $avatar       Avatar entity
-     * @param UserInterface         $user         User entity
+     * @param UploadedFile  $uploadedFile Uploaded file
+     * @param Avatar        $avatar       Avatar entity
+     * @param UserInterface $user         User entity
+     *
      * @throws ORMException
      */
     public function update(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void
@@ -53,9 +58,10 @@ class AvatarService implements AvatarServiceInterface
     /**
      * Create avatar.
      *
-     * @param UploadedFile $uploadedFile Uploaded file
-     * @param Avatar       $avatar       Avatar entity
-     * @param UserInterface         $user         User entity
+     * @param UploadedFile  $uploadedFile Uploaded file
+     * @param Avatar        $avatar       Avatar entity
+     * @param UserInterface $user         User entity
+     *
      * @throws ORMException
      */
     public function create(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void

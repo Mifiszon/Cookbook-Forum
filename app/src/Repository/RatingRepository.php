@@ -22,8 +22,6 @@ class RatingRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $recipeId
-     * @return float|bool|int|string|null
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

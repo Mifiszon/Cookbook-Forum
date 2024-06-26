@@ -26,9 +26,9 @@ interface PictureServiceInterface
     /**
      * Update avatar.
      *
-     * @param UploadedFile  $uploadedFile Uploaded file
-     * @param Picture       $picture      Picture entity
-     * @param Recipe        $recipe       Recipe entity
+     * @param UploadedFile $uploadedFile Uploaded file
+     * @param Picture      $picture      Picture entity
+     * @param Recipe       $recipe       Recipe entity
      */
     public function update(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void;
 }

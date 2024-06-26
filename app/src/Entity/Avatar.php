@@ -23,8 +23,6 @@ class Avatar
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,8 +31,6 @@ class Avatar
 
     /**
      * User.
-     *
-     * @var User|null
      */
     #[ORM\OneToOne(
         inversedBy: 'avatar',
@@ -49,8 +45,6 @@ class Avatar
 
     /**
      * Filename.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 191)]
     #[Assert\Type('string')]

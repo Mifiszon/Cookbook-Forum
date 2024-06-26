@@ -34,7 +34,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.tag'|trans }}</th>
                 <th>{{ 'label.author'|trans }}</th>
-                <th>{{ 'label.average_rating'|trans }}</th> {# Dodano nową kolumnę dla średniej oceny #}
+                <th>{{ knp_pagination_sortable(pagination, 'label.average_rating'|trans, 'recipe.ratings') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -69,7 +69,7 @@
                         {% if averageRatings[recipe.id] is defined %}
                             {{ averageRatings[recipe.id]|number_format(1, ',', '.') }}
                         {% else %}
-                            - {# Wyświetl brak oceny, jeśli nie ma średniej #}
+                            -
                         {% endif %}
                     </td>
                     <td>

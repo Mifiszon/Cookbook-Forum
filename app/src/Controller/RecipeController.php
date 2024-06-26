@@ -49,7 +49,7 @@ class RecipeController extends AbstractController
      * Index action.
      *
      * @param RecipeListInputFiltersDto $filters Input filters
-     * @param int                     $page    Page number
+     * @param int                       $page    Page number
      *
      * @return Response HTTP response
      */
@@ -90,7 +90,6 @@ class RecipeController extends AbstractController
      * @param Recipe $recipe Recipe entity
      *
      * @return Response HTTP response
-     *
      */
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     #[IsGranted('ROLE_USER')]

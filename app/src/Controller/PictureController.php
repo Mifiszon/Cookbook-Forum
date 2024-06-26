@@ -97,7 +97,7 @@ class PictureController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Picture $picture  Picture entity
+     * @param Picture $picture Picture entity
      *
      * @return Response HTTP response
      */

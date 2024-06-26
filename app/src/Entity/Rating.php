@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  *
  */
-
 #[ORM\Entity(repositoryClass: RatingRepository::class)]
 #[ORM\Table(name: 'ratings')]
 class Rating
@@ -46,7 +45,6 @@ class Rating
     }
 
     /**
-     * @param int $rating
      * @return $this
      */
     public function setRating(int $rating): static
@@ -65,7 +63,6 @@ class Rating
     }
 
     /**
-     * @param User|null $user
      * @return $this
      */
     public function setUser(?User $user): static
@@ -84,7 +81,6 @@ class Rating
     }
 
     /**
-     * @param Recipe|null $recipe
      * @return $this
      */
     public function setRecipe(?Recipe $recipe): static

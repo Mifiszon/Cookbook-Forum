@@ -26,8 +26,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,8 +34,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Email.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -54,8 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
@@ -63,8 +57,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
-     *
-     * @var string|null
      */
     #[Assert\NotBlank(groups: ['registration'])]
     #[Assert\Length(min: 6, groups: ['registration'])]
@@ -75,8 +67,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Nickname.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank]
@@ -115,7 +105,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param bool $isBlocked
      * @return $this
      */
     public function setIsBlocked(bool $isBlocked): self
@@ -265,7 +254,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param Avatar $avatar
      * @return $this
      */
     public function setAvatar(Avatar $avatar): static
@@ -309,7 +297,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $nickname
      * @return $this
      */
     public function setNickname(string $nickname): static
@@ -321,8 +308,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Check if user is an admin.
-     *
-     * @return bool
      */
     public function isAdmin(): bool
     {
@@ -338,7 +323,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param Rating $rating
      * @return $this
      */
     public function addRating(Rating $rating): static
@@ -352,7 +336,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param Rating $rating
      * @return $this
      */
     public function removeRating(Rating $rating): static

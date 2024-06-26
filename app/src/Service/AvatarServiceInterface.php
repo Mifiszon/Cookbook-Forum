@@ -17,9 +17,9 @@ interface AvatarServiceInterface
     /**
      * Create avatar.
      *
-     * @param UploadedFile $uploadedFile Uploaded file
-     * @param Avatar       $avatar       Avatar entity
-     * @param UserInterface         $user         User entity
+     * @param UploadedFile  $uploadedFile Uploaded file
+     * @param Avatar        $avatar       Avatar entity
+     * @param UserInterface $user         User entity
      */
     public function create(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void;
 

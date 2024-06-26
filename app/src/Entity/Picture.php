@@ -23,8 +23,6 @@ class Picture
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,19 +31,19 @@ class Picture
 
     /**
      * Recipe.
-     *
-     * @var Recipe|null
      */
     #[ORM\OneToOne(
-        inversedBy: 'picture', targetEntity: Recipe::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
+        inversedBy: 'picture',
+        targetEntity: Recipe::class,
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY'
+    )]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Type(Recipe::class)]
     private ?Recipe $recipe;
 
     /**
      * Filename.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 191)]
     #[Assert\Type('string')]

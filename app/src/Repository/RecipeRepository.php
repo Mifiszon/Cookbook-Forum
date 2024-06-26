@@ -18,7 +18,6 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Dto\RecipeListInputFiltersDto;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -123,7 +122,7 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('recipe');
     }
@@ -153,7 +152,7 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Query recipes by author.
      *
-     * @param UserInterface      $user    User entity
+     * @param UserInterface        $user    User entity
      * @param RecipeListFiltersDto $filters Filters
      *
      * @return QueryBuilder Query builder
@@ -162,7 +161,7 @@ class RecipeRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->queryAll($filters);
 
-        //$queryBuilder->andWhere('recipe.author = :author')
+        // $queryBuilder->andWhere('recipe.author = :author')
         //    ->setParameter('author', $user);
 
         return $queryBuilder;
@@ -171,7 +170,7 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Apply filters to paginated list.
      *
-     * @param QueryBuilder       $queryBuilder Query builder
+     * @param QueryBuilder         $queryBuilder Query builder
      * @param RecipeListFiltersDto $filters      Filters
      *
      * @return QueryBuilder Query builder

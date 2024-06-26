@@ -34,10 +34,10 @@ class RecipeService implements RecipeServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface  $categoryService Category service
-     * @param PaginatorInterface        $paginator       Paginator
-     * @param TagServiceInterface       $tagService      Tag service
-     * @param RecipeRepository         $recipeRepository  Recipe repository
+     * @param CategoryServiceInterface $categoryService  Category service
+     * @param PaginatorInterface       $paginator        Paginator
+     * @param TagServiceInterface      $tagService       Tag service
+     * @param RecipeRepository         $recipeRepository Recipe repository
      */
     public function __construct(
         private readonly CategoryServiceInterface $categoryService,
@@ -50,8 +50,8 @@ class RecipeService implements RecipeServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
-     * @param User|null $author Recipes author
+     * @param int                       $page    Page number
+     * @param User|null                 $author  Recipes author
      * @param RecipeListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
@@ -77,6 +77,7 @@ class RecipeService implements RecipeServiceInterface
      * Save entity.
      *
      * @param Recipe $recipe Recipe entity
+     *
      * @throws ORMException
      */
     public function save(Recipe $recipe): void
@@ -88,6 +89,7 @@ class RecipeService implements RecipeServiceInterface
      * Delete entity.
      *
      * @param Recipe $recipe Recipe entity
+     *
      * @throws ORMException
      */
     public function delete(Recipe $recipe): void

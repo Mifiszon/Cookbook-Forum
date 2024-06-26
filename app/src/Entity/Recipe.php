@@ -22,8 +22,6 @@ class Recipe
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,8 +30,6 @@ class Recipe
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(DateTimeImmutable::class)]
@@ -42,8 +38,6 @@ class Recipe
 
     /**
      * Updated at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(DateTimeImmutable::class)]
@@ -52,8 +46,6 @@ class Recipe
 
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -63,8 +55,6 @@ class Recipe
 
     /**
      * Category.
-     *
-     * @var Category|null
      */
     #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(Category::class)]
@@ -84,8 +74,6 @@ class Recipe
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -95,8 +83,6 @@ class Recipe
 
     /**
      * content.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $content = null;
@@ -250,7 +236,6 @@ class Recipe
     }
 
     /**
-     * @param User|null $author
      * @return $this
      */
     public function setAuthor(?User $author): static
@@ -269,7 +254,6 @@ class Recipe
     }
 
     /**
-     * @param string|null $content
      * @return $this
      */
     public function setContent(?string $content): static
@@ -288,7 +272,6 @@ class Recipe
     }
 
     /**
-     * @param Picture $picture
      * @return $this
      */
     public function setPicture(Picture $picture): static
@@ -312,7 +295,6 @@ class Recipe
     }
 
     /**
-     * @param Rating $rating
      * @return $this
      */
     public function addRating(Rating $rating): static
@@ -326,7 +308,6 @@ class Recipe
     }
 
     /**
-     * @param Rating $rating
      * @return $this
      */
     public function removeRating(Rating $rating): static
@@ -347,7 +328,7 @@ class Recipe
     public function getAverageRating(): ?float
     {
         $ratings = $this->getRatings();
-        if ($ratings->count() === 0) {
+        if (0 === $ratings->count()) {
             return null;
         }
 

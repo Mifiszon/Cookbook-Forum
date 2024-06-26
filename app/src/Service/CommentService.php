@@ -73,5 +73,4 @@ class CommentService implements CommentServiceInterface
             self::PAGINATOR_ITEMS_PER_PAGE
         );
     }
-
 }

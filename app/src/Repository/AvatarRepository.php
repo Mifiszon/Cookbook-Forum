@@ -25,6 +25,7 @@ class AvatarRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param Avatar $avatar Avatar entity
+     *
      * @throws ORMException
      */
     public function save(Avatar $avatar): void

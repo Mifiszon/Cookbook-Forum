@@ -17,14 +17,14 @@ use Knp\Component\Pager\Pagination\SlidingPagination;
 interface RecipeServiceInterface
 {
     /**
-    * Get paginated list.
-    *
-    * @param int                     $page    Page number
-    * @param User                    $author  Recipes author
-    * @param RecipeListInputFiltersDto $filters Filters
-    *
-    * @return PaginationInterface<SlidingPagination> Paginated list
-    */
+     * Get paginated list.
+     *
+     * @param int                       $page    Page number
+     * @param User                      $author  Recipes author
+     * @param RecipeListInputFiltersDto $filters Filters
+     *
+     * @return PaginationInterface<SlidingPagination> Paginated list
+     */
     public function getPaginatedList(
         int $page,
         User $author,

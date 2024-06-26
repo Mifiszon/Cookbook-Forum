@@ -2,6 +2,7 @@
 /**
  * Tag repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Tag;
@@ -51,7 +52,7 @@ class TagRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('tag');
     }
@@ -60,6 +61,7 @@ class TagRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param Tag $tag Category entity
+     *
      * @throws ORMException
      */
     public function save(Tag $tag): void
