@@ -153,4 +153,13 @@ class RecipeService implements RecipeServiceInterface
     {
         return $this->ratingRepository->findBy(['recipe' => $recipe]);
     }
+
+    /**
+     * @param array $ingredients
+     * @return array
+     */
+    public function findRecipesByIngredients(array $ingredients): array
+    {
+        return $this->recipeRepository->findByIngredients($ingredients);
+    }
 }

@@ -53,16 +53,19 @@ class RecipeRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
-                'partial recipe.{id, createdAt, updatedAt, title}',
+                'partial recipe.{id, createdAt, updatedAt, title, averageRating}', // Dodano averageRating
                 'partial category.{id, title}',
                 'partial tags.{id, title}'
             )
             ->join('recipe.category', 'category')
             ->leftJoin('recipe.tags', 'tags')
-            ->orderBy('recipe.updatedAt', 'DESC');
+            ->groupBy('recipe.id', 'category.id', 'tags.id')
+            ->orderBy('recipe.averageRating', 'DESC'); // Sortowanie po averageRating
 
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
+
+
 
     /**
      * Count recipes by category.
@@ -201,5 +204,27 @@ class RecipeRepository extends ServiceEntityRepository
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param array $ingredients
+     * @return array
+     */
+    public function findByIngredients(array $ingredients): array
+    {
+        if (empty($ingredients)) {
+            return [];
+        }
+
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        foreach ($ingredients as $index => $ingredient) {
+            $queryBuilder
+                ->leftJoin('r.ingredients', 'i' . $index)
+                ->andWhere($queryBuilder->expr()->like('LOWER(i' . $index . '.name)', ':ingredient_' . $index))
+                ->setParameter('ingredient_' . $index, '%' . strtolower($ingredient) . '%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

@@ -10,11 +10,11 @@ use App\Entity\Rating;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\Type\RatingType;
+use App\Form\Type\RecipeSearchType;
 use App\Form\Type\RecipeType;
 use App\Resolver\RecipeListInputFiltersDtoResolver;
 use App\Service\CommentServiceInterface;
 use App\Service\RecipeServiceInterface;
-use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,7 +51,6 @@ class RecipeController extends AbstractController
      * @param int                       $page    Page number
      *
      * @return Response HTTP response
-     * @throws ORMException
      */
     #[Route(
         name: 'recipe_index',
@@ -261,5 +260,34 @@ class RecipeController extends AbstractController
                 'recipe' => $recipe,
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @param RecipeServiceInterface $recipeService
+     * @return Response
+     */
+    #[Route('/search', name: 'recipe_search', methods: ['GET', 'POST'])]
+    public function searchByIngredients(Request $request, RecipeServiceInterface $recipeService): Response
+    {
+        $form = $this->createForm(RecipeSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $ingredients = $form->get('ingredients')->getData();
+
+            $ingredientsArray = array_map('trim', explode(',', $ingredients));
+
+            $recipes = $recipeService->findRecipesByIngredients($ingredientsArray);
+
+            return $this->render('recipe/results.html.twig', [
+                'form' => $form->createView(),
+                'recipes' => $recipes,
+            ]);
+        }
+
+        return $this->render('recipe/search.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

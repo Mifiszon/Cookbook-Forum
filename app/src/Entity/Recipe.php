@@ -96,6 +96,35 @@ class Recipe
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Rating::class)]
     private Collection $ratings;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $averageRating;
+
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'recipe', cascade: ['persist'])]
+    #[ORM\JoinTable(name: "ingredient_recipe")]
+    private Collection $ingredients;
+
+    /**
+     * @return float|null
+     */
+    public function getAverageRating(): ?float
+    {
+        return $this->averageRating;
+    }
+
+    /**
+     * @param float|null $averageRating
+     * @return $this
+     */
+    public function setAverageRating(?float $averageRating): self
+    {
+        $this->averageRating = $averageRating;
+
+        return $this;
+    }
+
     /**
      * Constructor.
      */
@@ -103,6 +132,7 @@ class Recipe
     {
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->ingredients = new ArrayCollection();
     }
 
     /**
@@ -317,6 +347,41 @@ class Recipe
             if ($rating->getRecipe() === $this) {
                 $rating->setRecipe(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * @param Ingredient $ingredient
+     * @return $this
+     */
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+            $ingredient->addRecipe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Ingredient $ingredient
+     * @return $this
+     */
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        if ($this->ingredients->removeElement($ingredient)) {
+            $ingredient->removeRecipe($this);
         }
 
         return $this;

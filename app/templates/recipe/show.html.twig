@@ -30,6 +30,13 @@
             <dd>{{ recipe.author.nickname }}</dd>
             <dt>{{ 'label.content'|trans }}</dt>
             <dd>{{ recipe.content|markdown_to_html }}</dd>
+            <dt>{{ 'label.ingredients'|trans }}</dt>
+            <dd>
+                {% for ingredient in recipe.ingredients %}
+                    {{ ingredient.name }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </dd>
         </dl>
 
         {% if recipe.picture is not null %}

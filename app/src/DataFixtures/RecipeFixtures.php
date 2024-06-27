@@ -9,89 +9,82 @@ use App\Entity\Category;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
+use App\Entity\Ingredient;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 
 /**
- * Klasa RecipeFixtures.
+ *
  */
 class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
-    /**
-     * Lista przykładowych przepisów.
-     *
-     * @var array
-     */
     private $sampleRecipes = [
         [
             'title' => 'Spaghetti Carbonara',
             'content' => 'Ugotuj spaghetti. W misce wymieszaj jajka, ser i pieprz. Połącz z ugotowanym spaghetti i pancettą.',
+            'ingredients' => ['Makaron spaghetti', 'Jajka', 'Ser'],
         ],
         [
             'title' => 'Kurczak Curry',
             'content' => 'Podsmaż cebulę, czosnek i imbir. Dodaj przyprawy i kurczaka. Gotuj na wolnym ogniu z mlekiem kokosowym aż będzie gotowy.',
+            'ingredients' => ['Kurczak', 'Cebula', 'Czosnek', 'Imbir', 'Mleko kokosowe'],
         ],
         [
             'title' => 'Befsztyk Strogonow',
             'content' => 'Smaż wołowinę z cebulą i grzybami. Dodaj bulion, śmietanę i musztardę. Podawaj z makaronem.',
+            'ingredients' => ['Wołowina', 'Cebula', 'Grzyby', 'Śmietana', 'Musztarda', 'Makaron'],
         ],
         [
             'title' => 'Warzywna Potrawka',
             'content' => 'Smaż różne warzywa na gorącej patelni z sosem sojowym i czosnkiem. Podawaj z ryżem lub makaronem.',
+            'ingredients' => ['Warzywa', 'Sos sojowy', 'Czosnek', 'Ryż', 'Makaron'],
         ],
         [
             'title' => 'Tacos z Rybą',
             'content' => 'Przypraw i grilluj rybę. Podawaj w tortillach z kapustą i skrop sokiem z limonki.',
+            'ingredients' => ['Ryba', 'Tortille', 'Kapusta', 'Limonka'],
         ],
         [
             'title' => 'Ciasto Czekoladowe',
             'content' => 'Wymieszaj mąkę, kakao, cukier i jajka. Piecz w piekarniku i polej czekoladowym lukrem.',
+            'ingredients' => ['Mąka', 'Kakao', 'Cukier', 'Jajka', 'Czekolada'],
         ],
         [
             'title' => 'Sałatka Cezar',
             'content' => 'Połącz sałatę rzymską, grzanki i sos Cezar. Posyp grillowanym kurczakiem i serem Parmezan.',
+            'ingredients' => ['Sałata rzymska', 'Grzanki', 'Sos Cezar', 'Kurczak', 'Ser Parmezan'],
         ],
         [
             'title' => 'Zupa Pomidorowa',
             'content' => 'Gotuj pomidory z cebulą i czosnkiem. Rozdrabniaj na gładką masę i gotuj na wolnym ogniu z śmietaną i bazylią.',
+            'ingredients' => ['Pomidory', 'Cebula', 'Czosnek', 'Śmietana', 'Bazyli', 'Chleb'],
         ],
         [
             'title' => 'Żeberka BBQ',
             'content' => 'Marynuj żeberka w sosie BBQ. Gotuj powoli na grillu lub w piekarniku aż będą miękkie.',
+            'ingredients' => ['Żeberka', 'Sos BBQ'],
         ],
         [
             'title' => 'Naleśniki',
             'content' => 'Wymieszaj mąkę, mleko, jajka i proszek do pieczenia. Smaż na gorącej patelni i podawaj z syropem.',
+            'ingredients' => ['Mąka', 'Mleko', 'Jajka', 'Proszek do pieczenia', 'Syrop'],
         ],
         [
             'title' => 'Lasagne',
             'content' => 'Układaj warstwy makaronu, sera ricotta, sosu mięsnego i sera mozzarella. Piecz w piekarniku aż będzie muskająca.',
+            'ingredients' => ['Makaron', 'Ser ricotta', 'Sos mięsny', 'Ser mozzarella'],
         ],
         [
             'title' => 'Grzanka z Serem',
             'content' => 'Umieść ser między dwiema kromkami chleba i smaż na gorącej patelni aż będzie złoty brąz.',
-        ],
-        [
-            'title' => 'Risotto z Grzybami',
-            'content' => 'Gotuj ryż w bulionie i smażone grzyby. Dodaj ser Parmezan i masło.',
-        ],
-        [
-            'title' => 'Sałatka Grecka',
-            'content' => 'Połącz ogórki, pomidory, oliwki i ser feta. Skrop oliwą z oliwek i oregano.',
-        ],
-        [
-            'title' => 'Tiramisu',
-            'content' => 'Układaj kawą nasączone paluchy biszkoptowe z mieszanką sera mascarpone. Schłodzić i posypać kakao w proszku.',
+            'ingredients' => ['Ser', 'Chleb'],
         ],
         // Dodaj więcej przepisów według potrzeb
     ];
 
     /**
-     * Wczytaj dane.
-     *
-     * @psalm-suppress PossiblyNullPropertyFetch
-     * @psalm-suppress PossiblyNullReference
-     * @psalm-suppress UnusedClosureParam
+     * Load data.
      */
     public function loadData(): void
     {
@@ -128,6 +121,14 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             $author = $this->getRandomReference('users');
             $recipe->setAuthor($author);
 
+            // Dodaj składniki do przepisu
+            foreach ($this->sampleRecipes[$i]['ingredients'] as $ingredientName) {
+                $ingredient = new Ingredient();
+                $ingredient->setName($ingredientName);
+
+                $recipe->addIngredient($ingredient);
+            }
+
             return $recipe;
         });
 
@@ -135,12 +136,10 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
     }
 
     /**
-     * Ta metoda musi zwrócić tablicę klas fikstur,
-     * od których zależy klasa implementująca.
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on
      *
-     * @return string[] Zależności
-     *
-     * @psalm-return array{0: CategoryFixtures::class, 1: TagFixtures::class, 2: UserFixtures::class}
+     * @psalm-return array<class-string<FixtureInterface>>
      */
     public function getDependencies(): array
     {

@@ -27,6 +27,13 @@
     padding: 10px;
 }
 
+.recipe-s {
+    position: fixed;
+    top: 50px;
+    right: 275px;
+    padding: 10px;
+}
+
 .alert {
     max-width: 15%;
     text-align: center;
@@ -62,6 +69,5 @@
     padding: 10px;
     margin-bottom: 10px;
 }
-
 
 

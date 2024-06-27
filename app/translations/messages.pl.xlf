@@ -421,6 +421,30 @@
         <source>title.comment_create</source>
         <target>Dodaj Komentarz</target>
       </trans-unit>
+      <trans-unit id="title.recipe_search">
+        <source>title.recipe_search</source>
+        <target>Wyszukaj Przepis</target>
+      </trans-unit>
+      <trans-unit id="label.ingredients">
+       <source>label.ingredients</source>
+        <target>Składniki</target>
+      </trans-unit>
+      <trans-unit id="Enter ingredients separated by commas">
+        <source>Enter ingredients separated by commas</source>
+        <target>Wpisz składniki po przecinku</target>
+      </trans-unit>
+      <trans-unit id="title.recipe_search_results">
+        <source>title.recipe_search_results</source>
+        <target>Wyniki Wyszukiwania</target>
+      </trans-unit>
+      <trans-unit id="action.search">
+        <source>action.search</source>
+        <target>Szukaj</target>
+      </trans-unit>
+      <trans-unit id="message.no_results_found">
+        <source>message.no_results_found</source>
+        <target>Brak wyników wyszukiwania</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

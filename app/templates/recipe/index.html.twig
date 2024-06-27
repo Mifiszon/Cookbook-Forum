@@ -13,6 +13,9 @@
         <div class="change-data">
             <a class="btn btn-outline-primary" href="{{ path('change_nickname') }}">Zmiana Danych</a>
         </div>
+        <div class="recipe-s">
+            <a class="btn btn-outline-primary" href="{{ path('recipe_search') }}">Wyszukaj Przepis</a>
+        </div>
     {% else %}
         <div class="user-info">
             <a class="btn btn-outline-primary" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
@@ -34,7 +37,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.tag'|trans }}</th>
                 <th>{{ 'label.author'|trans }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.average_rating'|trans, 'recipe.ratings') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.average_rating'|trans, 'recipe.averageRating') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
