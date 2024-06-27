@@ -4,31 +4,26 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Repository\RecipeRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class UserService.
+ *
  */
 class UserService implements UserServiceInterface
 {
+    private UserRepository $userRepository;
+    private PaginatorInterface $paginator;
+
     /**
      * @param UserRepository $userRepository
-     * @param RecipeRepository $recipeRepository
      * @param PaginatorInterface $paginator
-     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly RecipeRepository $recipeRepository,
-        private readonly PaginatorInterface $paginator,
-        private readonly EntityManagerInterface $entityManager
-    ) {
+    public function __construct(UserRepository $userRepository, PaginatorInterface $paginator)
+    {
+        $this->userRepository = $userRepository;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -52,8 +47,11 @@ class UserService implements UserServiceInterface
      *
      * @param User $user User entity
      */
-    public function save(User $user): void
+    public function save(User $user, string $plainPassword = null): void
     {
+        if ($plainPassword !== null) {
+            $user->setPassword($plainPassword);
+        }
         $this->userRepository->save($user);
     }
 
@@ -61,17 +59,9 @@ class UserService implements UserServiceInterface
      * Delete entity.
      *
      * @param User $user User entity
-     *
-     * @throws ORMException
      */
     public function delete(User $user): void
     {
-        $recipes = $this->recipeRepository->findByUser($user);
-        foreach ($recipes as $recipe) {
-            $this->recipeRepository->delete($recipe);
-        }
-
-        $this->entityManager->flush();
         $this->userRepository->delete($user);
     }
 
@@ -83,7 +73,7 @@ class UserService implements UserServiceInterface
     public function promoteUserToAdmin(User $user): void
     {
         $user->promoteToAdmin();
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
     }
 
     /**
@@ -94,16 +84,18 @@ class UserService implements UserServiceInterface
     public function revokeAdminPrivilegesFromUser(User $user): void
     {
         $user->revokeAdminPrivileges();
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
     }
 
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @param User $user
+     *
+     * @return bool
+     * @throws ORMException
      */
     public function isLastAdmin(User $user): bool
     {
-        return 1 === $this->userRepository->countAdmins() && $user->isAdmin();
+        return $this->userRepository->countAdmins() === 1 && $user->isAdmin();
     }
 
     /**
@@ -115,7 +107,7 @@ class UserService implements UserServiceInterface
     public function changeNickname(User $user, string $newNickname): void
     {
         $user->setNickname($newNickname);
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
     }
 
     /**
@@ -126,7 +118,7 @@ class UserService implements UserServiceInterface
     public function blockUser(User $user): void
     {
         $user->setIsBlocked(true);
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
     }
 
     /**
@@ -137,7 +129,7 @@ class UserService implements UserServiceInterface
     public function unblockUser(User $user): void
     {
         $user->setIsBlocked(false);
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
     }
 
     /**
@@ -147,10 +139,8 @@ class UserService implements UserServiceInterface
      */
     public function isUserBlocked(string $email): bool
     {
-        $userRepository = $this->entityManager->getRepository(User::class);
-        $user = $userRepository->findOneBy(['email' => $email]);
-
-        return $user->isBlocked;
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+        return $user ? $user->isBlocked() : false;
     }
 
     /**

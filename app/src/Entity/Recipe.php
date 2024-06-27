@@ -321,22 +321,4 @@ class Recipe
 
         return $this;
     }
-
-    /**
-     * @return float|null
-     */
-    public function getAverageRating(): ?float
-    {
-        $ratings = $this->getRatings();
-        if (0 === $ratings->count()) {
-            return null;
-        }
-
-        $total = 0;
-        foreach ($ratings as $rating) {
-            $total += $rating->getRating();
-        }
-
-        return $total / $ratings->count();
-    }
 }

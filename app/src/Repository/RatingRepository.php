@@ -34,4 +34,15 @@ class RatingRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * Save rating.
+     *
+     * @param Rating $rating
+     */
+    public function saveRating(Rating $rating): void
+    {
+        $this->_em->persist($rating);
+        $this->_em->flush();
+    }
 }

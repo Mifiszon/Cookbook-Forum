@@ -20,15 +20,15 @@ class PictureService implements PictureServiceInterface
     /**
      * Constructor.
      *
-     * @param string                        $targetDirectory      Target directory
-     * @param PictureRepository             $pictureRepository    Picture repository
-     * @param PictureUploadServiceInterface $pictureUploadService Picture upload service
-     * @param Filesystem                    $filesystem           Filesystem component
+     * @param string $targetDirectory Target directory
+     * @param PictureRepository $pictureRepository Picture repository
+     * @param FileUploadServiceInterface $fileUploadService file upload service
+     * @param Filesystem $filesystem Filesystem component
      */
     public function __construct(
         readonly string $targetDirectory,
         private readonly PictureRepository $pictureRepository,
-        private readonly PictureUploadServiceInterface $pictureUploadService,
+        private readonly FileUploadServiceInterface $fileUploadService,
         private readonly Filesystem $filesystem
     ) {
     }
@@ -66,7 +66,7 @@ class PictureService implements PictureServiceInterface
      */
     public function create(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
     {
-        $pictureFilename = $this->pictureUploadService->upload($uploadedFile);
+        $pictureFilename = $this->fileUploadService->upload($uploadedFile);
 
         $picture->setRecipe($recipe);
         $picture->setFilename($pictureFilename);

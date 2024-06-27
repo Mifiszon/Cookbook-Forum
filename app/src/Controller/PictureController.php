@@ -113,7 +113,7 @@ class PictureController extends AbstractController
         $recipe = $picture->getRecipe();
 
         if (!$this->isGranted('ROLE_ADMIN') && $recipe->getAuthor() !== $this->getUser()) {
-            throw $this->createAccessDeniedException('Access Denied');
+            throw $this->createAccessDeniedException('Brak dostępu');
         }
 
         $form = $this->createForm(

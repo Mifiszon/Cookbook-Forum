@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -12,48 +13,43 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CommentService implements CommentServiceInterface
 {
-    /**
-     * Items per page.
-     *
-     * Use constants to define configuration options that rarely change instead
-     * of specifying them in app/config/config.yml.
-     * See https://symfony.com/doc/current/best_practices.html#configuration
-     *
-     * @constant int
-     */
     private const PAGINATOR_ITEMS_PER_PAGE = 5;
 
     /**
      * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface $paginator
+     * @param CommentRepository $commentRepository
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly PaginatorInterface $paginator
+        private readonly PaginatorInterface $paginator,
+        private readonly CommentRepository $commentRepository
     ) {
     }
 
     /**
+     * Dodanie komentarza.
+     *
      * @param Comment $comment
-     * @return void
      */
     public function add(Comment $comment): void
     {
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
+        $this->commentRepository->save($comment);
     }
 
     /**
+     * Usunięcie komentarza.
+     *
      * @param Comment $comment
-     * @return void
      */
     public function delete(Comment $comment): void
     {
-        $this->entityManager->remove($comment);
-        $this->entityManager->flush();
+        $this->commentRepository->delete($comment);
     }
 
     /**
+     * Pobranie stronicowanej listy komentarzy dla przepisu.
+     *
      * @param int $recipeId
      * @param int $page
      * @return PaginationInterface

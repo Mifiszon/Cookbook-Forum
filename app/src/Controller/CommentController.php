@@ -9,7 +9,6 @@ use App\Entity\Comment;
 use App\Form\Type\CommentType;
 use App\Repository\RecipeRepository;
 use App\Service\CommentServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,15 +66,13 @@ class CommentController extends AbstractController
 
     /**
      * @param Comment $comment
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Comment $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Comment $comment): Response
     {
-        $entityManager->remove($comment);
-        $entityManager->flush();
+        $this->commentService->delete($comment);
 
         $this->addFlash('success', $this->translator->trans('message.comment_deleted_successfully'));
 

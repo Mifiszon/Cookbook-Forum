@@ -18,4 +18,26 @@ class CommentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Comment::class);
     }
+
+    /**
+     * Zapisanie komentarza.
+     *
+     * @param Comment $comment
+     */
+    public function save(Comment $comment): void
+    {
+        $this->_em->persist($comment);
+        $this->_em->flush();
+    }
+
+    /**
+     * Usunięcie komentarza.
+     *
+     * @param Comment $comment
+     */
+    public function delete(Comment $comment): void
+    {
+        $this->_em->remove($comment);
+        $this->_em->flush();
+    }
 }

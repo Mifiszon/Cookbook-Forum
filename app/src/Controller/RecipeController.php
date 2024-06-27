@@ -14,7 +14,7 @@ use App\Form\Type\RecipeType;
 use App\Resolver\RecipeListInputFiltersDtoResolver;
 use App\Service\CommentServiceInterface;
 use App\Service\RecipeServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +41,6 @@ class RecipeController extends AbstractController
         private readonly RecipeServiceInterface $recipeService,
         private readonly TranslatorInterface $translator,
         private readonly CommentServiceInterface $commentService,
-        private readonly EntityManagerInterface $entityManager
     ) {
     }
 
@@ -52,6 +51,7 @@ class RecipeController extends AbstractController
      * @param int                       $page    Page number
      *
      * @return Response HTTP response
+     * @throws ORMException
      */
     #[Route(
         name: 'recipe_index',
@@ -70,13 +70,7 @@ class RecipeController extends AbstractController
         );
 
         $recipes = $pagination->getItems();
-        $averageRatings = [];
-
-        foreach ($recipes as $recipe) {
-            $averageRatings[$recipe->getId()] = $this->entityManager
-                ->getRepository(Rating::class)
-                ->getAverageRatingForRecipe($recipe);
-        }
+        $averageRatings = $this->recipeService->getAverageRatings($recipes);
 
         return $this->render('recipe/index.html.twig', [
             'pagination' => $pagination,
@@ -93,12 +87,9 @@ class RecipeController extends AbstractController
      */
     #[Route('/{id}', name: 'recipe_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function show(Recipe $recipe, EntityManagerInterface $entityManager): Response
+    public function show(Recipe $recipe): Response
     {
-        $ratings = $entityManager->getRepository(Rating::class)->findBy(['recipe' => $recipe]);
-
-        $averageRating = $recipe->getAverageRating();
-
+        $ratings = $this->recipeService->getRatingsForRecipe($recipe);
         $commentsPagination = $this->commentService->getPaginatedCommentsForRecipe($recipe->getId(), 1);
 
         $rating = new Rating();
@@ -107,21 +98,21 @@ class RecipeController extends AbstractController
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipe,
             'ratings' => $ratings,
-            'averageRating' => $averageRating,
             'commentsPagination' => $commentsPagination,
             'ratingForm' => $ratingForm->createView(),
         ]);
     }
 
     /**
+     * Rate action
+     *
      * @param Recipe $recipe
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route('/{id}/rate', name: 'recipe_rate', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function rate(Recipe $recipe, Request $request, EntityManagerInterface $entityManager): Response
+    public function rate(Recipe $recipe, Request $request): Response
     {
         $rating = new Rating();
         $rating->setRecipe($recipe);
@@ -131,13 +122,9 @@ class RecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($rating);
-            $entityManager->flush();
+            $this->recipeService->addRating($rating);
 
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.added_successfully')
-            );
+            $this->addFlash('success', $this->translator->trans('message.added_successfully'));
 
             return $this->redirectToRoute('recipe_index');
         }

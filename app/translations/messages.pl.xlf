@@ -417,6 +417,10 @@
           <source>label.repeatPassword</source>
           <target>Powtórz hasło</target>
       </trans-unit>
+      <trans-unit id="title.comment_create">
+        <source>title.comment_create</source>
+        <target>Dodaj Komentarz</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

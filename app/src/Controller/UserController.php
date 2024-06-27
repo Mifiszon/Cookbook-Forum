@@ -9,7 +9,6 @@ use App\Form\Type\Privileges\RevokeType;
 use App\Form\Type\RegistrationFormType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,30 +25,34 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private UserServiceInterface $userService;
+    private TranslatorInterface $translator;
+    private UserPasswordHasherInterface $userPasswordHasher;
+
     /**
-     * Constructor.
-     *
-     * @param UserServiceInterface $userService User service
-     * @param TranslatorInterface  $translator  Translator
+     * @param UserServiceInterface $userService
+     * @param TranslatorInterface $translator
+     * @param UserPasswordHasherInterface $userPasswordHasher
      */
     public function __construct(
-        private readonly UserServiceInterface $userService,
-        private readonly TranslatorInterface $translator,
-        private readonly UserPasswordHasherInterface $userPasswordHasher
+        UserServiceInterface $userService,
+        TranslatorInterface $translator,
+        UserPasswordHasherInterface $userPasswordHasher
     ) {
+        $this->userService = $userService;
+        $this->translator = $translator;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     /**
-     * Index action.
-     *
-     * @return Response HTTP response
+     * @param int $page
+     * @return Response
      */
     #[Route(name: 'user_index', methods: 'GET')]
     #[IsGranted('ROLE_USER')]
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->userService->getPaginatedList($page);
-        dump($this->isGranted('VIEW', $pagination->getItems()[0]));
 
         return $this->render('user/index.html.twig', ['pagination' => $pagination]);
     }
@@ -70,12 +73,11 @@ class UserController extends AbstractController
     /**
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param UserPasswordHasherInterface $passwordHasher
      * @return Response
      */
-    #[Route('/create', name: 'user_create', methods: ['GET|POST'])]
+    #[Route('/create', name: 'user_create', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function create(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function create(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -83,16 +85,15 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
-                $passwordHasher->hashPassword(
+                $this->userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userService->save($user);
 
-            $this->addFlash('success', 'message.created_successfully');
+            $this->addFlash('success', $this->translator->trans('message.created_successfully'));
 
             return $this->redirectToRoute('user_index');
         }
@@ -125,10 +126,7 @@ class UserController extends AbstractController
             }
             $this->userService->save($user);
 
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.updated_successfully')
-            );
+            $this->addFlash('success', $this->translator->trans('message.updated_successfully'));
 
             return $this->redirectToRoute('user_index');
         }
@@ -161,10 +159,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->delete($user);
 
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.deleted_successfully')
-            );
+            $this->addFlash('success', $this->translator->trans('message.deleted_successfully'));
 
             return $this->redirectToRoute('user_index');
         }
@@ -190,10 +185,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->promoteUserToAdmin($user);
 
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.user_promoted_to_admin')
-            );
+            $this->addFlash('success', $this->translator->trans('message.user_promoted_to_admin'));
 
             return $this->redirectToRoute('user_index');
         }
@@ -224,10 +216,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->revokeAdminPrivilegesFromUser($user);
 
-            $this->addFlash(
-                'success',
-                $this->translator->trans('message.admin_privileges_revoked_from_user')
-            );
+            $this->addFlash('success', $this->translator->trans('message.admin_privileges_revoked_from_user'));
 
             return $this->redirectToRoute('user_index');
         }
@@ -239,18 +228,17 @@ class UserController extends AbstractController
 
     /**
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/change_nickname', name: 'change_data')]
-    public function changeNickname(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/change_nickname', name: 'change_nickname', methods: ['GET', 'POST'])]
+    public function changeNickname(Request $request): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(ChangeNicknameType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->userService->changeNickname($user, $form->get('nickname')->getData());
 
             $this->addFlash('success', $this->translator->trans('message.updated_successfully'));
 
