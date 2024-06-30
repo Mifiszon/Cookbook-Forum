@@ -1,4 +1,7 @@
 <?php
+/**
+* PromoteType
+ */
 
 namespace App\Form\Type\Privileges;
 
@@ -6,8 +9,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Class PromoteType.
+ */
 class PromoteType extends AbstractType
 {
+    /**
+     * Form Builder.
+     *
+     * @param FormBuilderInterface $builder Builder.
+     * @param array $options Options.
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

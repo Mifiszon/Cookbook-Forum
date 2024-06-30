@@ -1,4 +1,7 @@
 <?php
+/**
+ * UserServiceInterface.
+ */
 
 namespace App\Service;
 
@@ -6,7 +9,7 @@ use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
- * Interface UserServiceInterface.
+ * Class UserServiceInterface.
  */
 interface UserServiceInterface
 {
@@ -22,9 +25,10 @@ interface UserServiceInterface
     /**
      * Save entity.
      *
-     * @param User $user User entity
+     * @param User        $user          User entity
+     * @param string|null $plainPassword Plain Password.
      */
-    public function save(User $user): void;
+    public function save(User $user, string $plainPassword = null): void;
 
     /**
      * Delete entity.
@@ -34,59 +38,75 @@ interface UserServiceInterface
     public function delete(User $user): void;
 
     /**
-     * @param User $user
+     * Promote user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void void.
      */
     public function promoteUserToAdmin(User $user): void;
 
     /**
-     * @param User $user
+     * Revoke user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void Void.
      */
     public function revokeAdminPrivilegesFromUser(User $user): void;
 
     /**
-     * @param User $user
+     * Is last admin.
      *
-     * @return bool
+     * @param User $user User.
+     *
+     * @return bool Bool.
      */
     public function isLastAdmin(User $user): bool;
 
     /**
-     * @param User   $user
-     * @param string $newNickname
+     * Change Nickname.
      *
-     * @return void
+     * @param User   $user        User.
+     * @param string $newNickname newNickname.
+     *
+     * @return void Void.
      */
     public function changeNickname(User $user, string $newNickname): void;
 
     /**
-     * @param User $user
+     * Block user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void Void.
      */
     public function blockUser(User $user): void;
 
     /**
-     * @param User $user
+     * Unblock user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void Void.
      */
     public function unblockUser(User $user): void;
 
     /**
-     * @param string $email
+     * is user blocked.
      *
-     * @return bool
+     * @param string $email Email.
+     *
+     * @return bool Bool.
      */
     public function isUserBlocked(string $email): bool;
 
     /**
-     * @param string $email
+     * Find user by email.
      *
-     * @return User|null
+     * @param string $email Email.
+     *
+     * @return User|null User.
      */
     public function findUserByEmail(string $email): ?User;
 }

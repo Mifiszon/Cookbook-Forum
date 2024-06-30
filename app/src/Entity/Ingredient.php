@@ -1,5 +1,7 @@
 <?php
-
+/**
+* Ingredient Entity.
+ */
 namespace App\Entity;
 
 use App\Repository\IngredientRepository;
@@ -8,32 +10,43 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
+ * Class Ingredient.
  */
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 #[ORM\Table(name: 'inrgedients')]
 class Ingredient
 {
+    /**
+     * Primary key.
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     /**
-     * @var Collection<int, Recipe>
+     * Recipe.
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'ingredients')]
     private Collection $recipe;
 
+    /**
+     * Name.
+     */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * Contructor for recipes.
+     */
     public function __construct()
     {
         $this->recipe = new ArrayCollection();
     }
 
     /**
+     * Getter for id.
+     *
      * @return int|null
      */
     public function getId(): ?int
@@ -42,6 +55,8 @@ class Ingredient
     }
 
     /**
+     * Getter for recipe.
+     *
      * @return Collection<int, Recipe>
      */
     public function getRecipe(): Collection
@@ -50,8 +65,11 @@ class Ingredient
     }
 
     /**
-     * @param Recipe $recipe
-     * @return $this
+     * Adds recipes.
+     *
+     * @param Recipe $recipe Recipe.
+     *
+     * @return $this This.
      */
     public function addRecipe(Recipe $recipe): static
     {
@@ -63,8 +81,11 @@ class Ingredient
     }
 
     /**
-     * @param Recipe $recipe
-     * @return $this
+     * Removes recipes.
+     *
+     * @param Recipe $recipe Recipe.
+     *
+     * @return $this This.
      */
     public function removeRecipe(Recipe $recipe): static
     {
@@ -74,6 +95,8 @@ class Ingredient
     }
 
     /**
+     * Getter for name.
+     *
      * @return string|null
      */
     public function getName(): ?string
@@ -82,8 +105,11 @@ class Ingredient
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * Setter for name.
+     *
+     * @param string $name Name.
+     *
+     * @return $this This.
      */
     public function setName(string $name): static
     {
@@ -92,6 +118,8 @@ class Ingredient
         return $this;
     }
     /**
+     * Converts to string.
+     *
      * @return string
      */
     public function __toString(): string

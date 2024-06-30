@@ -23,21 +23,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CommentController extends AbstractController
 {
     /**
-     * @param CommentServiceInterface $commentService
-     * @param TranslatorInterface $translator
-     * @param RecipeRepository $recipeRepository
+     * Constructor.
+     *
+     * @param CommentServiceInterface $commentService   Comment service.
+     * @param TranslatorInterface     $translator       Translator.
+     * @param RecipeRepository        $recipeRepository Recipe repository.
      */
-    public function __construct(
-        private readonly CommentServiceInterface $commentService,
-        private readonly TranslatorInterface $translator,
-        private readonly RecipeRepository $recipeRepository,
-    ) {
+    public function __construct(private readonly CommentServiceInterface $commentService, private readonly TranslatorInterface $translator, private readonly RecipeRepository $recipeRepository)
+    {
     }
 
     /**
-     * @param Request $request
-     * @param int $recipeId
-     * @return Response
+     * Action add.
+     *
+     * @param Request $request  Request.
+     * @param int     $recipeId Recipe id.
+     *
+     * @return Response Response.
      */
     #[Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
@@ -65,8 +67,11 @@ class CommentController extends AbstractController
     }
 
     /**
-     * @param Comment $comment
-     * @return Response
+     * Action delete.
+     *
+     * @param Comment $comment Comment.
+     *
+     * @return Response Response.
      */
     #[Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]

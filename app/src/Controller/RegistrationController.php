@@ -1,4 +1,7 @@
 <?php
+/**
+ * Registration Controller.
+ */
 
 namespace App\Controller;
 
@@ -18,6 +21,8 @@ class RegistrationController extends AbstractController
     private RegistrationService $registrationService;
 
     /**
+     * Constructor.
+     *
      * @param RegistrationService $registrationService
      */
     public function __construct(RegistrationService $registrationService)
@@ -26,8 +31,11 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @return Response
+     * Aciton Register.
+     *
+     * @param Request $request Request.
+     *
+     * @return Response Response.
      */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request): Response

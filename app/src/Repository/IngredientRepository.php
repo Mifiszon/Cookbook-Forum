@@ -1,10 +1,14 @@
 <?php
+/**
+* IngredientRepository.
+ */
 
 namespace App\Repository;
 
 use App\Entity\Ingredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +22,8 @@ use Doctrine\Persistence\ManagerRegistry;
 class IngredientRepository extends ServiceEntityRepository
 {
     /**
+     * Constructor.
+     *
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
@@ -29,7 +35,6 @@ class IngredientRepository extends ServiceEntityRepository
      * Save entity.
      *
      * @param Ingredient $ingredient Ingredient entity
-     *
      */
     public function save(Ingredient $ingredient): void
     {
@@ -42,7 +47,6 @@ class IngredientRepository extends ServiceEntityRepository
      * Delete entity.
      *
      * @param Ingredient $ingredient Ingredient entity
-     *
      */
     public function delete(Ingredient $ingredient): void
     {
@@ -56,7 +60,7 @@ class IngredientRepository extends ServiceEntityRepository
      *
      * @param string $name Ingredient name
      *
-     * @return Ingredient|null Ingredient entity
+     * @return Ingredient|null Ingredient.
      */
     public function findOneByName(string $name): ?Ingredient
     {
@@ -64,7 +68,7 @@ class IngredientRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find by id.
+     * Find one by id.
      *
      * @param int $id Ingredient id
      *
@@ -84,8 +88,9 @@ class IngredientRepository extends ServiceEntityRepository
     /**
      * Query all ingredients.
      *
+     * @return Query Query.
      */
-    public function queryAll(): \Doctrine\ORM\Query
+    public function queryAll(): Query
     {
         return $this->createQueryBuilder('i')->getQuery();
     }

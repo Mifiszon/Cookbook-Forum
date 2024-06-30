@@ -26,11 +26,7 @@ interface RecipeServiceInterface
      *
      * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(
-        int $page,
-        User $author,
-        RecipeListInputFiltersDto $filters
-    ): PaginationInterface;
+    public function getPaginatedList(int $page, User $author, RecipeListInputFiltersDto $filters): PaginationInterface;
 
     /**
      * Save entity.
@@ -47,26 +43,38 @@ interface RecipeServiceInterface
     public function delete(Recipe $recipe): void;
 
     /**
-     * @param Rating $rating
-     * @return void
+     * Add rating.
+     *
+     * @param Rating $rating Rating.
+     *
+     * @return void Void.
      */
     public function addRating(Rating $rating): void;
 
     /**
-     * @param array $recipes
-     * @return array
+     * Get average rating.
+     *
+     * @param array $recipes Recipes.
+     *
+     * @return array Array.
      */
     public function getAverageRatings(array $recipes): array;
 
     /**
-     * @param Recipe $recipe
-     * @return array
+     * Get ratings for recipe.
+     *
+     * @param Recipe $recipe Recipe.
+     *
+     * @return array Array
      */
     public function getRatingsForRecipe(Recipe $recipe): array;
 
     /**
-     * @param array $ingredients
-     * @return array
+     * Find recipes by ingreinets.
+     *
+     * @param array $ingredients Ingredients.
+     *
+     * @return array Array.
      */
     public function findRecipesByIngredients(array $ingredients): array;
 }

@@ -11,6 +11,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -37,10 +38,7 @@ class CategoryService implements CategoryServiceInterface
      * @param PaginatorInterface $paginator          Paginator
      * @param RecipeRepository   $recipeRepository   Recipe repository
      */
-    public function __construct(
-        private readonly CategoryRepository $categoryRepository,
-        private readonly PaginatorInterface $paginator,
-        private readonly RecipeRepository $recipeRepository)
+    public function __construct(private readonly CategoryRepository $categoryRepository, private readonly PaginatorInterface $paginator, private readonly RecipeRepository $recipeRepository)
     {
     }
 
@@ -65,7 +63,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @param Category $category Category entity
      *
-     * @throws ORMException
+     * @throws ORMException ORMException.
      */
     public function save(Category $category): void
     {
@@ -75,7 +73,10 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Delete entity.
      *
-     * @throws ORMException
+     * @param Category $category Category.
+     *
+     * @throws ORMException ORMException.
+     * @throws OptimisticLockException OptimisticLockException.
      */
     public function delete(Category $category): void
     {
@@ -88,6 +89,8 @@ class CategoryService implements CategoryServiceInterface
      * @param Category $category Category entity
      *
      * @return bool Result
+     *
+     * @throws ORMException ORMException.
      */
     public function canBeDeleted(Category $category): bool
     {
@@ -107,7 +110,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @return Category|null Category entity
      *
-     * @throws NonUniqueResultException
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function findOneById(int $id): ?Category
     {

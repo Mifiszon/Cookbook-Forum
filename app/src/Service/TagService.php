@@ -37,11 +37,8 @@ class TagService implements TagServiceInterface
      * @param PaginatorInterface $paginator        Paginator
      * @param RecipeRepository   $recipeRepository Recipe repository
      */
-    public function __construct(
-        private readonly TagRepository $tagRepository,
-        private readonly PaginatorInterface $paginator,
-        private readonly RecipeRepository $recipeRepository
-    ) {
+    public function __construct(private readonly TagRepository $tagRepository, private readonly PaginatorInterface $paginator, private readonly RecipeRepository $recipeRepository)
+    {
     }
 
     /**
@@ -65,7 +62,7 @@ class TagService implements TagServiceInterface
      *
      * @param Tag $tag Tag entity
      *
-     * @throws ORMException
+     * @throws ORMException ORMException.
      */
     public function save(Tag $tag): void
     {
@@ -77,7 +74,7 @@ class TagService implements TagServiceInterface
      *
      * @param Tag $tag Tag entity
      *
-     * @throws ORMException
+     * @throws ORMException ORMException.
      */
     public function delete(Tag $tag): void
     {
@@ -121,7 +118,7 @@ class TagService implements TagServiceInterface
      *
      * @return Tag|null Tag entity
      *
-     * @throws NonUniqueResultException
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function findOneById(int $id): ?Tag
     {

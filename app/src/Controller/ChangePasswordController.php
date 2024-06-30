@@ -1,4 +1,7 @@
 <?php
+/**
+ * ChangePassword Controller.
+ */
 
 namespace App\Controller;
 
@@ -16,19 +19,21 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
  */
 class ChangePasswordController extends AbstractController
 {
-    private ChangePasswordServiceInterface $changePasswordService;
-
     /**
+     * Constructor.
+     *
      * @param ChangePasswordServiceInterface $changePasswordService
      */
-    public function __construct(ChangePasswordServiceInterface $changePasswordService)
+    public function __construct(private readonly ChangePasswordServiceInterface $changePasswordService)
     {
-        $this->changePasswordService = $changePasswordService;
     }
 
     /**
-     * @param Request $request
-     * @return Response
+     * Action change password.
+     *
+     * @param Request $request Request.
+     *
+     * @return Response response.
      */
     #[Route('/change-password', name: 'app_change_password')]
     #[IsGranted('ROLE_USER')]

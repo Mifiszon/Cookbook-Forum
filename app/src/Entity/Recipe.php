@@ -70,7 +70,7 @@ class Recipe
     #[Assert\Valid]
     #[ORM\ManyToMany(targetEntity: Tag::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
     #[ORM\JoinTable(name: 'recipes_tags')]
-    private $tags;
+    private ArrayCollection $tags;
 
     /**
      * Author.
@@ -82,24 +82,34 @@ class Recipe
     private ?User $author;
 
     /**
-     * content.
+     * Content.
      */
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $content = null;
 
+    /**
+     * Picture.
+     */
     #[ORM\OneToOne(mappedBy: 'recipe', cascade: ['persist', 'remove'])]
     private ?Picture $picture = null;
 
     /**
+     * Ratings.
+     *
      * @var Collection<int, Rating>
      */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Rating::class)]
     private Collection $ratings;
 
+    /**
+     * averageRating.
+     */
     #[ORM\Column(type: 'float', nullable: true)]
     private ?float $averageRating;
 
     /**
+     * Ingredient.
+     *
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'recipe', cascade: ['persist'])]
@@ -107,6 +117,8 @@ class Recipe
     private Collection $ingredients;
 
     /**
+     * Getter for avaerageRating.
+     *
      * @return float|null
      */
     public function getAverageRating(): ?float
@@ -115,8 +127,11 @@ class Recipe
     }
 
     /**
-     * @param float|null $averageRating
-     * @return $this
+     * Setter for averageRating.
+     *
+     * @param float|null $averageRating averateRating.
+     *
+     * @return $this This.
      */
     public function setAverageRating(?float $averageRating): self
     {
@@ -258,6 +273,8 @@ class Recipe
     }
 
     /**
+     * Getter for author.
+     *
      * @return User|null
      */
     public function getAuthor(): ?User
@@ -266,7 +283,11 @@ class Recipe
     }
 
     /**
-     * @return $this
+     * Setter for author.
+     *
+     * @param User|null $author Author.
+     *
+     * @return $this This.
      */
     public function setAuthor(?User $author): static
     {
@@ -276,6 +297,8 @@ class Recipe
     }
 
     /**
+     * Getter for Content.
+     *
      * @return string|null
      */
     public function getContent(): ?string
@@ -284,7 +307,11 @@ class Recipe
     }
 
     /**
-     * @return $this
+     * Setter for Content.
+     *
+     * @param string|null $content Content.
+     *
+     * @return $this This.
      */
     public function setContent(?string $content): static
     {
@@ -294,6 +321,8 @@ class Recipe
     }
 
     /**
+     * Getter for picture.
+     *
      * @return Picture|null
      */
     public function getPicture(): ?Picture
@@ -302,7 +331,11 @@ class Recipe
     }
 
     /**
-     * @return $this
+     * Setter for picture.
+     *
+     * @param Picture $picture Picture.
+     *
+     * @return $this This.
      */
     public function setPicture(Picture $picture): static
     {
@@ -317,6 +350,8 @@ class Recipe
     }
 
     /**
+     * Getter for ratings.
+     *
      * @return Collection<int, Rating>
      */
     public function getRatings(): Collection
@@ -325,7 +360,11 @@ class Recipe
     }
 
     /**
-     * @return $this
+     * Adds ratings.
+     *
+     * @param Rating $rating Rating.
+     *
+     * @return $this This.
      */
     public function addRating(Rating $rating): static
     {
@@ -338,7 +377,11 @@ class Recipe
     }
 
     /**
-     * @return $this
+     * Removes ratings.
+     *
+     * @param Rating $rating Rating.
+     *
+     * @return $this This.
      */
     public function removeRating(Rating $rating): static
     {
@@ -353,6 +396,8 @@ class Recipe
     }
 
     /**
+     * Getter for Ingredients.
+     *
      * @return Collection<int, Ingredient>
      */
     public function getIngredients(): Collection
@@ -361,8 +406,11 @@ class Recipe
     }
 
     /**
-     * @param Ingredient $ingredient
-     * @return $this
+     * This method adds an ingredient to the recipe.
+     *
+     * @param Ingredient $ingredient Ingredient.
+     *
+     * @return $this Description of what this method returns.
      */
     public function addIngredient(Ingredient $ingredient): static
     {
@@ -375,8 +423,11 @@ class Recipe
     }
 
     /**
-     * @param Ingredient $ingredient
-     * @return $this
+     * Removes ingredients.
+     *
+     * @param Ingredient $ingredient Ingredient.
+     *
+     * @return $this This.
      */
     public function removeIngredient(Ingredient $ingredient): static
     {

@@ -1,4 +1,7 @@
 <?php
+/**
+* ChangePasswordService.
+ */
 
 namespace App\Service;
 
@@ -8,23 +11,19 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 /**
- *
+ * Class ChangePasswordService.
  */
 class ChangePasswordService implements ChangePasswordServiceInterface
 {
-    private UserPasswordHasherInterface $passwordHasher;
-    private UserRepository $userRepository;
 
     /**
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @param UserRepository $userRepository
+     * Constructor.
+     *
+     * @param UserPasswordHasherInterface  $passwordHasher   Password Hasher.
+     * @param UserRepository               $userRepository   User Repository.
      */
-    public function __construct(
-        UserPasswordHasherInterface $passwordHasher,
-        UserRepository $userRepository
-    ) {
-        $this->passwordHasher = $passwordHasher;
-        $this->userRepository = $userRepository;
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher, private readonly UserRepository $userRepository)
+    {
     }
 
     /**
@@ -39,7 +38,7 @@ class ChangePasswordService implements ChangePasswordServiceInterface
     public function changePassword(User $user, string $currentPassword, string $newPassword): void
     {
         if (!$this->passwordHasher->isPasswordValid($user, $currentPassword)) {
-            throw new InvalidCsrfTokenException('Invalid current password.');
+            throw new InvalidCsrfTokenException('Invalid current password');
         }
 
         $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));

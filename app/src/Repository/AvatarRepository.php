@@ -1,4 +1,7 @@
 <?php
+/**
+ * Avatar Repository
+ */
 
 namespace App\Repository;
 
@@ -9,11 +12,13 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Avatar>
+ * Class Avatar Repository
  */
 class AvatarRepository extends ServiceEntityRepository
 {
     /**
+     * Constructor.
+     *
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)

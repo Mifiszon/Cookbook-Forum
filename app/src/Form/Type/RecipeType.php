@@ -7,7 +7,6 @@ namespace App\Form\Type;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
-use App\Form\DataTransformer\IngredientDataTransformer;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +25,7 @@ class RecipeType extends AbstractType
      *
      * @param TagsDataTransformer $tagsDataTransformer Tags data transformer
      */
-    public function __construct(private readonly TagsDataTransformer $tagsDataTransformer, private  readonly IngredientDataTransformer $ingredientDataTransformer)
+    public function __construct(private readonly TagsDataTransformer $tagsDataTransformer)
     {
     }
 

@@ -32,15 +32,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     private const DEFAULT_ROUTE = 'recipe_index';
 
     /**
+     * Contructor.
+     *
      * @param UrlGeneratorInterface $urlGenerator
      * @param UserServiceInterface  $userService
      * @param TranslatorInterface   $translator
      */
-    public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly UserServiceInterface $userService,
-        private readonly TranslatorInterface $translator
-    ) {
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**
@@ -48,7 +47,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * matched in order to handle the login form submit.
      *
      * This default implementation handles all POST requests to the
-     * login path (@see getLoginUrl()).
+     * login path (@param Request $request Request.
+     *
+     * @return bool Type.
+     * @see getLoginUrl()).
      */
     public function supports(Request $request): bool
     {
@@ -66,7 +68,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * You may throw any AuthenticationException in this method in case of error (e.g.
      * a UserNotFoundException when the user cannot be found).
      *
-     * @throws AuthenticationException
+     * @param Request $request Request.
+     *
+     * @return Passport Passport.
      */
     public function authenticate(Request $request): Passport
     {
@@ -102,6 +106,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      *
      * If you return null, the current request will continue, and the user
      * will be authenticated. This makes sense, for example, with an API.
+     *
+     * @param Request        $request      Request.
+     * @param TokenInterface $token        Token.
+     * @param string         $firewallName Firewall.
+     *
+     * @return RedirectResponse|null Redircet Response.
      */
     public function onAuthenticationSuccess(
         Request $request,
@@ -117,6 +127,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     /**
      * Return the URL to the login page.
+     *
+     * @param Request $request Request
+     *
+     * @return string Type.
      */
     protected function getLoginUrl(Request $request): string
     {

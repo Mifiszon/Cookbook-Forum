@@ -1,11 +1,14 @@
 <?php
+/**
+* ChangePasswordServiceInterface.
+ */
 
 namespace App\Service;
 
 use App\Entity\User;
 
 /**
- *
+ * Class ChangePasswordServiceInterface.
  */
 interface ChangePasswordServiceInterface
 {

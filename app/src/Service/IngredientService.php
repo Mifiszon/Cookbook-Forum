@@ -1,13 +1,12 @@
 <?php
-
+/**
+ * IngredientService.
+ */
 namespace App\Service;
 
 use App\Entity\Ingredient;
 use App\Repository\IngredientRepository;
-use App\Repository\RecipeRepository;
-use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -33,10 +32,8 @@ class IngredientService implements IngredientServiceInterface
      * @param IngredientRepository $ingredientRepository Ingredient repository
      * @param PaginatorInterface   $paginator            Paginator
      */
-    public function __construct(
-        private readonly IngredientRepository $ingredientRepository,
-        private readonly PaginatorInterface $paginator
-    ) {
+    public function __construct(private readonly IngredientRepository $ingredientRepository, private readonly PaginatorInterface $paginator)
+    {
     }
 
     /**
@@ -59,7 +56,6 @@ class IngredientService implements IngredientServiceInterface
      * Save entity.
      *
      * @param Ingredient $ingredient Ingredient entity
-     *
      */
     public function save(Ingredient $ingredient): void
     {
@@ -96,7 +92,7 @@ class IngredientService implements IngredientServiceInterface
      *
      * @return Ingredient|null Ingredient entity
      *
-     * @throws NonUniqueResultException
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function findOneById(int $id): ?Ingredient
     {

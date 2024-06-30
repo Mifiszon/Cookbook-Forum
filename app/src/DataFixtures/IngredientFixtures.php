@@ -1,14 +1,17 @@
 <?php
-
+/**
+* Ingredeint Fixtures.
+ */
 
 namespace App\DataFixtures;
 
 use App\Entity\Ingredient;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 
 /**
+ * Class IngredientFixtures.
  *
+ * @psalm-suppress MissingConstructor
  */
 class IngredientFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
@@ -35,7 +38,7 @@ class IngredientFixtures extends AbstractBaseFixtures implements DependentFixtur
 
             $this->manager->persist($ingredient);
 
-            $this->addReference('ingredient_' . $data['name'], $ingredient);
+            $this->addReference('ingredient_'.$data['name'], $ingredient);
         }
 
         $this->manager->flush();
@@ -45,7 +48,7 @@ class IngredientFixtures extends AbstractBaseFixtures implements DependentFixtur
      * This method must return an array of fixtures classes
      * on which the implementing class depends on
      *
-     * @psalm-return array<class-string<FixtureInterface>>
+     * @return array
      */
     public function getDependencies(): array
     {

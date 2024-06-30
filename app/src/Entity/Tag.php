@@ -133,7 +133,9 @@ class Tag
     }
 
     /**
-     * @return string|null
+     * Getter for slug.
+     *
+     * @return string|null Slug.
      */
     public function getSlug(): ?string
     {
@@ -141,7 +143,11 @@ class Tag
     }
 
     /**
-     * @return $this
+     * Setter for slug.
+     *
+     * @param string $slug Slug.
+     *
+     * @return Tag Tag.
      */
     public function setSlug(string $slug): static
     {

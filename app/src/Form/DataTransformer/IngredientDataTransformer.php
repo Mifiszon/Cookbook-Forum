@@ -1,4 +1,7 @@
 <?php
+/**
+ * Ingredients Data Transformer.
+ */
 
 namespace App\Form\DataTransformer;
 

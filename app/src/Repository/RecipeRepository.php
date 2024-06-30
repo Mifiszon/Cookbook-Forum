@@ -74,8 +74,7 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @return int Number of recipes in category
      *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws ORMException ORMException.
      */
     public function countByCategory(Category $category): int
     {
@@ -93,8 +92,8 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @param Recipe $recipe Recipe entity
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws ORMException ORMException.
+     * @throws OptimisticLockException NonUniqueResultException.
      */
     public function save(Recipe $recipe): void
     {
@@ -108,8 +107,8 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @param Recipe $recipe Recipe entity
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * @throws ORMException ORMException.
+     * @throws OptimisticLockException NonUniqueResultException.
      */
     public function delete(Recipe $recipe): void
     {
@@ -119,26 +118,14 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('recipe');
-    }
-
-    /**
      * Count recipes by category.
      *
      * @param Tag $tag Category
      *
      * @return int Number of recipes in category
      *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws NoResultException NoResultException.
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function countByTag(Tag $tag): int
     {
@@ -171,6 +158,59 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find recipe by user.
+     *
+     * @param User $user User.
+     *
+     * @return array Array.
+     */
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('recipe')
+            ->andWhere('recipe.author = :author')
+            ->setParameter('author', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Find recipe by ingredinets.
+     *
+     * @param array $ingredients Ingredients.
+     *
+     * @return array Array.
+     */
+    public function findByIngredients(array $ingredients): array
+    {
+        if (empty($ingredients)) {
+            return [];
+        }
+
+        $queryBuilder = $this->createQueryBuilder('r');
+
+        foreach ($ingredients as $index => $ingredient) {
+            $queryBuilder
+                ->leftJoin('r.ingredients', 'i'.$index)
+                ->andWhere($queryBuilder->expr()->like('LOWER(i'.$index.'.name)', ':ingredient_'.$index))
+                ->setParameter('ingredient_'.$index, '%'.strtolower($ingredient).'%');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('recipe');
+    }
+
+    /**
      * Apply filters to paginated list.
      *
      * @param QueryBuilder         $queryBuilder Query builder
@@ -191,40 +231,5 @@ class RecipeRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder;
-    }
-
-    /**
-     * @param User $user
-     * @return array
-     */
-    public function findByUser(User $user): array
-    {
-        return $this->createQueryBuilder('recipe')
-            ->andWhere('recipe.author = :author')
-            ->setParameter('author', $user)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @param array $ingredients
-     * @return array
-     */
-    public function findByIngredients(array $ingredients): array
-    {
-        if (empty($ingredients)) {
-            return [];
-        }
-
-        $queryBuilder = $this->createQueryBuilder('r');
-
-        foreach ($ingredients as $index => $ingredient) {
-            $queryBuilder
-                ->leftJoin('r.ingredients', 'i' . $index)
-                ->andWhere($queryBuilder->expr()->like('LOWER(i' . $index . '.name)', ':ingredient_' . $index))
-                ->setParameter('ingredient_' . $index, '%' . strtolower($ingredient) . '%');
-        }
-
-        return $queryBuilder->getQuery()->getResult();
     }
 }

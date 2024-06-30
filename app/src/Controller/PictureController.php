@@ -29,10 +29,8 @@ class PictureController extends AbstractController
      * @param PictureServiceInterface $pictureService Picture service
      * @param TranslatorInterface     $translator     Translator
      */
-    public function __construct(
-        private readonly PictureServiceInterface $pictureService,
-        private readonly TranslatorInterface $translator
-    ) {
+    public function __construct(private readonly PictureServiceInterface $pictureService, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**

@@ -1,4 +1,7 @@
 <?php
+/**
+ * CategoryVoter.
+ */
 
 namespace App\Security\Voter;
 
@@ -8,7 +11,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- *
+ * Class CategoryVoter.
  */
 class CategoryVoter extends Voter
 {
@@ -19,7 +22,10 @@ class CategoryVoter extends Voter
     /**
      * Determines if the attribute and subject are supported by this voter.
      *
-     * @param mixed $subject The subject to secure, e.g. an object the user wants to access or any other PHP type
+     * @param string $attribute Attribute.
+     * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
+     *
+     * @return bool Type.
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -30,6 +36,12 @@ class CategoryVoter extends Voter
     /**
      * Perform a single access check operation on a given attribute, subject and token.
      * It is safe to assume that $attribute and $subject already passed the "supports()" method check.
+     *
+     * @param string         $attribute Attribute
+     * @param mixed          $subject   Subject
+     * @param TokenInterface $token     Token
+     *
+     * @return bool Type.
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
@@ -43,8 +55,11 @@ class CategoryVoter extends Voter
     }
 
     /**
-     * @param UserInterface $user
-     * @return bool
+     * is Admin ?
+     *
+     * @param UserInterface $user User.
+     *
+     * @return bool Type.
      */
     private function isAdmin(UserInterface $user): bool
     {

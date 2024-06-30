@@ -85,6 +85,8 @@ class Comment
     }
 
     /**
+     * Getter for content.
+     *
      * @return string|null
      */
     public function getContent(): ?string
@@ -93,7 +95,11 @@ class Comment
     }
 
     /**
-     * @return $this
+     * Setter for Content.
+     *
+     * @param string $content Contnet.
+     *
+     * @return $this This.
      */
     public function setContent(string $content): static
     {

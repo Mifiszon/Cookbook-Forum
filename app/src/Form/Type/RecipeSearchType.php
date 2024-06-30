@@ -1,4 +1,7 @@
 <?php
+/**
+ * Recipe Search Type.
+ */
 
 namespace App\Form\Type;
 
@@ -7,14 +10,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- *
+ * Class RecipeSearchType.
  */
 class RecipeSearchType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     * @return void
+     * Form builder.
+     *
+     * @param FormBuilderInterface $builder FormBuilderInterface
+     * @param array                $options Array.
+     *
+     * @return void Void.
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

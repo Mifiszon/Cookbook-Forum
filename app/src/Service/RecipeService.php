@@ -1,6 +1,6 @@
 <?php
 /**
- * Recipe service.
+* Recipe Service.
  */
 
 namespace App\Service;
@@ -21,18 +21,13 @@ use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Class RecipeService.
+ *
+ * This service handles operations related to recipes,
+ * including pagination, saving, deleting, ratings management,
+ * and searching recipes by ingredients.
  */
 class RecipeService implements RecipeServiceInterface
 {
-    /**
-     * Items per page.
-     *
-     * Use constants to define configuration options that rarely change instead
-     * of specifying them in app/config/config.yml.
-     * See https://symfony.com/doc/current/best_practices.html#configuration
-     *
-     * @constant int
-     */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
     /**
@@ -44,23 +39,18 @@ class RecipeService implements RecipeServiceInterface
      * @param RatingRepository         $ratingRepository Rating repository
      * @param RecipeRepository         $recipeRepository Recipe repository
      */
-    public function __construct(
-        private readonly CategoryServiceInterface $categoryService,
-        private readonly PaginatorInterface $paginator,
-        private readonly TagServiceInterface $tagService,
-        private readonly RatingRepository $ratingRepository,
-        private readonly RecipeRepository $recipeRepository
-    ) {
+    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly PaginatorInterface $paginator, private readonly TagServiceInterface $tagService, private readonly RatingRepository $ratingRepository, private readonly RecipeRepository $recipeRepository)
+    {
     }
 
     /**
-     * Get paginated list.
+     * Get paginated list of recipes.
      *
      * @param int                       $page    Page number
      * @param User|null                 $author  Recipes author
      * @param RecipeListInputFiltersDto $filters Filters
      *
-     * @return PaginationInterface<SlidingPagination> Paginated list
+     * @return PaginationInterface<SlidingPagination> Paginated list of recipes
      */
     public function getPaginatedList(int $page, ?User $author, RecipeListInputFiltersDto $filters): PaginationInterface
     {
@@ -80,11 +70,11 @@ class RecipeService implements RecipeServiceInterface
     }
 
     /**
-     * Save entity.
+     * Save a recipe entity.
      *
-     * @param Recipe $recipe Recipe entity
+     * @param Recipe $recipe Recipe entity to save
      *
-     * @throws ORMException
+     * @throws ORMException ORMException.
      */
     public function save(Recipe $recipe): void
     {
@@ -92,11 +82,11 @@ class RecipeService implements RecipeServiceInterface
     }
 
     /**
-     * Delete entity.
+     * Delete a recipe entity.
      *
-     * @param Recipe $recipe Recipe entity
+     * @param Recipe $recipe Recipe entity to delete
      *
-     * @throws ORMException
+     * @throws ORMException ORMException.
      */
     public function delete(Recipe $recipe): void
     {
@@ -104,24 +94,9 @@ class RecipeService implements RecipeServiceInterface
     }
 
     /**
-     * Prepare filters for the recipes list.
+     * Add a rating to a recipe.
      *
-     * @param RecipeListInputFiltersDto $filters Raw filters from request
-     *
-     * @return RecipeListFiltersDto Result filters
-     */
-    private function prepareFilters(RecipeListInputFiltersDto $filters): RecipeListFiltersDto
-    {
-        return new RecipeListFiltersDto(
-            null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
-            null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
-        );
-    }
-
-    /**
-     * Add rating to a recipe.
-     *
-     * @param Rating $rating
+     * @param Rating $rating Rating entity to add
      */
     public function addRating(Rating $rating): void
     {
@@ -129,12 +104,14 @@ class RecipeService implements RecipeServiceInterface
     }
 
     /**
-     * Calculate average rating for a recipe.
+     * Calculate average ratings for an array of recipes.
      *
-     * @param array $recipes
-     * @return array
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @param array $recipes Array of Recipe entities
+     *
+     * @return array Array of average ratings indexed by recipe ID
+     *
+     * @throws NoResultException NoResultException.
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function getAverageRatings(array $recipes): array
     {
@@ -142,12 +119,16 @@ class RecipeService implements RecipeServiceInterface
         foreach ($recipes as $recipe) {
             $averageRatings[$recipe->getId()] = $this->ratingRepository->getAverageRatingForRecipe($recipe);
         }
+
         return $averageRatings;
     }
 
     /**
-     * @param Recipe $recipe
-     * @return array
+     * Get ratings for a specific recipe.
+     *
+     * @param Recipe $recipe Recipe entity
+     *
+     * @return array Array of Rating entities
      */
     public function getRatingsForRecipe(Recipe $recipe): array
     {
@@ -155,11 +136,29 @@ class RecipeService implements RecipeServiceInterface
     }
 
     /**
-     * @param array $ingredients
-     * @return array
+     * Find recipes by a list of ingredients.
+     *
+     * @param array $ingredients Array of ingredient names
+     *
+     * @return array Array of Recipe entities
      */
     public function findRecipesByIngredients(array $ingredients): array
     {
         return $this->recipeRepository->findByIngredients($ingredients);
+    }
+
+    /**
+     * Prepare filters for the recipes list.
+     *
+     * @param RecipeListInputFiltersDto $filters Raw filters from request
+     *
+     * @return RecipeListFiltersDto Result filters for querying recipes
+     */
+    private function prepareFilters(RecipeListInputFiltersDto $filters): RecipeListFiltersDto
+    {
+        return new RecipeListFiltersDto(
+            null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
+            null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
+        );
     }
 }

@@ -8,7 +8,7 @@
       </trans-unit>
       <trans-unit id="label.id">
         <source>label.id</source>
-        <target>Id</target>
+        <target>ID</target>
       </trans-unit>
       <trans-unit id="label.title">
         <source>label.title</source>
@@ -20,7 +20,7 @@
       </trans-unit>
       <trans-unit id="message.empty_list">
         <source>message.empty_list</source>
-        <target>List is empty.</target>
+        <target>List is empty</target>
       </trans-unit>
       <trans-unit id="message.record_not_found">
         <source>message.record_not_found</source>
@@ -28,7 +28,7 @@
       </trans-unit>
       <trans-unit id="title.recipe_details">
         <source>title.recipe_details</source>
-        <target>Recipe details - %title%</target>
+        <target>Recipe Details - %title%</target>
       </trans-unit>
       <trans-unit id="title.recipe_list">
         <source>title.recipe_list</source>
@@ -36,11 +36,11 @@
       </trans-unit>
       <trans-unit id="label.created_at">
         <source>label.created_at</source>
-        <target>Created At</target>
+        <target>Created</target>
       </trans-unit>
       <trans-unit id="label.updated_at">
         <source>label.updated_at</source>
-        <target>Updated At</target>
+        <target>Updated</target>
       </trans-unit>
       <trans-unit id="action.view">
         <source>action.view</source>
@@ -48,11 +48,11 @@
       </trans-unit>
       <trans-unit id="action.show">
         <source>action.show</source>
-        <target>Show</target>
+        <target>View</target>
       </trans-unit>
       <trans-unit id="action.back_to_list">
         <source>action.back_to_list</source>
-        <target>Back to list</target>
+        <target>Return to List</target>
       </trans-unit>
       <trans-unit id="label.category">
         <source>label.category</source>
@@ -76,7 +76,7 @@
       </trans-unit>
       <trans-unit id="message.created_successfully">
         <source>message.created_successfully</source>
-        <target>Created Successfully</target>
+        <target>Created SUccessfully</target>
       </trans-unit>
       <trans-unit id="title.category_edit">
         <source>title.category_edit</source>
@@ -96,7 +96,7 @@
       </trans-unit>
       <trans-unit id="message.deleted_successfully">
         <source>message.deleted_successfully</source>
-        <target>Deleted Successfully</target>
+        <target>Deleted SUccessfully</target>
       </trans-unit>
       <trans-unit id="action.create">
         <source>action.create</source>
@@ -108,23 +108,23 @@
       </trans-unit>
       <trans-unit id="message.updated_successfully">
         <source>message.updated_successfully</source>
-        <target>Updated Successfully</target>
+        <target>Updated SUccessfully</target>
       </trans-unit>
       <trans-unit id="message.category_contains_recipes">
         <source>message.category_contains_recipes</source>
-        <target>Category Contains Recipes</target>
+        <target>Category Contians Recipes</target>
       </trans-unit>
       <trans-unit id="title.recipe_edit">
         <source>title.recipe_edit</source>
-        <target>Edit Recipe</target>
+        <target>Recipe Edit</target>
       </trans-unit>
       <trans-unit id="title.recipe_delete">
         <source>title.recipe_delete</source>
-        <target>Delete Recipe</target>
+        <target>Recipe Delete</target>
       </trans-unit>
       <trans-unit id="title.recipe_create">
         <source>title.recipe_create</source>
-        <target>Create Recipe</target>
+        <target>Recipe Create</target>
       </trans-unit>
       <trans-unit id="label.none">
         <source>label.none</source>
@@ -132,7 +132,7 @@
       </trans-unit>
       <trans-unit id="message.edited_successfully">
         <source>message.edited_successfully</source>
-        <target>Edited Successfully</target>
+        <target>Edited SUccessfully</target>
       </trans-unit>
       <trans-unit id="label.tag">
         <source>label.tag</source>
@@ -142,101 +142,104 @@
         <source>title.tag_list</source>
         <target>Tag List</target>
       </trans-unit>
+      <trans-unit id="title.tag_details">
+        <source>title.tag_details</source>
+        <target>Tag Details</target>
+      </trans-unit>
       <trans-unit id="title.tag_edit">
         <source>title.tag_edit</source>
         <target>Tag Edit</target>
       </trans-unit>
       <trans-unit id="title.tag_delete">
         <source>title.tag_delete</source>
-        <target>Tag Delete</target>
-      </trans-unit>
-      <trans-unit id="title.tag_create">
-        <source>title.tag_create</source>
-        <target>Tag Create</target>
-      </trans-unit>
-      <trans-unit id="message.tag_contains_recipes">
-        <source>message.tag_contains_recipes</source>
-        <target>Tag Contains Recipes</target>
-      </trans-unit>
-      <trans-unit id="action.login">
-        <source>action.login</source>
-        <target>Login</target>
-      </trans-unit>
-      <trans-unit id="action.logout">
-         <source>action.logout</source>
-         <target>Logout</target>
-      </trans-unit>
-      <trans-unit id="label.author">
-         <source>label.author</source>
-         <target>Author</target>
-      </trans-unit>
-      <trans-unit id="label.content">
-         <source>label.content</source>
-         <target>Content</target>
-      </trans-unit>
-      <trans-unit id="label.password">
-         <source>label.password</source>
-         <target>Password</target>
-      </trans-unit>
-      <trans-unit id="label.email">
+        <target>Delete Tag</target>
+      </trans-unit><trans-unit id="message.tag_contains_recipes">
+       <source>message.tag_contains_recipes</source>
+       <target>Tag Contians Recipes</target>
+     </trans-unit>
+         <trans-unit id="action.login">
+           <source>action.login</source>
+           <target>Login</target>
+         </trans-unit>
+         <trans-unit id="action.logout">
+            <source>action.logout</source>
+            <target>Logout</target>
+        </trans-unit>
+        <trans-unit id="label.author">
+          <source>label.author</source>
+          <target>Author</target>
+       </trans-unit>
+       <trans-unit id="label.content">
+          <source>label.content</source>
+          <target>Content</target>
+       </trans-unit>
+       <trans-unit id="Password">
+          <source>Password</source>
+          <target>Password</target>
+       </trans-unit>
+       <trans-unit id="Email">
+          <source>Email</source>
+          <target>Email</target>
+       </trans-unit>
+       <trans-unit id="Repeat Password">
+         <source>Repeat Password</source>
+         <target>Repeat Password</target>
+       </trans-unit>
+       <trans-unit id="label.CurrentPassword">
+         <source>label.CurrentPassword</source>
+         <target>Current Password</target>
+       </trans-unit>
+       <trans-unit id="label.NewPassword">
+         <source>label.NewPassword</source>
+         <target>New Password</target>
+       </trans-unit>
+       <trans-unit id="action.back_to_recipes">
+         <source>action.back_to_recipes</source>
+         <target>Return to Recipes</target>
+       </trans-unit>
+       <trans-unit id="title.user_delete">
+         <source>title.user_delete</source>
+         <target>Delete User</target>
+       </trans-unit>
+       <trans-unit id="title.user_edit">
+         <source>title.user_edit</source>
+         <target>Edit User</target>
+       </trans-unit>
+       <trans-unit id="title.user_list">
+         <source>title.user_list</source>
+         <target>Users List</target>
+       </trans-unit>
+       <trans-unit id="label.email">
          <source>label.email</source>
          <target>Email</target>
-      </trans-unit>
-      <trans-unit id="label.repeatPassword">
-        <source>label.repeatPassword</source>
-        <target>Repeat Password</target>
-      </trans-unit>
-      <trans-unit id="label.CurrentPassword">
-        <source>label.CurrentPassword</source>
-        <target>Current Password</target>
-      </trans-unit>
-      <trans-unit id="label.NewPassword">
-        <source>label.NewPassword</source>
-        <target>New Password</target>
-      </trans-unit>
-      <trans-unit id="action.back_to_recipes">
-        <source>action.back_to_recipes</source>
-        <target>Back To Recipes</target>
-      </trans-unit>
-      <trans-unit id="title.tag_details">
-        <source>title.tag_details</source>
-        <target>Tag Details</target>
-      </trans-unit>
-      <trans-unit id="title.user_delete">
-        <source>title.user_delete</source>
-        <target>User Delete</target>
-      </trans-unit>
-      <trans-unit id="title.user_edit">
-        <source>title.user_edit</source>
-        <target>User Edit</target>
-      </trans-unit>
-      <trans-unit id="title.user_list">
-        <source>title.user_list</source>
-        <target>User List</target>
-      </trans-unit>
-      <trans-unit id="label.roles">
-        <source>label.roles</source>
-        <target>Roles</target>
-      </trans-unit>
-      <trans-unit id="title.user_details">
-        <source>title.user_details</source>
-        <target>User Details</target>
+       </trans-unit>
+       <trans-unit id="title.tag_create">
+         <source>title.tag_create</source>
+         <target>Tag Create</target>
+       </trans-unit>
+       <trans-unit id="label.roles">
+         <source>label.roles</source>
+         <target>Roles</target>
+       </trans-unit>
+       <trans-unit id="title.user_details">
+         <source>title.user_details</source>
+         <target>User Details</target>
       </trans-unit>
       <trans-unit id="title.user_create">
         <source>title.user_create</source>
         <target>User Create</target>
       </trans-unit>
       <trans-unit id="action.show_users">
-        <source>action.show_users</source>
-        <target>Show Users</target>
+         <source>action.show_users</source>
+         <target>Users List</target>
       </trans-unit>
       <trans-unit id="action.show_tags">
         <source>action.show_tags</source>
-        <target>Show Tags</target>
+        <target>Tag List</target>
       </trans-unit>
       <trans-unit id="action.show_categories">
         <source>action.show_categories</source>
-        <target>Show Categories</target>
+        <target>Category List</target>
       </trans-unit>
       <trans-unit id="label.avatar">
         <source>label.avatar</source>
@@ -252,39 +255,39 @@
       </trans-unit>
       <trans-unit id="action.back_to_users">
         <source>action.back_to_users</source>
-        <target>Back to List</target>
+        <target>Return to List</target>
       </trans-unit>
       <trans-unit id="action.back_to_categories">
         <source>action.back_to_categories</source>
-        <target>Back to List</target>
+        <target>Return to List</target>
       </trans-unit>
       <trans-unit id="action.back_to_tags">
         <source>action.back_to_tags</source>
-        <target>Back to List</target>
+        <target>Return to List</target>
       </trans-unit>
       <trans-unit id="action.revoke">
-         <source>action.revoke</source>
-         <target>Revoke Admin Privileges</target>
+        <source>action.revoke</source>
+        <target>Revoke User</target>
       </trans-unit>
       <trans-unit id="action.promote">
-         <source>action.promote</source>
-         <target>Promote to Admin</target>
+        <source>action.promote</source>
+        <target>Promote User</target>
       </trans-unit>
       <trans-unit id="message.admin_privileges_revoked_from_user">
-         <source>message.admin_privileges_revoked_from_user</source>
-         <target>Admin privileges revoked from user.</target>
+        <source>message.admin_privileges_revoked_from_user</source>
+        <target>Admin Privileges Revoked form User</target>
       </trans-unit>
       <trans-unit id="message.user_promoted_to_admin">
-         <source>message.user_promoted_to_admin</source>
-         <target>User promoted to Admin.</target>
+        <source>message.user_promoted_to_admin</source>
+        <target>User Promoted to Admin</target>
       </trans-unit>
       <trans-unit id="Promote to Admin">
-         <source>Promote to Admin</source>
-         <target>Promote to Admin</target>
+        <source>Promote to Admin</source>
+        <target>Promote</target>
       </trans-unit>
       <trans-unit id="Revoke Admin Privileges">
-         <source>Revoke Admin Privileges</source>
-         <target>Revoke Admin Privileges</target>
+        <source>Revoke Admin Privileges</source>
+        <target>Revoke</target>
       </trans-unit>
       <trans-unit id="Obecne Hasło">
          <source>Obecne Hasło</source>
@@ -298,9 +301,21 @@
          <source>label.nickname</source>
          <target>Nickname</target>
       </trans-unit>
+      <trans-unit id="Hasło">
+         <source>Hasło</source>
+         <target>Password</target>
+      </trans-unit>
+      <trans-unit id="Powtórz Hasło">
+         <source>Powtórz Hasło</source>
+         <target>Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="Nick">
+         <source>Nick</source>
+         <target>Nick</target>
+      </trans-unit>
       <trans-unit id="message.no_access">
          <source>message.no_access</source>
-         <target>No access</target>
+         <target>No Access</target>
       </trans-unit>
       <trans-unit id="New Nickname">
          <source>New Nickname</source>
@@ -309,6 +324,138 @@
       <trans-unit id="message.comment_added_successfully">
          <source>message.comment_added_successfully</source>
          <target>Comment Added</target>
+      </trans-unit>
+      <trans-unit id="title.change_password">
+         <source>title.change_password</source>
+         <target>Password Change</target>
+      </trans-unit>
+      <trans-unit id="title.registration">
+         <source>title.registration</source>
+         <target>Register</target>
+      </trans-unit>
+      <trans-unit id="message.comment_deleted_successfully">
+         <source>message.comment_deleted_successfully</source>
+         <target>Comment Deleted</target>
+      </trans-unit>
+      <trans-unit id="action.block">
+         <source>action.block</source>
+         <target>Block</target>
+      </trans-unit>
+      <trans-unit id="action.unblock">
+         <source>action.unblock</source>
+         <target>Unblock</target>
+      </trans-unit>
+      <trans-unit id="message.user_blocked">
+         <source>message.user_blocked</source>
+         <target>Account Blocked</target>
+      </trans-unit>
+      <trans-unit id="message.user_unblocked">
+         <source>message.user_unblocked</source>
+         <target>Account Unlocked</target>
+      </trans-unit>
+      <trans-unit id="message.account_blocked">
+         <source>message.account_blocked</source>
+         <target>Your account is blocked</target>
+      </trans-unit>
+      <trans-unit id="message.added_successfully">
+         <source>message.added_successfully</source>
+         <target>Added SUccessfully !</target>
+      </trans-unit>
+      <trans-unit id="title.picture_create">
+         <source>title.picture_create</source>
+         <target>Add Picture</target>
+      </trans-unit>
+      <trans-unit id="title.picture_edit">
+         <source>title.picture_edit</source>
+         <target>Edit Picture</target>
+      </trans-unit>
+      <trans-unit id="label.picture">
+         <source>label.picture</source>
+         <target>Picture</target>
+      </trans-unit>
+      <trans-unit id="message.user_not_found">
+         <source>message.user_not_found</source>
+         <target>Your account doesn't exist</target>
+      </trans-unit>
+      <trans-unit id="label.average_rating">
+         <source>label.average_rating</source>
+         <target>Rate</target>
+      </trans-unit>
+      <trans-unit id="label.rate">
+         <source>label.rate</source>
+         <target>Rate Choice : </target>
+      </trans-unit>
+      <trans-unit id="1">
+          <source>1</source>
+          <target>1</target>
+      </trans-unit>
+      <trans-unit id="2">
+          <source>2</source>
+          <target>2</target>
+      </trans-unit>
+      <trans-unit id="3">
+          <source>3</source>
+          <target>3</target>
+      </trans-unit>
+      <trans-unit id="4">
+          <source>4</source>
+          <target>4</target>
+      </trans-unit>
+      <trans-unit id="5">
+          <source>5</source>
+          <target>5</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+          <source>message.form_error</source>
+          <target>Form error. Check yout data.</target>
+      </trans-unit>
+      <trans-unit id="label.password">
+          <source>label.password</source>
+          <target>Password</target>
+      </trans-unit>
+      <trans-unit id="label.repeatPassword">
+          <source>label.repeatPassword</source>
+          <target>Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="title.comment_create">
+        <source>title.comment_create</source>
+        <target>Add Comment</target>
+      </trans-unit>
+      <trans-unit id="title.recipe_search">
+        <source>title.recipe_search</source>
+        <target>Seatch for Recipe</target>
+      </trans-unit>
+      <trans-unit id="label.ingredients">
+       <source>label.ingredients</source>
+        <target>Ingredients</target>
+      </trans-unit>
+      <trans-unit id="Enter ingredients separated by commas">
+        <source>Enter ingredients separated by commas</source>
+        <target>Enter ingredients separated by commas</target>
+      </trans-unit>
+      <trans-unit id="title.recipe_search_results">
+        <source>title.recipe_search_results</source>
+        <target>Search Result</target>
+      </trans-unit>
+      <trans-unit id="action.search">
+        <source>action.search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="message.no_results_found">
+        <source>message.no_results_found</source>
+        <target>No results found</target>
+      </trans-unit>
+      <trans-unit id="Your password should be at least {{ limit }} characters">
+        <source>Your password should be at least {{ limit }} characters</source>
+      <target>Your password should be at least {{ limit }} characters</target>
+      </trans-unit>
+      <trans-unit id="There is already an account with this email">
+        <source>There is already an account with this email</source>
+        <target>There is already an account with this email</target>
+      </trans-unit>
+      <trans-unit id="Invalid current password">
+        <source>Invalid current password</source>
+        <target>Invalid current password</target>
       </trans-unit>
     </body>
   </file>

@@ -1,4 +1,7 @@
 <?php
+/**
+* User Repository.
+ */
 
 namespace App\Repository;
 
@@ -10,11 +13,13 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- *
+ * Class UserRepository.
  */
 class UserRepository extends ServiceEntityRepository
 {
     /**
+     * Contrsutcor.
+     *
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
@@ -23,6 +28,8 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
+     * Query all.
+     *
      * @return QueryBuilder
      */
     public function queryAll(): QueryBuilder
@@ -54,8 +61,12 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * Count admins.
+     *
+     * @return int Int.
+     *
+     * @throws NoResultException NoResultException.
+     * @throws NonUniqueResultException NonUniqueResultException.
      */
     public function countAdmins(): int
     {

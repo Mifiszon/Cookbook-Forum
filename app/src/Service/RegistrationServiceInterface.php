@@ -1,11 +1,14 @@
 <?php
+/**
+ * RegistrationServiceInterface.
+ */
 
 namespace App\Service;
 
 use App\Entity\User;
 
 /**
- *
+ * Class RegistrationServiceInterface.
  */
 interface RegistrationServiceInterface
 {

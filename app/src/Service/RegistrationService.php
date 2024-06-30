@@ -1,5 +1,7 @@
 <?php
-
+/**
+* RegistrationService.
+ */
 namespace App\Service;
 
 use App\Entity\User;
@@ -9,31 +11,25 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- *
+ * Class RegistrationService.
  */
 class RegistrationService implements RegistrationServiceInterface
 {
-    private UserPasswordHasherInterface $passwordHasher;
-    private UserRepository $userRepository;
-    private TokenStorageInterface $tokenStorage;
-
     /**
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @param UserRepository $userRepository
-     * @param TokenStorageInterface $tokenStorage
+     * Constructor.
+     *
+     * @param UserPasswordHasherInterface $passwordHasher Password Hasher.
+     * @param UserRepository              $userRepository User Repository.
+     * @param TokenStorageInterface       $tokenStorage   Token storage.
      */
-    public function __construct(
-        UserPasswordHasherInterface $passwordHasher,
-        UserRepository $userRepository,
-        TokenStorageInterface $tokenStorage
-    ) {
-        $this->passwordHasher = $passwordHasher;
-        $this->userRepository = $userRepository;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher, private readonly UserRepository $userRepository, private readonly TokenStorageInterface $tokenStorage)
+    {
     }
 
     /**
-     * @inheritDoc
+     * Register
+     *
+     * @param User $user User.
      */
     public function register(User $user): void
     {
@@ -47,4 +43,3 @@ class RegistrationService implements RegistrationServiceInterface
         $this->tokenStorage->setToken($token);
     }
 }
-

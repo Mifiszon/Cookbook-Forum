@@ -1,4 +1,7 @@
 <?php
+/**
+ * UserService.
+ */
 
 namespace App\Service;
 
@@ -9,21 +12,18 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- *
+ * Class UserService.
  */
 class UserService implements UserServiceInterface
 {
-    private UserRepository $userRepository;
-    private PaginatorInterface $paginator;
-
     /**
-     * @param UserRepository $userRepository
-     * @param PaginatorInterface $paginator
+     * Constructor.
+     *
+     * @param UserRepository     $userRepository User repository.
+     * @param PaginatorInterface $paginator      Paginator interface.
      */
-    public function __construct(UserRepository $userRepository, PaginatorInterface $paginator)
+    public function __construct(private readonly UserRepository $userRepository, private readonly PaginatorInterface $paginator)
     {
-        $this->userRepository = $userRepository;
-        $this->paginator = $paginator;
     }
 
     /**
@@ -45,11 +45,12 @@ class UserService implements UserServiceInterface
     /**
      * Save entity.
      *
-     * @param User $user User entity
+     * @param User        $user          User entity.
+     * @param string|null $plainPassword plain password.
      */
     public function save(User $user, string $plainPassword = null): void
     {
-        if ($plainPassword !== null) {
+        if (null !== $plainPassword) {
             $user->setPassword($plainPassword);
         }
         $this->userRepository->save($user);
@@ -66,9 +67,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
+     * Promote user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void void.
      */
     public function promoteUserToAdmin(User $user): void
     {
@@ -77,9 +80,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
+     * Revoke user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void void.
      */
     public function revokeAdminPrivilegesFromUser(User $user): void
     {
@@ -88,10 +93,13 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
+     * Last admin.
      *
-     * @return bool
-     * @throws ORMException
+     * @param User $user User.
+     *
+     * @return bool bool.
+     *
+     * @throws ORMException ORMException.
      */
     public function isLastAdmin(User $user): bool
     {
@@ -99,10 +107,12 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
-     * @param string $newNickname
+     * Change nickname.
      *
-     * @return void
+     * @param User   $user        User.
+     * @param string $newNickname newNickname.
+     *
+     * @return void Void.
      */
     public function changeNickname(User $user, string $newNickname): void
     {
@@ -111,9 +121,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
+     * Block user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void Void.
      */
     public function blockUser(User $user): void
     {
@@ -122,9 +134,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param User $user
+     * Unblock user.
      *
-     * @return void
+     * @param User $user User.
+     *
+     * @return void Void.
      */
     public function unblockUser(User $user): void
     {
@@ -133,20 +147,25 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * @param string $email
+     * is User bcloked.
      *
-     * @return bool
+     * @param string $email Email.
+     *
+     * @return bool Bool.
      */
     public function isUserBlocked(string $email): bool
     {
         $user = $this->userRepository->findOneBy(['email' => $email]);
+
         return $user ? $user->isBlocked() : false;
     }
 
     /**
-     * @param string $email
+     * Find user by email.
      *
-     * @return User|null
+     * @param string $email Email.
+     *
+     * @return User|null User.
      */
     public function findUserByEmail(string $email): ?User
     {

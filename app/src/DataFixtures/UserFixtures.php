@@ -13,6 +13,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * Class UserFixtures.
+ *
+ * @psalm-suppress MissingConstructor
  */
 class UserFixtures extends AbstractBaseFixtures
 {

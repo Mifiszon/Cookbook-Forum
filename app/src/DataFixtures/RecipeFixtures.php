@@ -1,6 +1,6 @@
 <?php
 /**
- * Dane fikstur dla przepisów.
+ * Rcipe Fixtures.
  */
 
 namespace App\DataFixtures;
@@ -15,11 +15,13 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 /**
+ * Class RecipeFixtures.
  *
+ * @psalm-suppress MissingConstructor
  */
 class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
-    private $sampleRecipes = [
+    private array $sampleRecipes = [
         [
             'title' => 'Spaghetti Carbonara',
             'content' => 'Ugotuj spaghetti. W misce wymieszaj jajka, ser i pieprz. Połącz z ugotowanym spaghetti i pancettą.',
@@ -139,7 +141,7 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
      * This method must return an array of fixtures classes
      * on which the implementing class depends on
      *
-     * @psalm-return array<class-string<FixtureInterface>>
+     * @return array
      */
     public function getDependencies(): array
     {

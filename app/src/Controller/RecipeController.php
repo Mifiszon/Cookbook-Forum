@@ -34,14 +34,12 @@ class RecipeController extends AbstractController
     /**
      * Constructor.
      *
-     * @param RecipeServiceInterface $recipeService Recipe service
-     * @param TranslatorInterface    $translator    Translator
+     * @param RecipeServiceInterface  $recipeService  Recipe service
+     * @param TranslatorInterface     $translator     Translator
+     * @param CommentServiceInterface $commentService Comment Service
      */
-    public function __construct(
-        private readonly RecipeServiceInterface $recipeService,
-        private readonly TranslatorInterface $translator,
-        private readonly CommentServiceInterface $commentService,
-    ) {
+    public function __construct(private readonly RecipeServiceInterface $recipeService, private readonly TranslatorInterface $translator, private readonly CommentServiceInterface $commentService)
+    {
     }
 
     /**
@@ -105,9 +103,10 @@ class RecipeController extends AbstractController
     /**
      * Rate action
      *
-     * @param Recipe $recipe
-     * @param Request $request
-     * @return Response
+     * @param Recipe  $recipe  Recipe
+     * @param Request $request Request
+     *
+     * @return Response Response
      */
     #[Route('/{id}/rate', name: 'recipe_rate', requirements: ['id' => '\d+'], methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
@@ -263,9 +262,12 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @param RecipeServiceInterface $recipeService
-     * @return Response
+     * Action seatch.
+     *
+     * @param Request                $request       Request.
+     * @param RecipeServiceInterface $recipeService Recipe service.
+     *
+     * @return Response Response.
      */
     #[Route('/search', name: 'recipe_search', methods: ['GET', 'POST'])]
     public function searchByIngredients(Request $request, RecipeServiceInterface $recipeService): Response
