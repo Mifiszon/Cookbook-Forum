@@ -29,14 +29,14 @@ class RatingRepository extends ServiceEntityRepository
     /**
      * Get average rating for recipe.
      *
-     * @param int $recipeId recipeId.
+     * @param mixed $recipeId RecipeId.
      *
      * @return float|bool|int|string|null Type.
      *
      * @throws NoResultException NoResultException.
      * @throws NonUniqueResultException NonUniqueResultException.
      */
-    public function getAverageRatingForRecipe(int $recipeId): float|bool|int|string|null
+    public function getAverageRatingForRecipe(mixed $recipeId): float|bool|int|string|null
     {
         return $this->createQueryBuilder('r')
             ->select('AVG(r.rating) as averageRating')

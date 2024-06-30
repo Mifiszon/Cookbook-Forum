@@ -64,13 +64,11 @@ class Recipe
 
     /**
      * Tags.
-     *
-     * @var ArrayCollection<int, Tag>
      */
     #[Assert\Valid]
     #[ORM\ManyToMany(targetEntity: Tag::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
     #[ORM\JoinTable(name: 'recipes_tags')]
-    private ArrayCollection $tags;
+    private $tags;
 
     /**
      * Author.

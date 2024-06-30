@@ -16,18 +16,15 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CommentRepository extends ServiceEntityRepository
 {
-    private PaginatorInterface $paginator;
-
     /**
      * Constructor.
      *
      * @param ManagerRegistry    $registry  Registry.
      * @param PaginatorInterface $paginator Paginator.
      */
-    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
+    public function __construct(ManagerRegistry $registry, private readonly PaginatorInterface $paginator)
     {
         parent::__construct($registry, Comment::class);
-        $this->paginator = $paginator;
     }
 
     /**
