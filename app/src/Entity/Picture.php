@@ -40,14 +40,14 @@ class Picture
     )]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Type(Recipe::class)]
-    private ?Recipe $recipe;
+    private ?Recipe $recipe = null;
 
     /**
      * Filename.
      */
     #[ORM\Column(type: 'string', length: 191)]
     #[Assert\Type('string')]
-    private ?string $filename;
+    private ?string $filename = null;
 
     /**
      * Getter for Id.

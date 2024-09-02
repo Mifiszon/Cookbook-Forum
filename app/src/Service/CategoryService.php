@@ -63,7 +63,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @param Category $category Category entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function save(Category $category): void
     {
@@ -73,10 +73,10 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Delete entity.
      *
-     * @param Category $category Category.
+     * @param Category $category category
      *
-     * @throws ORMException ORMException.
-     * @throws OptimisticLockException OptimisticLockException.
+     * @throws ORMException            ORMException
+     * @throws OptimisticLockException optimisticLockException
      */
     public function delete(Category $category): void
     {
@@ -90,14 +90,14 @@ class CategoryService implements CategoryServiceInterface
      *
      * @return bool Result
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function canBeDeleted(Category $category): bool
     {
         try {
             $result = $this->recipeRepository->countByCategory($category);
 
-            return !($result > 0);
+            return $result <= 0;
         } catch (NoResultException|NonUniqueResultException) {
             return false;
         }
@@ -110,7 +110,7 @@ class CategoryService implements CategoryServiceInterface
      *
      * @return Category|null Category entity
      *
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function findOneById(int $id): ?Category
     {

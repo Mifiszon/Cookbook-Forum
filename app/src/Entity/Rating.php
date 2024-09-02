@@ -1,7 +1,8 @@
 <?php
 /**
-* Rating Entity.
+ * Rating Entity.
  */
+
 namespace App\Entity;
 
 use App\Repository\RatingRepository;
@@ -45,7 +46,7 @@ class Rating
     /**
      * Getter for id.
      *
-     * @return int|null
+     * @return int|null Type
      */
     public function getId(): ?int
     {
@@ -55,7 +56,7 @@ class Rating
     /**
      * Getter for rating.
      *
-     * @return int|null
+     * @return int|null Type
      */
     public function getRating(): ?int
     {
@@ -65,9 +66,9 @@ class Rating
     /**
      * Setter for rating.
      *
-     * @param int $rating Rating.
+     * @param int $rating rating
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setRating(int $rating): static
     {
@@ -79,7 +80,7 @@ class Rating
     /**
      * Getter for user.
      *
-     * @return User|null
+     * @return User|null User
      */
     public function getUser(): ?User
     {
@@ -89,9 +90,9 @@ class Rating
     /**
      * Setter for user.
      *
-     * @param User|null $user User.
+     * @param User|null $user user
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setUser(?User $user): static
     {
@@ -103,7 +104,7 @@ class Rating
     /**
      * Getter for recipe.
      *
-     * @return Recipe|null
+     * @return Recipe|null Recipe
      */
     public function getRecipe(): ?Recipe
     {
@@ -113,9 +114,9 @@ class Rating
     /**
      * Setter for recipe.
      *
-     * @param Recipe|null $recipe Recipe.
+     * @param Recipe|null $recipe recipe
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setRecipe(?Recipe $recipe): static
     {

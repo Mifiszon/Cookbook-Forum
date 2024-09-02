@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,9 +18,9 @@ class SecurityController extends AbstractController
     /**
      * Action Login.
      *
-     * @param AuthenticationUtils $authenticationUtils AuthenticationUtils.
+     * @param AuthenticationUtils $authenticationUtils AuthenticationUtils
      *
-     * @return Response Response.
+     * @return Response Response
      */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -35,11 +34,11 @@ class SecurityController extends AbstractController
     /**
      * Action Logout.
      *
-     * @return void Void.
+     * @return void Void
      */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        throw new LogicException();
+        throw new \LogicException();
     }
 }

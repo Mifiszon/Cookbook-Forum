@@ -54,10 +54,8 @@ class RecipeController extends AbstractController
         name: 'recipe_index',
         methods: 'GET'
     )]
-    public function index(
-        #[MapQueryString(resolver: RecipeListInputFiltersDtoResolver::class)] RecipeListInputFiltersDto $filters,
-        #[MapQueryParameter] int $page = 1
-    ): Response {
+    public function index(#[MapQueryString(resolver: RecipeListInputFiltersDtoResolver::class)] RecipeListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
+    {
         /** @var User $user */
         $user = $this->getUser();
         $pagination = $this->recipeService->getPaginatedList(
@@ -101,7 +99,7 @@ class RecipeController extends AbstractController
     }
 
     /**
-     * Rate action
+     * Rate action.
      *
      * @param Recipe  $recipe  Recipe
      * @param Request $request Request
@@ -264,10 +262,10 @@ class RecipeController extends AbstractController
     /**
      * Action seatch.
      *
-     * @param Request                $request       Request.
-     * @param RecipeServiceInterface $recipeService Recipe service.
+     * @param Request                $request       request
+     * @param RecipeServiceInterface $recipeService recipe service
      *
-     * @return Response Response.
+     * @return Response response
      */
     #[Route('/search', name: 'recipe_search', methods: ['GET', 'POST'])]
     public function searchByIngredients(Request $request, RecipeServiceInterface $recipeService): Response
@@ -278,7 +276,7 @@ class RecipeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $ingredients = $form->get('ingredients')->getData();
 
-            $ingredientsArray = array_map('trim', explode(',', $ingredients));
+            $ingredientsArray = array_map('trim', explode(',', (string) $ingredients));
 
             $recipes = $recipeService->findRecipesByIngredients($ingredientsArray);
 

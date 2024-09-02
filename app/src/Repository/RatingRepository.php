@@ -1,6 +1,6 @@
 <?php
 /**
-* Rating Repository.
+ * Rating Repository.
  */
 
 namespace App\Repository;
@@ -19,7 +19,7 @@ class RatingRepository extends ServiceEntityRepository
     /**
      * Constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,12 +29,12 @@ class RatingRepository extends ServiceEntityRepository
     /**
      * Get average rating for recipe.
      *
-     * @param mixed $recipeId RecipeId.
+     * @param mixed $recipeId recipeId
      *
-     * @return float|bool|int|string|null Type.
+     * @return float|bool|int|string|null type
      *
-     * @throws NoResultException NoResultException.
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NoResultException        noResultException
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function getAverageRatingForRecipe(mixed $recipeId): float|bool|int|string|null
     {
@@ -49,7 +49,7 @@ class RatingRepository extends ServiceEntityRepository
     /**
      * Save rating.
      *
-     * @param Rating $rating
+     * @param Rating $rating Rating
      */
     public function saveRating(Rating $rating): void
     {

@@ -19,8 +19,8 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Constructor.
      *
-     * @param ManagerRegistry    $registry  Registry.
-     * @param PaginatorInterface $paginator Paginator.
+     * @param ManagerRegistry    $registry  registry
+     * @param PaginatorInterface $paginator paginator
      */
     public function __construct(ManagerRegistry $registry, private readonly PaginatorInterface $paginator)
     {
@@ -30,7 +30,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Save Comment.
      *
-     * @param Comment $comment Comment.
+     * @param Comment $comment comment
      */
     public function save(Comment $comment): void
     {
@@ -41,7 +41,7 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Delete comment.
      *
-     * @param Comment $comment Comment.
+     * @param Comment $comment comment
      */
     public function delete(Comment $comment): void
     {
@@ -52,11 +52,11 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * Pobranie stronicowanej listy komentarzy dla przepisu.
      *
-     * @param int $recipeId RecipeId.
-     * @param int $page     Page.
-     * @param int $limit    Limit.
+     * @param int $recipeId recipeId
+     * @param int $page     page
+     * @param int $limit    limit
      *
-     * @return PaginationInterface Pagination Interface.
+     * @return PaginationInterface pagination Interface
      */
     public function getPaginatedCommentsForRecipe(int $recipeId, int $page, int $limit): PaginationInterface
     {

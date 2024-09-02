@@ -1,6 +1,6 @@
 <?php
 /**
-* RevokeType.
+ * RevokeType.
  */
 
 namespace App\Form\Type\Privileges;
@@ -17,10 +17,10 @@ class RevokeType extends AbstractType
     /**
      * Form Builer.
      *
-     * @param FormBuilderInterface $builder Builder.
-     * @param array $options Options array.
+     * @param FormBuilderInterface $builder builder
+     * @param array                $options options array
      *
-     * @return void Void.
+     * @return void void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

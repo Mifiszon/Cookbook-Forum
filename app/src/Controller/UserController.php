@@ -1,6 +1,6 @@
 <?php
 /**
- * User Controller
+ * User Controller.
  */
 
 namespace App\Controller;
@@ -18,22 +18,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class UserController
+ * Class UserController.
  */
-#[Route('/user')]
+#[\Symfony\Component\Routing\Attribute\Route('/user')]
 class UserController extends AbstractController
 {
     /**
      * Constructor.
      *
-     * @param UserServiceInterface        $userService        User service.
-     * @param TranslatorInterface         $translator         Translator.
-     * @param UserPasswordHasherInterface $userPasswordHasher Password Hasher.
+     * @param UserServiceInterface        $userService        user service
+     * @param TranslatorInterface         $translator         translator
+     * @param UserPasswordHasherInterface $userPasswordHasher password Hasher
      */
     public function __construct(private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator, private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
@@ -42,11 +41,11 @@ class UserController extends AbstractController
     /**
      * Action index.
      *
-     * @param int $page Page.
+     * @param int $page Page
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route(name: 'user_index', methods: 'GET')]
+    #[\Symfony\Component\Routing\Attribute\Route(name: 'user_index', methods: 'GET')]
     #[IsGranted('ROLE_USER')]
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
@@ -58,11 +57,11 @@ class UserController extends AbstractController
     /**
      * Action show.
      *
-     * @param User $user User.
+     * @param User $user User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
     #[IsGranted('ROLE_ADMIN')]
     public function show(User $user): Response
     {
@@ -74,11 +73,11 @@ class UserController extends AbstractController
     /**
      * Action Create.
      *
-     * @param Request $request Request.
+     * @param Request $request Request
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/create', name: 'user_create', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/create', name: 'user_create', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request): Response
     {
@@ -109,12 +108,12 @@ class UserController extends AbstractController
     /**
      * Action Edit.
      *
-     * @param Request $request Request.
-     * @param User    $user    User.
+     * @param Request $request Request
+     * @param User    $user    User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'POST', 'PUT'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'POST', 'PUT'])]
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, User $user): Response
     {
@@ -146,12 +145,12 @@ class UserController extends AbstractController
     /**
      * Action Delete.
      *
-     * @param Request $request Request.
-     * @param User    $user    User.
+     * @param Request $request Request
+     * @param User    $user    User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'DELETE'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: ['GET', 'DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, User $user): Response
     {
@@ -182,12 +181,12 @@ class UserController extends AbstractController
     /**
      * Action Promote.
      *
-     * @param Request $request Request.
-     * @param User    $user    user.
+     * @param Request $request Request
+     * @param User    $user    user
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/promote', name: 'user_promote', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/promote', name: 'user_promote', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function promoteUserToAdmin(Request $request, User $user): Response
     {
@@ -210,12 +209,12 @@ class UserController extends AbstractController
     /**
      * Action Revoke.
      *
-     * @param Request $request Request.
-     * @param User    $user    User.
+     * @param Request $request Request
+     * @param User    $user    User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/revoke', name: 'user_revoke', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/revoke', name: 'user_revoke', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function revokeAdminPrivilegesFromUser(Request $request, User $user): Response
     {
@@ -244,11 +243,11 @@ class UserController extends AbstractController
     /**
      * Action change nickname.
      *
-     * @param Request $request Request.
+     * @param Request $request Request
      *
-     * @return Response response.
+     * @return Response response
      */
-    #[Route('/change_nickname', name: 'change_nickname', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/change_nickname', name: 'change_nickname', methods: ['GET', 'POST'])]
     public function changeNickname(Request $request): Response
     {
         $user = $this->getUser();
@@ -272,11 +271,11 @@ class UserController extends AbstractController
     /**
      * Method block.
      *
-     * @param User $user User.
+     * @param User $user User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/block', name: 'user_block', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/block', name: 'user_block', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function blockUser(User $user): Response
     {
@@ -287,13 +286,13 @@ class UserController extends AbstractController
     }
 
     /**
-     * Action Unblock
+     * Action Unblock.
      *
-     * @param User $user User.
+     * @param User $user User
      *
-     * @return Response Response.
+     * @return Response Response
      */
-    #[Route('/{id}/unblock', name: 'user_unblock', methods: ['POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/unblock', name: 'user_unblock', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function unblockUser(User $user): Response
     {

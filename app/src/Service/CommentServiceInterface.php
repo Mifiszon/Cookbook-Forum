@@ -1,7 +1,8 @@
 <?php
 /**
-* CommentServiceInterface.
+ * CommentServiceInterface.
  */
+
 namespace App\Service;
 
 use App\Entity\Comment;
@@ -17,7 +18,7 @@ interface CommentServiceInterface
      *
      * @param Comment $comment Comment
      *
-     * @return void Void.
+     * @return void void
      */
     public function add(Comment $comment): void;
 
@@ -26,7 +27,7 @@ interface CommentServiceInterface
      *
      * @param Comment $comment Comment
      *
-     * @return void Void.
+     * @return void void
      */
     public function delete(Comment $comment): void;
 

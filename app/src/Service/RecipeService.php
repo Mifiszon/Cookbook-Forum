@@ -1,6 +1,6 @@
 <?php
 /**
-* Recipe Service.
+ * Recipe Service.
  */
 
 namespace App\Service;
@@ -56,7 +56,7 @@ class RecipeService implements RecipeServiceInterface
     {
         $filters = $this->prepareFilters($filters);
 
-        if ($author) {
+        if ($author instanceof User) {
             $query = $this->recipeRepository->queryByAuthor($author, $filters);
         } else {
             $query = $this->recipeRepository->queryAll($filters);
@@ -74,7 +74,7 @@ class RecipeService implements RecipeServiceInterface
      *
      * @param Recipe $recipe Recipe entity to save
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function save(Recipe $recipe): void
     {
@@ -86,7 +86,7 @@ class RecipeService implements RecipeServiceInterface
      *
      * @param Recipe $recipe Recipe entity to delete
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function delete(Recipe $recipe): void
     {
@@ -110,8 +110,8 @@ class RecipeService implements RecipeServiceInterface
      *
      * @return array Array of average ratings indexed by recipe ID
      *
-     * @throws NoResultException NoResultException.
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NoResultException        noResultException
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function getAverageRatings(array $recipes): array
     {

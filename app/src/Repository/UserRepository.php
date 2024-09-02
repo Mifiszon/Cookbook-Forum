@@ -1,6 +1,6 @@
 <?php
 /**
-* User Repository.
+ * User Repository.
  */
 
 namespace App\Repository;
@@ -20,7 +20,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Contrsutcor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,7 +30,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Query all.
      *
-     * @return QueryBuilder
+     * @return QueryBuilder QueryBuilder
      */
     public function queryAll(): QueryBuilder
     {
@@ -63,10 +63,10 @@ class UserRepository extends ServiceEntityRepository
     /**
      * Count admins.
      *
-     * @return int Int.
+     * @return int Int
      *
-     * @throws NoResultException NoResultException.
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NoResultException        NoResultException
+     * @throws NonUniqueResultException NonUniqueResultException
      */
     public function countAdmins(): int
     {

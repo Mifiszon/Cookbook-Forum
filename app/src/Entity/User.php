@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
 #[ORM\UniqueConstraint(name: 'email_idx', columns: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email;
+    private ?string $email = null;
 
     /**
      * Roles.
@@ -51,17 +51,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    private ?string $password;
+    private ?string $password = null;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
      */
     #[Assert\NotBlank(groups: ['registration'])]
     #[Assert\Length(min: 6, groups: ['registration'])]
-    private ?string $plainPassword;
+    private ?string $plainPassword = null;
 
     /**
-    * Avatar.
+     * Avatar.
      */
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Avatar $avatar = null;
@@ -106,7 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for isBlocked.
      *
-     * @return bool
+     * @return bool Type
      */
     public function getIsBlocked(): bool
     {
@@ -114,11 +114,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Setter for isBlocked
+     * Setter for isBlocked.
      *
-     * @param bool $isBlocked isBlocked.
+     * @param bool $isBlocked isBlocked
      *
-     * @return $this This.
+     * @return $this This
      */
     public function setIsBlocked(bool $isBlocked): self
     {
@@ -152,7 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string User identifier
      *
-     * @see UserInterface UserInterface.
+     * @see UserInterface
      */
     public function getUserIdentifier(): string
     {
@@ -176,7 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return array<int, string> Roles
      *
-     * @see UserInterface UserInterface.
+     * @see UserInterface
      */
     public function getRoles(): array
     {
@@ -190,7 +190,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for roles.
      *
-     * @param array<int, string> $roles Roles.
+     * @param array<int, string> $roles Roles
      */
     public function setRoles(array $roles): void
     {
@@ -200,7 +200,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for password.
      *
-     * @return string|null Password.
+     * @return string|null Password
      *
      * @see PasswordAuthenticatedUserInterface
      */
@@ -212,7 +212,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for password.
      *
-     * @param string $password User password.
+     * @param string $password User password
      */
     public function setPassword(string $password): void
     {
@@ -223,7 +223,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
-     * @see UserInterface UserInterface.
+     * @return string|null Type
+     *
+     * @see UserInterface
      */
     public function getSalt(): ?string
     {
@@ -233,7 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for plainPassword.
      *
-     * @return string|null Plain password.
+     * @return string|null Plain password
      */
     public function getPlainPassword(): ?string
     {
@@ -243,7 +245,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for plainPassword.
      *
-     * @param string|null $plainPassword Plain password.
+     * @param string|null $plainPassword Plain password
      */
     public function setPlainPassword(?string $plainPassword): void
     {
@@ -253,7 +255,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Removes sensitive information from the token.
      *
-     * @see UserInterface UserInterface.
+     * @see UserInterface
      */
     public function eraseCredentials(): void
     {
@@ -263,7 +265,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for avatar.
      *
-     * @return Avatar|null Avatar.
+     * @return Avatar|null Avatar
      */
     public function getAvatar(): ?Avatar
     {
@@ -273,9 +275,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for avatar.
      *
-     * @param Avatar $avatar Avatar.
+     * @param Avatar $avatar Avatar
      *
-     * @return $this This.
+     * @return $this This
      */
     public function setAvatar(Avatar $avatar): static
     {
@@ -312,7 +314,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for nickname.
      *
-     * @return string|null
+     * @return string|null Type
      */
     public function getNickname(): ?string
     {
@@ -322,9 +324,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Setter for nickname.
      *
-     * @param string $nickname Nickname.
+     * @param string $nickname Nickname
      *
-     * @return $this This.
+     * @return $this This
      */
     public function setNickname(string $nickname): static
     {
@@ -335,6 +337,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Check if user is an admin.
+     *
+     * @return bool Type
      */
     public function isAdmin(): bool
     {
@@ -344,7 +348,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Getter for Ratings.
      *
-     * @return Collection<int, Rating>
+     * @return Collection<int, Rating> Ratings
      */
     public function getRatings(): Collection
     {
@@ -354,9 +358,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Adds ratings.
      *
-     * @param Rating $rating Rating.
+     * @param Rating $rating Rating
      *
-     * @return $this This.
+     * @return $this This
      */
     public function addRating(Rating $rating): static
     {
@@ -369,19 +373,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Removes rating,
+     * Removes rating.
      *
-     * @param Rating $rating Rating.
+     * @param Rating $rating Rating
      *
-     * @return $this This.
+     * @return $this This
      */
     public function removeRating(Rating $rating): static
     {
-        if ($this->ratings->removeElement($rating)) {
-            // set the owning side to null (unless already changed)
-            if ($rating->getUser() === $this) {
-                $rating->setUser(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->ratings->removeElement($rating) && $rating->getUser() === $this) {
+            $rating->setUser(null);
         }
 
         return $this;

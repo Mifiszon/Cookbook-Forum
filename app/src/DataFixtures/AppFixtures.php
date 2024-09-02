@@ -1,7 +1,8 @@
 <?php
 /**
-* App Fixtures.
+ * App Fixtures.
  */
+
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,6 +15,8 @@ class AppFixtures extends Fixture
 {
     /**
      * Load data fixtures with the passed EntityManager.
+     *
+     * @param ObjectManager $manager objectManager
      */
     public function load(ObjectManager $manager): void
     {

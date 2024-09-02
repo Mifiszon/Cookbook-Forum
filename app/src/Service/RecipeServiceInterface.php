@@ -45,25 +45,25 @@ interface RecipeServiceInterface
     /**
      * Add rating.
      *
-     * @param Rating $rating Rating.
+     * @param Rating $rating rating
      *
-     * @return void Void.
+     * @return void void
      */
     public function addRating(Rating $rating): void;
 
     /**
      * Get average rating.
      *
-     * @param array $recipes Recipes.
+     * @param array $recipes recipes
      *
-     * @return array Array.
+     * @return array array
      */
     public function getAverageRatings(array $recipes): array;
 
     /**
      * Get ratings for recipe.
      *
-     * @param Recipe $recipe Recipe.
+     * @param Recipe $recipe recipe
      *
      * @return array Array
      */
@@ -72,9 +72,9 @@ interface RecipeServiceInterface
     /**
      * Find recipes by ingreinets.
      *
-     * @param array $ingredients Ingredients.
+     * @param array $ingredients ingredients
      *
-     * @return array Array.
+     * @return array array
      */
     public function findRecipesByIngredients(array $ingredients): array;
 }

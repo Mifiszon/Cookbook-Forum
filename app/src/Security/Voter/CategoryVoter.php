@@ -22,10 +22,10 @@ class CategoryVoter extends Voter
     /**
      * Determines if the attribute and subject are supported by this voter.
      *
-     * @param string $attribute Attribute.
+     * @param string $attribute Attribute
      * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
      *
-     * @return bool Type.
+     * @return bool Type
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -41,7 +41,7 @@ class CategoryVoter extends Voter
      * @param mixed          $subject   Subject
      * @param TokenInterface $token     Token
      *
-     * @return bool Type.
+     * @return bool Type
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
@@ -57,9 +57,9 @@ class CategoryVoter extends Voter
     /**
      * is Admin ?
      *
-     * @param UserInterface $user User.
+     * @param UserInterface $user User
      *
-     * @return bool Type.
+     * @return bool Type
      */
     private function isAdmin(UserInterface $user): bool
     {

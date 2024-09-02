@@ -6,7 +6,6 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,17 +31,17 @@ class Recipe
      * Created at.
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Title.
@@ -51,7 +50,7 @@ class Recipe
     #[Assert\Type('string')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255)]
-    private ?string $title;
+    private ?string $title = null;
 
     /**
      * Category.
@@ -60,7 +59,7 @@ class Recipe
     #[Assert\Type(Category::class)]
     #[Assert\NotBlank]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category;
+    private ?Category $category = null;
 
     /**
      * Tags.
@@ -77,7 +76,7 @@ class Recipe
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
-    private ?User $author;
+    private ?User $author = null;
 
     /**
      * Content.
@@ -103,7 +102,7 @@ class Recipe
      * averageRating.
      */
     #[ORM\Column(type: 'float', nullable: true)]
-    private ?float $averageRating;
+    private ?float $averageRating = null;
 
     /**
      * Ingredient.
@@ -111,13 +110,13 @@ class Recipe
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, mappedBy: 'recipe', cascade: ['persist'])]
-    #[ORM\JoinTable(name: "ingredient_recipe")]
+    #[ORM\JoinTable(name: 'ingredient_recipe')]
     private Collection $ingredients;
 
     /**
      * Getter for avaerageRating.
      *
-     * @return float|null
+     * @return float|null Type
      */
     public function getAverageRating(): ?float
     {
@@ -127,9 +126,9 @@ class Recipe
     /**
      * Setter for averageRating.
      *
-     * @param float|null $averageRating averateRating.
+     * @param float|null $averageRating averateRating
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setAverageRating(?float $averageRating): self
     {
@@ -161,9 +160,9 @@ class Recipe
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -171,9 +170,9 @@ class Recipe
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -181,9 +180,9 @@ class Recipe
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -191,9 +190,9 @@ class Recipe
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable $updatedAt Updated at
+     * @param \DateTimeImmutable $updatedAt Updated at
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -273,7 +272,7 @@ class Recipe
     /**
      * Getter for author.
      *
-     * @return User|null
+     * @return User|null User
      */
     public function getAuthor(): ?User
     {
@@ -283,9 +282,9 @@ class Recipe
     /**
      * Setter for author.
      *
-     * @param User|null $author Author.
+     * @param User|null $author author
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setAuthor(?User $author): static
     {
@@ -297,7 +296,7 @@ class Recipe
     /**
      * Getter for Content.
      *
-     * @return string|null
+     * @return string|null Type
      */
     public function getContent(): ?string
     {
@@ -307,9 +306,9 @@ class Recipe
     /**
      * Setter for Content.
      *
-     * @param string|null $content Content.
+     * @param string|null $content content
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setContent(?string $content): static
     {
@@ -321,7 +320,7 @@ class Recipe
     /**
      * Getter for picture.
      *
-     * @return Picture|null
+     * @return Picture|null Picture
      */
     public function getPicture(): ?Picture
     {
@@ -331,9 +330,9 @@ class Recipe
     /**
      * Setter for picture.
      *
-     * @param Picture $picture Picture.
+     * @param Picture $picture picture
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setPicture(Picture $picture): static
     {
@@ -360,9 +359,9 @@ class Recipe
     /**
      * Adds ratings.
      *
-     * @param Rating $rating Rating.
+     * @param Rating $rating rating
      *
-     * @return $this This.
+     * @return $this this
      */
     public function addRating(Rating $rating): static
     {
@@ -377,17 +376,15 @@ class Recipe
     /**
      * Removes ratings.
      *
-     * @param Rating $rating Rating.
+     * @param Rating $rating rating
      *
-     * @return $this This.
+     * @return $this this
      */
     public function removeRating(Rating $rating): static
     {
-        if ($this->ratings->removeElement($rating)) {
-            // set the owning side to null (unless already changed)
-            if ($rating->getRecipe() === $this) {
-                $rating->setRecipe(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->ratings->removeElement($rating) && $rating->getRecipe() === $this) {
+            $rating->setRecipe(null);
         }
 
         return $this;
@@ -406,9 +403,9 @@ class Recipe
     /**
      * This method adds an ingredient to the recipe.
      *
-     * @param Ingredient $ingredient Ingredient.
+     * @param Ingredient $ingredient ingredient
      *
-     * @return $this Description of what this method returns.
+     * @return $this description of what this method returns
      */
     public function addIngredient(Ingredient $ingredient): static
     {
@@ -423,9 +420,9 @@ class Recipe
     /**
      * Removes ingredients.
      *
-     * @param Ingredient $ingredient Ingredient.
+     * @param Ingredient $ingredient ingredient
      *
-     * @return $this This.
+     * @return $this this
      */
     public function removeIngredient(Ingredient $ingredient): static
     {

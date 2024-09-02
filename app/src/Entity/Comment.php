@@ -6,7 +6,6 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,9 +29,9 @@ class Comment
      * Created at.
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Created at.
@@ -67,9 +66,9 @@ class Comment
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -77,9 +76,9 @@ class Comment
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable|null $createdAt Created at
+     * @param \DateTimeImmutable|null $createdAt Created at
      */
-    public function setCreatedAt(?DateTimeImmutable $createdAt): void
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -87,7 +86,7 @@ class Comment
     /**
      * Getter for content.
      *
-     * @return string|null
+     * @return string|null Type
      */
     public function getContent(): ?string
     {
@@ -97,9 +96,9 @@ class Comment
     /**
      * Setter for Content.
      *
-     * @param string $content Contnet.
+     * @param string $content Contnet
      *
-     * @return $this This.
+     * @return $this This
      */
     public function setContent(string $content): static
     {

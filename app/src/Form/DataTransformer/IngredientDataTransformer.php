@@ -64,7 +64,7 @@ class IngredientDataTransformer implements DataTransformerInterface
         foreach ($ingredientNames as $ingredientName) {
             if ('' !== trim($ingredientName)) {
                 $ingredient = $this->ingredientService->findOneByName(strtolower($ingredientName));
-                if (null === $ingredient) {
+                if (!$ingredient instanceof Ingredient) {
                     $ingredient = new Ingredient();
                     $ingredient->setName($ingredientName);
 

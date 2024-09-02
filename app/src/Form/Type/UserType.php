@@ -25,10 +25,10 @@ class UserType extends AbstractType
     /**
      * Form builder.
      *
-     * @param FormBuilderInterface $builder FormBuilderInterface.
-     * @param array                $options Options array.
+     * @param FormBuilderInterface $builder FormBuilderInterface
+     * @param array                $options Options array
      *
-     * @return void Void.
+     * @return void Void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -57,8 +57,6 @@ class UserType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096,
                     ]),
                 ],
             ]);
@@ -74,9 +72,9 @@ class UserType extends AbstractType
     /**
      * Config Options.
      *
-     * @param OptionsResolver $resolver Resolver.
+     * @param OptionsResolver $resolver Resolver
      *
-     * @return void Void.
+     * @return void Void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -84,6 +82,7 @@ class UserType extends AbstractType
             'data_class' => User::class,
             'is_edit' => false,
             'change_password' => false,
+            'validation_groups' => ['registration'],
         ]);
     }
 }

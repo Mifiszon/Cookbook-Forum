@@ -1,6 +1,6 @@
 <?php
 /**
-* ChangePasswordServiceInterface.
+ * ChangePasswordServiceInterface.
  */
 
 namespace App\Service;

@@ -1,6 +1,6 @@
 <?php
 /**
-* Comment Service.
+ * Comment Service.
  */
 
 namespace App\Service;
@@ -19,7 +19,7 @@ class CommentService implements CommentServiceInterface
     /**
      * Constructor.
      *
-     * @param CommentRepository  $commentRepository  CommentRepository.
+     * @param CommentRepository $commentRepository commentRepository
      */
     public function __construct(private readonly CommentRepository $commentRepository)
     {
@@ -30,7 +30,7 @@ class CommentService implements CommentServiceInterface
      *
      * @param Comment $comment Comment
      *
-     * @return void Void.
+     * @return void void
      */
     public function add(Comment $comment): void
     {
@@ -42,7 +42,7 @@ class CommentService implements CommentServiceInterface
      *
      * @param Comment $comment Comment
      *
-     * @return void Void.
+     * @return void void
      */
     public function delete(Comment $comment): void
     {
@@ -52,10 +52,10 @@ class CommentService implements CommentServiceInterface
     /**
      * Pobranie stronicowanej listy komentarzy dla przepisu.
      *
-     * @param int $recipeId RecipeId.
-     * @param int $page     Page.
+     * @param int $recipeId recipeId
+     * @param int $page     page
      *
-     * @return PaginationInterface Pagination Interface.
+     * @return PaginationInterface pagination Interface
      */
     public function getPaginatedCommentsForRecipe(int $recipeId, int $page): PaginationInterface
     {

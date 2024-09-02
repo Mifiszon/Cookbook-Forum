@@ -445,10 +445,6 @@
         <source>message.no_results_found</source>
         <target>Brak wyników wyszukiwania</target>
       </trans-unit>
-      <trans-unit id="Your password should be at least {{ limit }} characters">
-        <source>Your password should be at least {{ limit }} characters</source>
-        <target>Twoje hasło powinno mieć minimum {{ limit } znaków</target>
-      </trans-unit>
       <trans-unit id="There is already an account with this email">
         <source>There is already an account with this email</source>
         <target>Konto z tym emailem już istnieje</target>

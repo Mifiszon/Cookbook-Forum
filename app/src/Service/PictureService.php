@@ -36,7 +36,7 @@ class PictureService implements PictureServiceInterface
      * @param Picture      $picture      Picture entity
      * @param Recipe       $recipe       Recipe entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function update(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
     {
@@ -58,7 +58,7 @@ class PictureService implements PictureServiceInterface
      * @param Picture      $picture      Picture entity
      * @param Recipe       $recipe       Recipe entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function create(UploadedFile $uploadedFile, Picture $picture, Recipe $recipe): void
     {

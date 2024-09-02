@@ -34,9 +34,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Contructor.
      *
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param UserServiceInterface  $userService
-     * @param TranslatorInterface   $translator
+     * @param UrlGeneratorInterface $urlGenerator urlGeneratorInterface
+     * @param UserServiceInterface  $userService  userServiceInterface
+     * @param TranslatorInterface   $translator   TranslatorInterface
      */
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator)
     {
@@ -47,9 +47,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * matched in order to handle the login form submit.
      *
      * This default implementation handles all POST requests to the
-     * login path (@param Request $request Request.
+     * login path (
      *
-     * @return bool Type.
+     * @param Request $request request
+     *
+     * @return bool type
+     *
      * @see getLoginUrl()).
      */
     public function supports(Request $request): bool
@@ -68,16 +71,16 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * You may throw any AuthenticationException in this method in case of error (e.g.
      * a UserNotFoundException when the user cannot be found).
      *
-     * @param Request $request Request.
+     * @param Request $request request
      *
-     * @return Passport Passport.
+     * @return Passport passport
      */
     public function authenticate(Request $request): Passport
     {
         $email = (string) $request->request->get('email', '');
         $user = $this->userService->findUserByEmail($email);
 
-        if (!$user) {
+        if (!$user instanceof \App\Entity\User) {
             $message = $this->translator->trans('message.user_not_found');
             throw new CustomUserMessageAuthenticationException($message);
         }
@@ -107,17 +110,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      * If you return null, the current request will continue, and the user
      * will be authenticated. This makes sense, for example, with an API.
      *
-     * @param Request        $request      Request.
-     * @param TokenInterface $token        Token.
-     * @param string         $firewallName Firewall.
+     * @param Request        $request      request
+     * @param TokenInterface $token        token
+     * @param string         $firewallName firewall
      *
-     * @return RedirectResponse|null Redircet Response.
+     * @return RedirectResponse|null redircet Response
      */
-    public function onAuthenticationSuccess(
-        Request $request,
-        TokenInterface $token,
-        string $firewallName
-    ): ?RedirectResponse {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?RedirectResponse
+    {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
@@ -130,7 +130,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      *
      * @param Request $request Request
      *
-     * @return string Type.
+     * @return string type
      */
     protected function getLoginUrl(Request $request): string
     {

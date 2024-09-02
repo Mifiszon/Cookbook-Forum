@@ -62,7 +62,7 @@ class TagService implements TagServiceInterface
      *
      * @param Tag $tag Tag entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function save(Tag $tag): void
     {
@@ -74,7 +74,7 @@ class TagService implements TagServiceInterface
      *
      * @param Tag $tag Tag entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function delete(Tag $tag): void
     {
@@ -93,7 +93,7 @@ class TagService implements TagServiceInterface
         try {
             $result = $this->recipeRepository->countByTag($tag);
 
-            return !($result > 0);
+            return $result <= 0;
         } catch (NoResultException|NonUniqueResultException) {
             return false;
         }
@@ -118,7 +118,7 @@ class TagService implements TagServiceInterface
      *
      * @return Tag|null Tag entity
      *
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function findOneById(int $id): ?Tag
     {

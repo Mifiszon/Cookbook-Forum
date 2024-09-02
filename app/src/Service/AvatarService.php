@@ -36,7 +36,7 @@ class AvatarService implements AvatarServiceInterface
      * @param Avatar        $avatar       Avatar entity
      * @param UserInterface $user         User entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function update(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void
     {
@@ -58,7 +58,7 @@ class AvatarService implements AvatarServiceInterface
      * @param Avatar        $avatar       Avatar entity
      * @param UserInterface $user         User entity
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function create(UploadedFile $uploadedFile, Avatar $avatar, UserInterface $user): void
     {

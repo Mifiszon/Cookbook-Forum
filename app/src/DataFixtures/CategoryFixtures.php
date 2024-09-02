@@ -6,7 +6,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use DateTimeImmutable;
 
 /**
  * Class CategoryFixtures.
@@ -27,12 +26,12 @@ class CategoryFixtures extends AbstractBaseFixtures
             $category = new Category();
             $category->setTitle($this->faker->unique()->word);
             $category->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $category->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );

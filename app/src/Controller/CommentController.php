@@ -12,22 +12,21 @@ use App\Service\CommentServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class CommentController.
  */
-#[Route('/comment')]
+#[\Symfony\Component\Routing\Attribute\Route('/comment')]
 class CommentController extends AbstractController
 {
     /**
      * Constructor.
      *
-     * @param CommentServiceInterface $commentService   Comment service.
-     * @param TranslatorInterface     $translator       Translator.
-     * @param RecipeRepository        $recipeRepository Recipe repository.
+     * @param CommentServiceInterface $commentService   comment service
+     * @param TranslatorInterface     $translator       translator
+     * @param RecipeRepository        $recipeRepository recipe repository
      */
     public function __construct(private readonly CommentServiceInterface $commentService, private readonly TranslatorInterface $translator, private readonly RecipeRepository $recipeRepository)
     {
@@ -36,12 +35,12 @@ class CommentController extends AbstractController
     /**
      * Action add.
      *
-     * @param Request $request  Request.
-     * @param int     $recipeId Recipe id.
+     * @param Request $request  request
+     * @param int     $recipeId recipe id
      *
-     * @return Response Response.
+     * @return Response response
      */
-    #[Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/add/{recipeId}', name: 'comment_add', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function add(Request $request, int $recipeId): Response
     {
@@ -69,11 +68,11 @@ class CommentController extends AbstractController
     /**
      * Action delete.
      *
-     * @param Comment $comment Comment.
+     * @param Comment $comment comment
      *
-     * @return Response Response.
+     * @return Response response
      */
-    #[Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/{id}/delete', name: 'comment_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Comment $comment): Response
     {

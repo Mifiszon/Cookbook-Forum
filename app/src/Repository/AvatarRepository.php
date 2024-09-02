@@ -1,6 +1,6 @@
 <?php
 /**
- * Avatar Repository
+ * Avatar Repository.
  */
 
 namespace App\Repository;
@@ -12,14 +12,14 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class Avatar Repository
+ * Class Avatar Repository.
  */
 class AvatarRepository extends ServiceEntityRepository
 {
     /**
      * Constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {

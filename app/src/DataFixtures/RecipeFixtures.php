@@ -10,9 +10,7 @@ use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Ingredient;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 
 /**
  * Class RecipeFixtures.
@@ -90,7 +88,7 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
      */
     public function loadData(): void
     {
-        if (null === $this->manager || null === $this->faker) {
+        if (!$this->manager instanceof \Doctrine\Persistence\ObjectManager || !$this->faker instanceof \Faker\Generator) {
             return;
         }
 
@@ -99,12 +97,12 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             $recipe->setTitle($this->sampleRecipes[$i]['title']);
             $recipe->setContent($this->sampleRecipes[$i]['content']);
             $recipe->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $recipe->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -139,9 +137,9 @@ class RecipeFixtures extends AbstractBaseFixtures implements DependentFixtureInt
 
     /**
      * This method must return an array of fixtures classes
-     * on which the implementing class depends on
+     * on which the implementing class depends on.
      *
-     * @return array
+     * @return array Type
      */
     public function getDependencies(): array
     {

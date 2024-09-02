@@ -2,6 +2,7 @@
 /**
  * IngredientService.
  */
+
 namespace App\Service;
 
 use App\Entity\Ingredient;
@@ -66,7 +67,6 @@ class IngredientService implements IngredientServiceInterface
      * Delete entity.
      *
      * @param Ingredient $ingredient Ingredient entity
-     *
      */
     public function delete(Ingredient $ingredient): void
     {
@@ -92,7 +92,7 @@ class IngredientService implements IngredientServiceInterface
      *
      * @return Ingredient|null Ingredient entity
      *
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function findOneById(int $id): ?Ingredient
     {

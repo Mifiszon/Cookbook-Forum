@@ -13,14 +13,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class PictureController.
  */
-#[Route('/picture')]
+#[\Symfony\Component\Routing\Attribute\Route('/picture')]
 class PictureController extends AbstractController
 {
     /**
@@ -41,7 +40,7 @@ class PictureController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/create/{id}',
         name: 'picture_create',
         methods: 'GET|POST'
@@ -53,7 +52,7 @@ class PictureController extends AbstractController
             throw $this->createAccessDeniedException('Access Denied');
         }
 
-        if ($recipe->getPicture()) {
+        if ($recipe->getPicture() instanceof Picture) {
             return $this->redirectToRoute(
                 'picture_edit',
                 ['id' => $recipe->getPicture()->getId()]
@@ -99,7 +98,7 @@ class PictureController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
+    #[\Symfony\Component\Routing\Attribute\Route(
         '/{id}/edit',
         name: 'picture_edit',
         requirements: ['id' => '[1-9]\d*'],

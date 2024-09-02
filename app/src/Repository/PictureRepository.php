@@ -1,6 +1,6 @@
 <?php
 /**
-* PictureRepository
+ * PictureRepository.
  */
 
 namespace App\Repository;
@@ -12,14 +12,14 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class PictureRepository
+ * Class PictureRepository.
  */
 class PictureRepository extends ServiceEntityRepository
 {
     /**
      * Constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {

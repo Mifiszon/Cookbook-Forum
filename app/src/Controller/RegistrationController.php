@@ -11,33 +11,29 @@ use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class RegistrationController.
  */
 class RegistrationController extends AbstractController
 {
-    private RegistrationService $registrationService;
-
     /**
      * Constructor.
      *
-     * @param RegistrationService $registrationService
+     * @param RegistrationService $registrationService RegistrationService
      */
-    public function __construct(RegistrationService $registrationService)
+    public function __construct(private readonly RegistrationService $registrationService)
     {
-        $this->registrationService = $registrationService;
     }
 
     /**
      * Aciton Register.
      *
-     * @param Request $request Request.
+     * @param Request $request request
      *
-     * @return Response Response.
+     * @return Response response
      */
-    #[Route('/register', name: 'app_register')]
+    #[\Symfony\Component\Routing\Attribute\Route('/register', name: 'app_register')]
     public function register(Request $request): Response
     {
         $user = new User();

@@ -32,7 +32,7 @@ interface CategoryServiceInterface
     /**
      * Delete entity.
      *
-     * @param Category $category Category.
+     * @param Category $category category
      */
     public function delete(Category $category): void;
 
@@ -48,9 +48,9 @@ interface CategoryServiceInterface
     /**
      * Find category by id.
      *
-     * @param int $id Category Id.
+     * @param int $id category Id
      *
-     * @return Category|null Category.
+     * @return Category|null category
      */
     public function findOneById(int $id): ?Category;
 }

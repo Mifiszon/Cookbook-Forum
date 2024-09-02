@@ -18,9 +18,9 @@ class RecipeSearchType extends AbstractType
      * Form builder.
      *
      * @param FormBuilderInterface $builder FormBuilderInterface
-     * @param array                $options Array.
+     * @param array                $options array
      *
-     * @return void Void.
+     * @return void void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

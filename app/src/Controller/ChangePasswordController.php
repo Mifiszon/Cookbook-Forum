@@ -7,11 +7,9 @@ namespace App\Controller;
 
 use App\Form\Type\ChangePasswordFormType;
 use App\Service\ChangePasswordServiceInterface;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
@@ -22,7 +20,7 @@ class ChangePasswordController extends AbstractController
     /**
      * Constructor.
      *
-     * @param ChangePasswordServiceInterface $changePasswordService
+     * @param ChangePasswordServiceInterface $changePasswordService changePasswordService
      */
     public function __construct(private readonly ChangePasswordServiceInterface $changePasswordService)
     {
@@ -31,11 +29,11 @@ class ChangePasswordController extends AbstractController
     /**
      * Action change password.
      *
-     * @param Request $request Request.
+     * @param Request $request request
      *
-     * @return Response response.
+     * @return Response response
      */
-    #[Route('/change-password', name: 'app_change_password')]
+    #[\Symfony\Component\Routing\Attribute\Route('/change-password', name: 'app_change_password')]
     #[IsGranted('ROLE_USER')]
     public function changePassword(Request $request): Response
     {
@@ -52,7 +50,7 @@ class ChangePasswordController extends AbstractController
                 $this->addFlash('success', 'Hasło zmienione pomyślnie.');
 
                 return $this->redirectToRoute('recipe_index');
-            } catch (Exception $e) {
+            } catch (\Exception) {
                 $this->addFlash('error', 'Nieprawidłowe stare hasło.');
 
                 return $this->redirectToRoute('app_change_password');

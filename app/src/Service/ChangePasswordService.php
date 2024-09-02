@@ -1,6 +1,6 @@
 <?php
 /**
-* ChangePasswordService.
+ * ChangePasswordService.
  */
 
 namespace App\Service;
@@ -15,12 +15,11 @@ use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
  */
 class ChangePasswordService implements ChangePasswordServiceInterface
 {
-
     /**
      * Constructor.
      *
-     * @param UserPasswordHasherInterface  $passwordHasher   Password Hasher.
-     * @param UserRepository               $userRepository   User Repository.
+     * @param UserPasswordHasherInterface $passwordHasher passwordHasher
+     * @param UserRepository              $userRepository userRepository
      */
     public function __construct(private readonly UserPasswordHasherInterface $passwordHasher, private readonly UserRepository $userRepository)
     {

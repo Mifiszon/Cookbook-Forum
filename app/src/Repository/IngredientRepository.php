@@ -1,6 +1,6 @@
 <?php
 /**
-* IngredientRepository.
+ * IngredientRepository.
  */
 
 namespace App\Repository;
@@ -24,7 +24,7 @@ class IngredientRepository extends ServiceEntityRepository
     /**
      * Constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -60,7 +60,7 @@ class IngredientRepository extends ServiceEntityRepository
      *
      * @param string $name Ingredient name
      *
-     * @return Ingredient|null Ingredient.
+     * @return Ingredient|null ingredient
      */
     public function findOneByName(string $name): ?Ingredient
     {
@@ -88,7 +88,7 @@ class IngredientRepository extends ServiceEntityRepository
     /**
      * Query all ingredients.
      *
-     * @return Query Query.
+     * @return Query query
      */
     public function queryAll(): Query
     {

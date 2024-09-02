@@ -1,7 +1,8 @@
 <?php
 /**
-* Ingredient Entity.
+ * Ingredient Entity.
  */
+
 namespace App\Entity;
 
 use App\Repository\IngredientRepository;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 #[ORM\Table(name: 'inrgedients')]
-class Ingredient
+class Ingredient implements \Stringable
 {
     /**
      * Primary key.
@@ -47,7 +48,7 @@ class Ingredient
     /**
      * Getter for id.
      *
-     * @return int|null
+     * @return int|null Type
      */
     public function getId(): ?int
     {
@@ -67,9 +68,9 @@ class Ingredient
     /**
      * Adds recipes.
      *
-     * @param Recipe $recipe Recipe.
+     * @param Recipe $recipe recipe
      *
-     * @return $this This.
+     * @return $this this
      */
     public function addRecipe(Recipe $recipe): static
     {
@@ -83,9 +84,9 @@ class Ingredient
     /**
      * Removes recipes.
      *
-     * @param Recipe $recipe Recipe.
+     * @param Recipe $recipe recipe
      *
-     * @return $this This.
+     * @return $this this
      */
     public function removeRecipe(Recipe $recipe): static
     {
@@ -97,7 +98,7 @@ class Ingredient
     /**
      * Getter for name.
      *
-     * @return string|null
+     * @return string|null Type
      */
     public function getName(): ?string
     {
@@ -107,9 +108,9 @@ class Ingredient
     /**
      * Setter for name.
      *
-     * @param string $name Name.
+     * @param string $name name
      *
-     * @return $this This.
+     * @return $this this
      */
     public function setName(string $name): static
     {
@@ -117,13 +118,14 @@ class Ingredient
 
         return $this;
     }
+
     /**
      * Converts to string.
      *
-     * @return string
+     * @return string Type
      */
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

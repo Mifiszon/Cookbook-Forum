@@ -1,7 +1,8 @@
 <?php
 /**
-* RegistrationService.
+ * RegistrationService.
  */
+
 namespace App\Service;
 
 use App\Entity\User;
@@ -18,18 +19,18 @@ class RegistrationService implements RegistrationServiceInterface
     /**
      * Constructor.
      *
-     * @param UserPasswordHasherInterface $passwordHasher Password Hasher.
-     * @param UserRepository              $userRepository User Repository.
-     * @param TokenStorageInterface       $tokenStorage   Token storage.
+     * @param UserPasswordHasherInterface $passwordHasher password Hasher
+     * @param UserRepository              $userRepository user Repository
+     * @param TokenStorageInterface       $tokenStorage   token storage
      */
     public function __construct(private readonly UserPasswordHasherInterface $passwordHasher, private readonly UserRepository $userRepository, private readonly TokenStorageInterface $tokenStorage)
     {
     }
 
     /**
-     * Register
+     * Register.
      *
-     * @param User $user User.
+     * @param User $user user
      */
     public function register(User $user): void
     {

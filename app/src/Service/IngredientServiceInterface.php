@@ -1,6 +1,6 @@
 <?php
 /**
-* IngredientServiceInterface.
+ * IngredientServiceInterface.
  */
 
 namespace App\Service;

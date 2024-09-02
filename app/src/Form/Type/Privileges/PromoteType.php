@@ -1,6 +1,6 @@
 <?php
 /**
-* PromoteType
+ * PromoteType.
  */
 
 namespace App\Form\Type\Privileges;
@@ -17,10 +17,8 @@ class PromoteType extends AbstractType
     /**
      * Form Builder.
      *
-     * @param FormBuilderInterface $builder Builder.
-     * @param array $options Options.
-     *
-     * @return void
+     * @param FormBuilderInterface $builder builder
+     * @param array                $options options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

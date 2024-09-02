@@ -1,7 +1,8 @@
 <?php
 /**
-* TagVoter.
+ * TagVoter.
  */
+
 namespace App\Security\Voter;
 
 use App\Entity\Tag;
@@ -21,10 +22,10 @@ class TagVoter extends Voter
     /**
      * Determines if the attribute and subject are supported by this voter.
      *
-     * @param string $attribute Attribute.
+     * @param string $attribute attribute
      * @param mixed  $subject   The subject to secure, e.g. an object the user wants to access or any other PHP type
      *
-     * @return bool Type.
+     * @return bool type
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -36,11 +37,11 @@ class TagVoter extends Voter
      * Perform a single access check operation on a given attribute, subject and token.
      * It is safe to assume that $attribute and $subject already passed the "supports()" method check.
      *
-     * @param string         $attribute Atribute.
-     * @param mixed          $subject   Subject.
-     * @param TokenInterface $token     Token.
+     * @param string         $attribute atribute
+     * @param mixed          $subject   subject
+     * @param TokenInterface $token     token
      *
-     * @return bool
+     * @return bool Type
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
@@ -56,9 +57,9 @@ class TagVoter extends Voter
     /**
      * is Admin ?
      *
-     * @param UserInterface $user User.
+     * @param UserInterface $user user
      *
-     * @return bool Type.
+     * @return bool type
      */
     private function isAdmin(UserInterface $user): bool
     {

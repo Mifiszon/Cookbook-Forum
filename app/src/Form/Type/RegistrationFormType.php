@@ -24,10 +24,10 @@ class RegistrationFormType extends AbstractType
     /**
      * Form Builder.
      *
-     * @param FormBuilderInterface $builder FormBuilderInterface.
-     * @param array                $options Options array.
+     * @param FormBuilderInterface $builder FormBuilderInterface
+     * @param array                $options Options array
      *
-     * @return void Void.
+     * @return void Void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -55,11 +55,6 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'groups' => ['registration'],
                     ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        'max' => 4096,
-                    ]),
                 ],
             ]);
     }
@@ -67,9 +62,9 @@ class RegistrationFormType extends AbstractType
     /**
      * Configure Options.
      *
-     * @param OptionsResolver $resolver Reslover.
+     * @param OptionsResolver $resolver Reslover
      *
-     * @return void Void.
+     * @return void Void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

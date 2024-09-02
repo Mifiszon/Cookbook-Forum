@@ -1,6 +1,6 @@
 <?php
 /**
-* Ingredeint Fixtures.
+ * Ingredeint Fixtures.
  */
 
 namespace App\DataFixtures;
@@ -46,9 +46,9 @@ class IngredientFixtures extends AbstractBaseFixtures implements DependentFixtur
 
     /**
      * This method must return an array of fixtures classes
-     * on which the implementing class depends on
+     * on which the implementing class depends on.
      *
-     * @return array
+     * @return array Type
      */
     public function getDependencies(): array
     {

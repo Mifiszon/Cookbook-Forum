@@ -65,8 +65,6 @@ class RecipeRepository extends ServiceEntityRepository
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
 
-
-
     /**
      * Count recipes by category.
      *
@@ -74,7 +72,7 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @return int Number of recipes in category
      *
-     * @throws ORMException ORMException.
+     * @throws ORMException ORMException
      */
     public function countByCategory(Category $category): int
     {
@@ -92,8 +90,8 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @param Recipe $recipe Recipe entity
      *
-     * @throws ORMException ORMException.
-     * @throws OptimisticLockException NonUniqueResultException.
+     * @throws ORMException            ORMException
+     * @throws OptimisticLockException nonUniqueResultException
      */
     public function save(Recipe $recipe): void
     {
@@ -107,8 +105,8 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @param Recipe $recipe Recipe entity
      *
-     * @throws ORMException ORMException.
-     * @throws OptimisticLockException NonUniqueResultException.
+     * @throws ORMException            ORMException
+     * @throws OptimisticLockException nonUniqueResultException
      */
     public function delete(Recipe $recipe): void
     {
@@ -124,8 +122,8 @@ class RecipeRepository extends ServiceEntityRepository
      *
      * @return int Number of recipes in category
      *
-     * @throws NoResultException NoResultException.
-     * @throws NonUniqueResultException NonUniqueResultException.
+     * @throws NoResultException        noResultException
+     * @throws NonUniqueResultException nonUniqueResultException
      */
     public function countByTag(Tag $tag): int
     {
@@ -160,9 +158,9 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Find recipe by user.
      *
-     * @param User $user User.
+     * @param User $user user
      *
-     * @return array Array.
+     * @return array array
      */
     public function findByUser(User $user): array
     {
@@ -176,13 +174,13 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Find recipe by ingredinets.
      *
-     * @param array $ingredients Ingredients.
+     * @param array $ingredients ingredients
      *
-     * @return array Array.
+     * @return array array
      */
     public function findByIngredients(array $ingredients): array
     {
-        if (empty($ingredients)) {
+        if ([] === $ingredients) {
             return [];
         }
 
@@ -192,7 +190,7 @@ class RecipeRepository extends ServiceEntityRepository
             $queryBuilder
                 ->leftJoin('r.ingredients', 'i'.$index)
                 ->andWhere($queryBuilder->expr()->like('LOWER(i'.$index.'.name)', ':ingredient_'.$index))
-                ->setParameter('ingredient_'.$index, '%'.strtolower($ingredient).'%');
+                ->setParameter('ingredient_'.$index, '%'.strtolower((string) $ingredient).'%');
         }
 
         return $queryBuilder->getQuery()->getResult();
