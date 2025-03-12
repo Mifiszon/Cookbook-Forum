@@ -2,91 +2,98 @@
 
 Starter kit is based on [The perfect kit starter for a Symfony 4 project with Docker and PHP 7.2](https://medium.com/@romaricp/the-perfect-kit-starter-for-a-symfony-4-project-with-docker-and-php-7-2-fda447b6bca1).
 
-## What is inside?
+# Recipe Forum Project
 
-* Apache 2.4.57 (Debian)
-* PHP 8.3 FPM
-* MySQL 8.3.1
-* NodeJS LTS (latest)
-* Composer
-* Symfony CLI 
-* xdebug
-* djfarrelly/maildev
+This project is a **recipe forum** built with **PHP Symfony** and **Twig** as the templating engine.** It allows users to add, rate, and manage recipes, including uploading images. The system focuses on **CRUD operations** (Create, Read, Update, Delete) while enforcing access permissions for different user roles. The interface is styled using **Bootstrap**, ensuring a modern and responsive design.
 
-## Requirements
+A **recipe search engine** has already been implemented and will be further expanded in future updates.
 
-* Install [Docker](https://www.docker.com/products/docker-desktop) and [Docker Compose](https://docs.docker.com/compose/install) on your machine 
+## Key Features
+
+- **User authentication** with role-based access control
+- **Recipe management** (adding, editing, deleting, and rating recipes)
+- **Image uploads** for recipes
+- **Recipe search engine** (with planned improvements)
+- **Responsive UI** using Bootstrap
+
+## Technology Stack
+
+- **Symfony (PHP 8.3 FPM)**
+- **Twig (Templating Engine)**
+- **MySQL 8.3.1** (Database)
+- **Apache 2.4.57 (Debian)**
+- **NodeJS LTS (Latest)**
+- **Composer (Dependency Management)**
+- **Xdebug (Debugging)**
+- **Maildev (Email Testing)**
 
 ## Installation
 
-* (optional) Add 
+1. *(Optional)* Add the following line to your `hosts` file:
+   ```bash
+   127.0.0.1   symfony.local
+   ```
+2. Run `build-env.sh` (or `build-env.ps1` on Windows).
+3. Enter the PHP container:
+   ```bash
+   docker-compose exec php bash
+   ```
+4. Install Symfony inside the container:
+   ```bash
+   cd app
+   rm .gitkeep
+   git config --global user.email "you@example.com"
+   symfony new ../app --version=lts --webapp
+   chown -R dev.dev *
+   ```
 
-```bash
-127.0.0.1   symfony.local
-```
-in your `host` file.
+## URLs and Ports
 
-* Run `build-env.sh` (or `build-env.ps1` on Windows box)
+- **Project URL:**
+  ```bash
+  http://localhost:8000
+  ```
+  or
+  ```bash
+  http://symfony.local:8000
+  ```
+- **Database (MySQL):**
+  - Inside container: `mysql`, port `3306`
+  - Outside container: `localhost`, port `3307`
+- **Maildev (Email testing):** Available on port `8001`.
+- **Xdebug:** Available remotely on port `9000`.
 
-* Enter the PHP container:
+## Database Configuration
 
-```bash
-docker-compose exec php bash
-```
+Modify the **`.env`** file in Symfony to configure the database:
 
-* To install Symfony LTS inside container execute:
-
-```bash
-cd app
-rm .gitkeep
-git config --global user.email "you@example.com"
-symfony new ../app --version=lts --webapp
-chown -R dev.dev *
-```
-
-## Container URLs and ports
-
-* Project URL
-
-```bash
-http://localhost:8000
-```
-
-or 
-
-```bash
-http://symfony.local:8000
-```
-
-* MySQL
-
-    * inside container: host is `mysql`, port: `3306`
-    * outside container: host is `localhost`, port: `3307`
-    * passwords, db name are in `docker-compose.yml`
-    
-* djfarrelly/maildev i available from the browser on port `8001`
-
-* xdebug i available remotely on port `9000`
-
-* Database connection in Symfony `.env` file:
 ```yaml
 DATABASE_URL=mysql://symfony:symfony@mysql:3306/symfony?serverVersion=5.7
 ```
 
-## Useful commands
+## Useful Commands
 
-* `docker-compose up -d` - start containers
-* `docker-compose down` - stop containers
-* `docker-compose exec php bash` - enter into PHP container
-* `docker-compose exec mysql bash` - enter into MySQL container
-* `docker-compose exec apache bash` - enter into Apache2 container
+- `docker-compose up -d` - Start containers
+- `docker-compose down` - Stop containers
+- `docker-compose exec php bash` - Enter PHP container
+- `docker-compose exec mysql bash` - Enter MySQL container
+- `docker-compose exec apache bash` - Enter Apache2 container
+
+## Future Development
+
+- Further improvements to the **recipe search engine**.
+- Expansion of **user access control** for different roles.
+- Additional features for rating and commenting on recipes.
+
+## Screenshots
+
+*(Add screenshots here to showcase the UI and features of the project.)*
 
 ## Troubleshooting
 
-* **2024.05.11 - ERROR: for apache  'ContainerConfig'**
+- **ERROR: for apache 'ContainerConfig'** (2024.05.11)
 
-  Error `ERROR: for apache  'ContainerConfig'` after `docker-compose up -d` execution can be solved `docker compose up -d --force-recreate`
-
-  
-
-
+  If you encounter the error `ERROR: for apache 'ContainerConfig'` after running `docker-compose up -d`, you can resolve it with:
+  ```bash
+  docker compose up -d --force-recreate
+  ```
