@@ -87,7 +87,6 @@ DATABASE_URL=mysql://symfony:symfony@mysql:3306/symfony?serverVersion=5.7
 
 ## Screenshots
 
-*(Add screenshots here to showcase the UI and features of the project.)*
 
 ## Troubleshooting
 
