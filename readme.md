@@ -3,7 +3,7 @@
 Starter kit is based on [The perfect kit starter for a Symfony 4 project with Docker and PHP 7.2](https://medium.com/@romaricp/the-perfect-kit-starter-for-a-symfony-4-project-with-docker-and-php-7-2-fda447b6bca1)
 
 # Recipe Forum Project
--
+
 This project is a **recipe forum** built with **PHP Symfony** and **Twig** as the templating engine.** It allows users to add, rate, and manage recipes, including uploading images. The system focuses on **CRUD operations** (Create, Read, Update, Delete) while enforcing access permissions for different user roles. The interface is styled using **Bootstrap**, ensuring a modern and responsive design.
 
 A **recipe search engine** has already been implemented and will be further expanded in future updates.
